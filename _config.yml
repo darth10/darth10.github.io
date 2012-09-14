@@ -12,11 +12,10 @@ pygments: true
 title : memcpy
 tagline: darth10's blog
 author :
-  name : darth10
+  name : Akhil Wali
   email : akhil.wali.10@gmail.com
   github : darth10
   twitter : darth10
-  feedburner : darth10
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
