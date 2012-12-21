@@ -2,8 +2,8 @@
 layout: post
 title: "The WebBrowser nightmare"
 description: ""
-category: 
-tags: [C#, .NET]
+category: programming
+tags: [C#]
 ---
 {% include JB/setup %}
 
