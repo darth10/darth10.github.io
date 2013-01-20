@@ -80,7 +80,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : memcpy-github
+      short_name : darth10
 
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
