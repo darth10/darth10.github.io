@@ -24,10 +24,8 @@
     <hr>
     {% include JB/comments %}
   </div>
-  
+
   <div class="span4">
-    <h4>Published</h4>
-    <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
 
   {% unless page.tags == empty %}
     <h4>Tags</h4>
@@ -35,6 +33,16 @@
     {% assign tags_list = page.tags %}
     {% include JB/tags_list %}
     </ul>
-  {% endunless %}  
+    <br />
+  {% endunless %}
+
+    <h4>Published</h4>
+    <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
+    <br />
+
+    <h4>Share</h4>
+    <div class="post-sharing">
+      {% include JB/sharing %}
+    </div>
   </div>
 </div>
