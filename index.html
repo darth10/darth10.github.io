@@ -3,23 +3,37 @@ layout: page
 group: navigation
 ---
 {% include JB/setup %}
-
+<style type="text/css" media="screen">
+  .typeofword {
+    color: gray;
+  }
+  .dictlist {
+    list-style-type: lower-alpha;
+  }
+  .profileimg {
+    border-radius: 5px;
+  }
+  .profiletext {
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+</style>
 <table border="0px" cell-padding="5px">
 <tr>
-<td style="width: 260px;"><img src="assets/images/self.jpg" style="border-radius:5px;" /></td>
-<td style="vertical-align: bottom;">
-<div style="margin-left: 10px;">
-<b>programming</b> <span style="color: gray;">[mass noun]</span> /<i>'prəʊɡramɪŋ</i>/
+<td><img src="{{ site.author.email | to_gravatar }}" class="profileimg"/></td>
+<td>
+<div class="profiletext">
+<b>programming</b> <span class="typeofword">[mass noun]</span> /<i>'prəʊɡramɪŋ</i>/
 <br />
-<ol style="list-style-type: lower-alpha;">
+<ol class="dictlist">
   <li>the planning, scheduling, or performing of a program</li>
   <li>the process of instructing or learning by means of an instructional program</li>
   <li>the process of preparing an instructional program</li>
 </ol>
 <br />
-<b>hack</b> <span style="color: gray;">[intransitive verb]</span> /<i>'hak</i>/
+<b>hack</b> <span class="typeofword">[intransitive verb]</span> /<i>'hak</i>/
 <br />
-<ol style="list-style-type: lower-alpha;">
+<ol class="dictlist">
   <li>to write computer programs for enjoyment</li>
   <li>to gain access to a computer illegally</li>
 </ol>
