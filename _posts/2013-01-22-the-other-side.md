@@ -12,8 +12,7 @@ The past few months have not been easy, and I'm being fairly honest. Let's simpl
 I'm posting this as a thumbs-up to my awesome girl, Kiranmai, who I'm pretty sure is the reason I get up every morning with a purpose in mind.
 The purpose is simple - keeping her happy and smiling always.
 If it wasn't for her, I'm sure things would have been different if not worse.
-She cares for me, helps me though my troubles, and always keeps me smiling. Here's to her.
-
+She cares for me, helps me through my troubles, and always keeps me smiling. Here's to her.
 
 <br />
 <br />
@@ -53,7 +52,7 @@ She cares for me, helps me though my troubles, and always keeps me smiling. Here
     <div class="poemline">Awake for ever in a sweet unrest,	    </div>
     <div class="poemline">Still, still to hear her tender-taken breath</div>
     <div class="poemline">And so live ever - or else swoon to death.</div>
-    <div class="poemnote">Bright Star - John Keats</div>
+    <div class="poemnote">Bright Star, John Keats</div>
   </td>
 </tr>
 </table>
