@@ -34,3 +34,20 @@ We should be able to simply say `time(fiboLast(n))` or `time(fiboList(n))`.
 <script src="https://gist.github.com/4364961.js?file=Time.scala"><!-- Gist  --></script>
 
 And here are the results!
+
+<style type="text/css">
+  #postchart {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<table width="100%" height="350px" cellspacing="" cellpadding="" border="0px">
+  <tr>
+    <td>
+      <div id="postchart"></div>
+    </td>
+  </tr>
+</table>
+
+<script src="/assets/js/lazy-sequences-and-streams.js" type="text/javascript">
+</script>
