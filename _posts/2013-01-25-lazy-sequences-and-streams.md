@@ -49,5 +49,5 @@ And here are the results!
   </tr>
 </table>
 
-<script src="/assets/js/lazy-sequences-and-streams.js" type="text/javascript">
+<script src="/assets/js/posts/lazy-sequences-and-streams.js" type="text/javascript">
 </script>

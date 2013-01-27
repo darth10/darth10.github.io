@@ -1,17 +1,17 @@
 var chartData = {
-  'scalaFiboList': [ [1, 0],
-		     [1000, 400],
-		     [5000, 800],
-		     [10000, 1600],
-		     [25000, 1800],
-		     [50000, 2000] ],
+  'scalaFiboList': [ [1, 10],
+		     [1000, 20],
+		     [5000, 27],
+		     [10000, 56],
+		     [25000, 145],
+		     [50000, 843] ],
 
-  'scalaFiboLast': [ [1, 0],
-		     [1000, 500],
-		     [5000, 700],
-		     [10000, 2600],
-		     [25000, 2800],
-		     [50000, 4000] ],
+  'scalaFiboLast': [ [1, 8],
+		     [1000, 21],
+		     [5000, 25],
+		     [10000, 75],
+		     [25000, 147],
+		     [50000, 572] ],
 
   'clojureFiboList': [ [1, 0],
 		       [1000, 200],
@@ -42,7 +42,7 @@ function showChartTooltip(x, y, contents) {
 };
 
 function timeFormatter(v, axis) {
-  return (v / 1000) + " s ";
+  return (v.toFixed(2) / 1000) + " s ";
 };
 
 function nFormatter(v, axis) {
