@@ -37,11 +37,11 @@ And here are the results!
 
 <style type="text/css">
   #postchart {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 300px;
   }
 </style>
-<table width="100%" height="350px" cellspacing="" cellpadding="" border="0px">
+<table border="0px">
   <tr>
     <td>
       <div id="postchart"></div>
