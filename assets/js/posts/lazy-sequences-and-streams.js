@@ -1,31 +1,31 @@
 var chartData = {
-  'scalaFiboList': [ [1, 10],
-		     [1000, 20],
-		     [5000, 27],
-		     [10000, 56],
-		     [25000, 145],
-		     [50000, 843] ],
+  'scalaFiboList': [ [1, 9],
+		     [10000, 70],
+		     [20000, 85],
+		     [30000, 141],
+		     [40000, 182],
+		     [50000, 235] ],
 
-  'scalaFiboLast': [ [1, 8],
-		     [1000, 21],
-		     [5000, 25],
-		     [10000, 75],
-		     [25000, 147],
-		     [50000, 572] ],
+  'scalaFiboLast': [ [1, 10],
+		     [10000, 63],
+		     [20000, 87],
+		     [30000, 174],
+		     [40000, 243],
+		     [50000, 555] ],
 
   'clojureFiboList': [ [1, 0],
-		       [1000, 200],
-		       [5000, 400],
-		       [10000, 600],
-		       [25000, 800],
-		       [50000, 1000] ],
+		       [10000, 1],
+		       [20000, 1],
+		       [30000, 1],
+		       [40000, 1],
+		       [50000, 1] ],
 
   'clojureFiboLast': [ [1, 0],
-		       [1000, 300],
-		       [5000, 600],
-		       [10000, 1200],
-		       [25000, 2400],
-		       [50000, 4800] ]
+		       [10000, 144],
+		       [20000, 615],
+		       [30000, 980],
+		       [40000, 1121],
+		       [50000, 1450] ],
 };
 
 function showChartTooltip(x, y, contents) {
@@ -77,16 +77,16 @@ function loadCharts () {
   var plot = $.plot($(chartId),
 		    [ { data: chartData['scalaFiboList'], label: "fiboList(x)", color: "#aaff00"},
 		      { data: chartData['scalaFiboLast'], label: "fiboLast(x)", color: "#00ff00" },
-		      { data: chartData['clojureFiboList'], label: "(fibo-list x)", color: "#0066ff" },
-		      { data: chartData['clojureFiboLast'], label: "(fibo-last x)", color: "#00ccee" },
+		      { data: chartData['clojureFiboList'], label: "(fibo-list x)", color: "#00ccee" },
+		      { data: chartData['clojureFiboLast'], label: "(fibo-last x)", color: "#0066ff" },
 		    ],
 		    { series: {
 			lines: { show: true },
 			points: { show: true }
 		      },
 		      grid: { hoverable: true },
-		      xaxis: { tickFormatter: nFormatter },
-		      yaxis: { tickFormatter: timeFormatter },
+		      xaxis: {  max: 50500, tickFormatter: nFormatter },
+		      yaxis: { min: -50, max: 1550, tickFormatter: timeFormatter },
 		      legend: { position: 'nw' }
 		    });
 
