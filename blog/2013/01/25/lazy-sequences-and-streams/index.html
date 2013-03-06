@@ -88,9 +88,7 @@
   </header>
 
 
-<div class="entry-content"><p>Included file &#8216;JB/setup&#8217; not found in _includes directory</p>
-
-<p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory.
+<div class="entry-content"><p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory.
 It would be wasteful to realize an entire infinite sequence before even using it.
 The basic idea is to only call the function that generates the sequence when needed, and cache the results.
 With lazy sequences, you don&#8217;t blow the stack and the elements in the sequence are not recalculated everytime.</p>
@@ -210,6 +208,12 @@ However, <code>fibo-last</code> performs linearly since the <code>last</code> fu
   </footer>
 </article>
 
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
 </div>
 
 <aside class="sidebar">
@@ -280,6 +284,22 @@ However, <code>fibo-last</code> performs linearly since the <code>last</code> fu
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'darth10';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://darth10.github.com/blog/2013/01/25/lazy-sequences-and-streams/';
+        var disqus_url = 'http://darth10.github.com/blog/2013/01/25/lazy-sequences-and-streams/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
