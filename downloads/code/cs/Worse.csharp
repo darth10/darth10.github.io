@@ -1,0 +1,24 @@
+bool _skipNextKeyDown = false;
+
+private void OnBrowserKeyInput(object sender, PreviewKeyDownEventArgs e)
+{
+	if (e.KeyCode == Keys.W &&
+	    e.Modifiers == (Keys.Control | Keys.Alt))
+	{
+		Debug.WriteLine("C-M-w pressed");
+		return;
+	}
+
+	if (_skipNextKeyDown)
+	{
+		_skipNextKeyDown = false;
+		return;
+	}
+	
+	if (e.KeyCode == Keys.W &&
+	    e.Modifiers == Keys.Control)
+	{
+		Debug.WriteLine("C-w pressed");
+		_skipNextKeyDown = true;
+	}
+}

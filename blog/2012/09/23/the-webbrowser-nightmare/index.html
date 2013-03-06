@@ -95,18 +95,153 @@ Although the facilities for JavaScript interoperability and DOM manipualtion are
 
 <p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p>
 
-<script src="https://gist.github.com/4354971.js?file=Normal.cs"><!-- Gist --></script>
+<figure class='code'><figcaption><span> (Normal.csharp)</span> <a href='/downloads/code/cs/Normal.csharp'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">MyControl</span> <span class="p">:</span> <span class="n">UserControl</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">WebBrowser</span> <span class="n">_webBrowser</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="nf">MyControl</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>    
+</span><span class='line'>      
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">_webBrowser</span><span class="p">.</span><span class="n">WebBrowserShortcutsEnabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">_webBrowser</span><span class="p">.</span><span class="n">PreviewKeyDown</span> <span class="p">+=</span>
+</span><span class='line'>          <span class="k">new</span> <span class="nf">PreviewKeyDownEventHandler</span><span class="p">(</span><span class="n">OnBrowserKeyInput</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">private</span> <span class="k">void</span> <span class="nf">OnBrowserKeyInput</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PreviewKeyDownEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">KeyCode</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">W</span> <span class="p">&amp;&amp;</span>
+</span><span class='line'>          <span class="n">e</span><span class="p">.</span><span class="n">Modifiers</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">Control</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;C-w pressed&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Surprisingly, the <code>OnBrowserKeyInput</code> method is called twice; once when the key is pressed and another time when the key is released.
 After some googling around, I found <a href="http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/f83d3d71-ea3e-4b18-a610-30a91fae060e/">this discussion</a> on MSDN, and it turns out to be an accepted problem with the control. The workaround requires explicity maintaining state and is quite ugly.</p>
 
-<script src="https://gist.github.com/4354971.js?file=Bad.cs"><!-- Gist --></script>
+<figure class='code'><figcaption><span> (Bad.csharp)</span> <a href='/downloads/code/cs/Bad.csharp'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">bool</span> <span class="n">_skipNextKeyDown</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">private</span> <span class="k">void</span> <span class="nf">OnBrowserKeyInput</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PreviewKeyDownEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">_skipNextKeyDown</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">_skipNextKeyDown</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">KeyCode</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">W</span> <span class="p">&amp;&amp;</span>
+</span><span class='line'>      <span class="n">e</span><span class="p">.</span><span class="n">Modifiers</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">Control</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;C-w pressed&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">_skipNextKeyDown</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>And the nightmare only begins there. The control doesn&#8217;t fire the event twice for some key combinations, and so the function ends up looking something like this.</p>
 
-<script src="https://gist.github.com/4354971.js?file=Worse.cs"><!-- Gist --></script>
+<figure class='code'><figcaption><span> (Worse.csharp)</span> <a href='/downloads/code/cs/Worse.csharp'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">bool</span> <span class="n">_skipNextKeyDown</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">private</span> <span class="k">void</span> <span class="nf">OnBrowserKeyInput</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PreviewKeyDownEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">KeyCode</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">W</span> <span class="p">&amp;&amp;</span>
+</span><span class='line'>      <span class="n">e</span><span class="p">.</span><span class="n">Modifiers</span> <span class="p">==</span> <span class="p">(</span><span class="n">Keys</span><span class="p">.</span><span class="n">Control</span> <span class="p">|</span> <span class="n">Keys</span><span class="p">.</span><span class="n">Alt</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;C-M-w pressed&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">_skipNextKeyDown</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">_skipNextKeyDown</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">KeyCode</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">W</span> <span class="p">&amp;&amp;</span>
+</span><span class='line'>      <span class="n">e</span><span class="p">.</span><span class="n">Modifiers</span> <span class="p">==</span> <span class="n">Keys</span><span class="p">.</span><span class="n">Control</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;C-w pressed&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">_skipNextKeyDown</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>The thing that bothered me most was that this was an accepted bug in the control. Even in the .NET 4.0 version.

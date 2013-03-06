@@ -95,7 +95,20 @@
 The <code>apply</code> method in companion objects is the best place to start.
 Here&#8217;s an example from the implementation of the <code>List</code> class in the Scala library.</p>
 
-<script src="https://gist.github.com/4354753.js?file=List.scala"><!-- Gist  --></script>
+<figure class='code'><figcaption><span> (List.scala)</span> <a href='/downloads/code/scala/List.scala'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">object</span> <span class="nc">List</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">apply</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">A*</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">toList</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Classes and traits can be parameterized as well.</p>
@@ -106,7 +119,40 @@ Type systems also imply support for variance, i.e. <em>covariance</em> and <em>c
 <p>However, consider the use of a parameterized type in a trait.
 You <em>must</em> specify the parameterized type(s) in the deriving class, i.e. the deriving class <em>has</em> to be concrete.</p>
 
-<script src="https://gist.github.com/4354753.js?file=SimpleJsonComment.scala"><!-- Gist  --></script>
+<figure class='code'><figcaption><span> (SimpleJsonComment.scala)</span> <a href='/downloads/code/scala/SimpleJsonComment.scala'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">java.util.SimpleDateFormat</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">trait</span> <span class="nc">JsonComment</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fromJson</span><span class="k">:</span> <span class="kt">T</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">JsonComment</span><span class="o">(</span><span class="n">comment</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">user</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">time</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+</span><span class='line'>  <span class="k">extends</span> <span class="nc">FromJson</span><span class="o">[</span><span class="kt">Comment</span><span class="o">]</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">lazy</span> <span class="k">val</span> <span class="n">dateFormat</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">&quot;yyyy/MM/dd HH:mm:ss&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fromJson</span> <span class="k">=</span> <span class="nc">Comment</span><span class="o">(</span>
+</span><span class='line'>    <span class="n">comment</span><span class="o">,</span>
+</span><span class='line'>    <span class="n">user</span><span class="o">,</span>
+</span><span class='line'>    <span class="n">dateFormat</span><span class="o">.</span><span class="n">parse</span><span class="o">(</span><span class="n">time</span><span class="o">))</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p><code>JsonComment</code> has to define the type <code>Comment</code> (Ok, I admit this is a really bad example), and it cannot omit the type.
@@ -116,7 +162,70 @@ Also, it&#8217;s not possible to have members which are objects of the specified
 Deriving classes <em>may</em> specify the abstract type(s) in a base class.
 As parameterized types have variance annotations, abstract types have <em>type bounds</em>.</p>
 
-<script src="https://gist.github.com/4354753.js?file=AbstractedJsonComment.scala"><!-- Gist  --></script>
+<figure class='code'><figcaption><span> (AbstractedJsonComment.scala)</span> <a href='/downloads/code/scala/AbstractedJsonComment.scala'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">java.util.</span><span class="o">{</span> <span class="nc">DateFormat</span><span class="o">,</span> <span class="nc">SimpleDateFormat</span> <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">trait</span> <span class="nc">FromJson</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">type</span> <span class="kt">C</span>
+</span><span class='line'>  <span class="k">type</span> <span class="kt">F</span> <span class="k">&lt;:</span> <span class="kt">DateFormat</span>   <span class="c1">// upper type bound specified</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">formatter</span><span class="k">:</span> <span class="kt">F</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">parseTime</span><span class="o">(</span><span class="n">date</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">formatter</span><span class="o">.</span><span class="n">parse</span><span class="o">(</span><span class="n">date</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fromJson</span><span class="k">:</span> <span class="kt">C</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">abstract</span> <span class="k">class</span> <span class="nc">AbstractJsonComment</span> <span class="k">extends</span> <span class="nc">FromJson</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">type</span> <span class="kt">T</span> <span class="o">=</span> <span class="nc">Comment</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">abstract</span> <span class="k">class</span> <span class="nc">AbstractFormattedJsonComment</span> <span class="k">extends</span> <span class="nc">AbstractJsonComment</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">type</span> <span class="kt">F</span> <span class="o">=</span> <span class="nc">SimpleDateFormat</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">JsonComment</span><span class="o">(</span><span class="n">comment</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">user</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">time</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+</span><span class='line'>  <span class="k">extends</span> <span class="nc">AbstractFormattedJsonComment</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">val</span> <span class="n">formatter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">&quot;yyyy/MM/dd HH:mm:ss&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">fromJson</span> <span class="k">=</span> <span class="nc">Comment</span><span class="o">(</span>
+</span><span class='line'>    <span class="n">comment</span><span class="o">,</span>
+</span><span class='line'>    <span class="n">user</span><span class="o">,</span>
+</span><span class='line'>    <span class="n">parseTime</span><span class="o">(</span><span class="n">time</span><span class="o">))</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Here, <code>AbstractJsonComment</code> omits specifying the type <code>F</code> which has to be a subclass of <code>DateFormat</code>.
