@@ -94,6 +94,9 @@ It would be wasteful to realize an entire infinite sequence before even using it
 The basic idea is to only call the function that generates the sequence when needed, and cache the results.
 With lazy sequences, you don&#8217;t blow the stack and the elements in the sequence are not recalculated everytime.</p>
 
+<!-- More -->
+
+
 <p>Let&#8217;s look at how the two most popular and functional JVM languages handle lazy sequences.</p>
 
 <p>Clojure has the <code>lazy-seq</code> macro to create lazy sequences.

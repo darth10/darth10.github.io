@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | darth10.github.com]]></title>
   <link href="http://darth10.github.com/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://darth10.github.com/"/>
-  <updated>2013-03-06T22:58:03+05:30</updated>
+  <updated>2013-03-06T23:04:50+05:30</updated>
   <id>http://darth10.github.com/</id>
   <author>
     <name><![CDATA[Akhil Wali]]></name>
@@ -22,6 +22,9 @@
 It would be wasteful to realize an entire infinite sequence before even using it.
 The basic idea is to only call the function that generates the sequence when needed, and cache the results.
 With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p>
+
+<!-- More -->
+
 
 <p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p>
 
@@ -147,6 +150,9 @@ However, <code>fibo-last</code> performs linearly since the <code>last</code> fu
     <content type="html"><![CDATA[<p>I recently had to use the <code>WebBrowser</code> .NET component in a project.
 The control is essentially Internet Explorer embedded in a <code>UserControl</code> component.
 Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p>
+
+<!-- More -->
+
 
 <p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p>
 
@@ -333,6 +339,9 @@ Here's an example from the implementation of the <code>List</code> class in the 
 
 <p>In most languages, types are designed to reduce casting, which can be an expensive operation.
 Type systems also imply support for variance, i.e. <em>covariance</em> and <em>contravariance</em>.</p>
+
+<!-- More -->
+
 
 <p>However, consider the use of a parameterized type in a trait.
 You <em>must</em> specify the parameterized type(s) in the deriving class, i.e. the deriving class <em>has</em> to be concrete.</p>
