@@ -25,6 +25,7 @@
   <script src="/javascripts/jquery.min.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/flot/jquery.flot.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="darth10.github.com" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -190,12 +191,10 @@ Memory usage can be ignored, as the GC is invoked unpredictably.</p>
 
 <p>And here are the results!</p>
 
-
-
 <table border="0px">
   <tr>
     <td>
-      <div id="postchart"></div>
+      <div id="postchart" style="width: 660px; height: 300px;"></div>
     </td>
   </tr>
 </table>
@@ -203,8 +202,7 @@ Memory usage can be ignored, as the GC is invoked unpredictably.</p>
 
 
 
-<script src="/assets/js/posts/lazy-sequences-and-streams.js" type="text/javascript">
-</script>
+<script src="/javascripts/posts/lazy-sequences-and-streams.js" type="text/javascript"></script>
 
 
 <p>A weird observation in the Scala implementation is that <code>fiboList(1)</code> takes 8-10 milliseconds to evaluate.

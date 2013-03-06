@@ -4,7 +4,7 @@
   <title><![CDATA[darth10.github.com]]></title>
   <link href="http://darth10.github.com/atom.xml" rel="self"/>
   <link href="http://darth10.github.com/"/>
-  <updated>2013-03-06T23:04:50+05:30</updated>
+  <updated>2013-03-06T23:43:01+05:30</updated>
   <id>http://darth10.github.com/</id>
   <author>
     <name><![CDATA[Akhil Wali]]></name>
@@ -119,12 +119,10 @@ Memory usage can be ignored, as the GC is invoked unpredictably.</p>
 
 <p>And here are the results!</p>
 
-
-
 <table border="0px">
   <tr>
     <td>
-      <div id="postchart"></div>
+      <div id="postchart" style="width: 660px; height: 300px;"></div>
     </td>
   </tr>
 </table>
@@ -132,8 +130,7 @@ Memory usage can be ignored, as the GC is invoked unpredictably.</p>
 
 
 
-<script src="http://darth10.github.com/assets/js/posts/lazy-sequences-and-streams.js" type="text/javascript">
-</script>
+<script src="http://darth10.github.com/javascripts/posts/lazy-sequences-and-streams.js" type="text/javascript"></script>
 
 
 <p>A weird observation in the Scala implementation is that <code>fiboList(1)</code> takes 8-10 milliseconds to evaluate.
