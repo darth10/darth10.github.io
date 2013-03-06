@@ -9,27 +9,11 @@
         <lastmod>2013-03-03T03:20:18+05:30</lastmod>
     </url>
     <url>
-        <loc>http://darth10.github.com/blog/2013/01/22/the-other-side/</loc>
-        <lastmod>2013-03-03T03:20:18+05:30</lastmod>
-    </url>
-    <url>
         <loc>http://darth10.github.com/blog/2013/01/25/lazy-sequences-and-streams/</loc>
         <lastmod>2013-03-03T03:20:18+05:30</lastmod>
     </url>
     <url>
-        <loc>http://darth10.github.com/blog/2013/03/03/sdf/</loc>
-        <lastmod>2013-03-03T03:20:18+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.com/blog/2013/03/03/sdf1/</loc>
-        <lastmod>2013-03-03T03:20:18+05:30</lastmod>
-    </url>
-    <url>
         <loc>http://darth10.github.com/robots.txt</loc>
-        <lastmod>2013-03-03T03:20:18+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.com/new-page/</loc>
         <lastmod>2013-03-03T03:20:18+05:30</lastmod>
     </url>
     <url>
@@ -39,5 +23,9 @@
     <url>
         <loc>http://darth10.github.com/</loc>
         <lastmod>2013-03-03T03:20:18+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.com/the-other-side/</loc>
+        <lastmod>2013-03-06T19:04:20+05:30</lastmod>
     </url>
 </urlset>
