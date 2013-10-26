@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: programming | darth10.github.com]]></title>
-  <link href="http://darth10.github.com/blog/categories/programming/atom.xml" rel="self"/>
-  <link href="http://darth10.github.com/"/>
-  <updated>2013-03-09T15:15:42+05:30</updated>
-  <id>http://darth10.github.com/</id>
+  <title><![CDATA[Category: programming | darth10.github.io]]></title>
+  <link href="http://darth10.github.io/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://darth10.github.io/"/>
+  <updated>2013-10-26T13:40:29+05:30</updated>
+  <id>http://darth10.github.io/</id>
   <author>
     <name><![CDATA[Akhil Wali]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Lazy sequences and streams]]></title>
-    <link href="http://darth10.github.com/blog/2013/01/25/lazy-sequences-and-streams/"/>
+    <link href="http://darth10.github.io/blog/2013/01/25/lazy-sequences-and-streams/"/>
     <updated>2013-01-25T00:00:00+05:30</updated>
-    <id>http://darth10.github.com/blog/2013/01/25/lazy-sequences-and-streams</id>
+    <id>http://darth10.github.io/blog/2013/01/25/lazy-sequences-and-streams</id>
     <content type="html"><![CDATA[<p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory.
 It would be wasteful to realize an entire infinite sequence before even using it.
 The basic idea is to only call the function that generates the sequence when needed, and cache the results.
@@ -141,9 +141,9 @@ However, <code>fibo-last</code> performs linearly since the <code>last</code> fu
   
   <entry>
     <title type="html"><![CDATA[The WebBrowser nightmare]]></title>
-    <link href="http://darth10.github.com/blog/2012/09/23/the-webbrowser-nightmare/"/>
+    <link href="http://darth10.github.io/blog/2012/09/23/the-webbrowser-nightmare/"/>
     <updated>2012-09-23T00:00:00+05:30</updated>
-    <id>http://darth10.github.com/blog/2012/09/23/the-webbrowser-nightmare</id>
+    <id>http://darth10.github.io/blog/2012/09/23/the-webbrowser-nightmare</id>
     <content type="html"><![CDATA[<p>I recently had to use the <code>WebBrowser</code> .NET component in a project.
 The control is essentially Internet Explorer embedded in a <code>UserControl</code> component.
 Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p>
@@ -308,9 +308,9 @@ The end result is some ugly and error prone code.</p>
   
   <entry>
     <title type="html"><![CDATA[Abstract and parameterized types]]></title>
-    <link href="http://darth10.github.com/blog/2012/08/16/abstract-and-parameterized-types/"/>
+    <link href="http://darth10.github.io/blog/2012/08/16/abstract-and-parameterized-types/"/>
     <updated>2012-08-16T00:00:00+05:30</updated>
-    <id>http://darth10.github.com/blog/2012/08/16/abstract-and-parameterized-types</id>
+    <id>http://darth10.github.io/blog/2012/08/16/abstract-and-parameterized-types</id>
     <content type="html"><![CDATA[<p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p>
 
 <p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it.
