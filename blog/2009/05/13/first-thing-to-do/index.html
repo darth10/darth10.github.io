@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>LICENSE - darth10.github.io</title>
+  <title>The first thing to do... - darth10.github.io</title>
   <meta name="author" content="Akhil Wali">
 
   
-  <meta name="description" content="LICENSE Copyright (c) 2013 Akhil Wali This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General &hellip;">
+  <meta name="description" content="I thought of writing a py script to help with sharing blog stuff, so here goes. The usage of os.mkdir() is obvious, but to name the directory &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ it under the terms of the GNU General &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://darth10.github.io/LICENSE/">
+  <link rel="canonical" href="http://darth10.github.io/blog/2009/05/13/first-thing-to-do/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,30 +63,89 @@ it under the terms of the GNU General &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">LICENSE</h1>
+    
+      <h1 class="entry-title">The First Thing to Do...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T00:00:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><div class='post'>
+<span style="font-family:verdana;">I thought of writing a py script to help with sharing blog stuff, so here goes.</span> <span style="font-family:verdana;">The usage of</span><span style="font-style: italic; font-family: verdana;"> os.mkdir()</span><span style="font-family:verdana;"> is obvious, but to name the directory uniquely a lot of strategies are possible. I just figured as I would blog at a daily basis at best, just use </span><span style="font-style: italic; font-family: verdana;">time.gmtime()</span><span style="font-family:verdana;">.</span><br /><br /><pre><code class="python">#!/usr/bin/python<br />import os<br />from time import strftime,gmtime<br /><br />date = strftime("%a.%d.%b%Y", gtime())<br />try:<br />    os.mkdir(date, 0700)<br />except OSError:<br />    print "Haven't you already done this today?"<br />else:<br />    print "Created directory ", date<br /></code></pre><script type="text/javascript">hljs.initHighlightingOnLoad(); </script><br /><span style="font-family:verdana;">So that basically does it I guess; nothing too fan</span><span style="font-family:verdana;">cy.</span> <span style="font-family:verdana;">If you have any better ideas about solving the unique directory problem please leave your comments.<br /><br /></span><a style="font-family: verdana;" href="http://3.bp.blogspot.com/_LayYGniQQRY/SgpUXySbloI/AAAAAAAAA1E/L8O7Oex54B4/s1600-h/Screenshot-Terminal+-+darth10@Deathstar:+~-pymatter-blogs.png" onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}"><img style="margin: 0pt 0pt 10px 10px; float: right; cursor: pointer; width: 400px; height: 226px;" src="http://3.bp.blogspot.com/_LayYGniQQRY/SgpUXySbloI/AAAAAAAAA1E/L8O7Oex54B4/s400/Screenshot-Terminal+-+darth10@Deathstar:+~-pymatter-blogs.png" alt="" id="BLOGGER_PHOTO_ID_5335169476186576514" border="0" /></a></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <p>Copyright (c) 2013 Akhil Wali</p>
 
-<p>This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.</p>
+<span class="byline author vcard">Posted by <span class="fn">Akhil Wali</span></span>
 
-<p>This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.</p>
+      
 
-<p>You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software Foundation,
-Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
+
+
+
+
+
+
 
   
+
+
+<time datetime="2009-05-13T00:00:00+05:30" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/scripting/'>Scripting</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://darth10.github.io/blog/2009/05/13/first-thing-to-do/" data-via="" data-counturl="http://darth10.github.io/blog/2009/05/13/first-thing-to-do/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="large"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/05/13/name-and-http-servers/" title="Next Post: __name__ and HTTP servers">__name__ and HTTP servers &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>
@@ -96,7 +154,7 @@ Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
   
     <section>
 <h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-<a href="http://darth10.github.io/LICENSE/index.html"><img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chld=|0&chco=165B94&chl=http://darth10.github.io/LICENSE/index.html" alt="post-qrcode"></a></section>
+<a href="http://darth10.github.io/blog/2009/05/13/first-thing-to-do/"><img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chld=|0&chco=165B94&chl=http://darth10.github.io/blog/2009/05/13/first-thing-to-do/" alt="post-qrcode"></a></section>
 
 <section>
   <h1>Coderwall</h1>

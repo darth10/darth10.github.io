@@ -1,35 +1,75 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://darth10.github.io/blog/2009/05/13/first-thing-to-do/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/05/13/name-and-http-servers/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/05/17/control-your-browser/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/05/17/we-are-outnumbered-by-machines/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/05/19/network-packets-with-py/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/05/20/html-to-pdf/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/07/12/chasing-shade/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2009/08/07/my-irc-room/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2010/01/13/67b-selection-sort/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2011/03/22/visual-studio-colors/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
         <loc>http://darth10.github.io/blog/2012/08/16/abstract-and-parameterized-types/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://darth10.github.io/blog/2012/09/23/moved-to-github/</loc>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://darth10.github.io/blog/2012/09/23/the-webbrowser-nightmare/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://darth10.github.io/blog/2013/01/25/lazy-sequences-and-streams/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.io/the-other-side/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://darth10.github.io/blog/archives/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://darth10.github.io/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://darth10.github.io/robots.txt</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
     <url>
         <loc>http://darth10.github.io/LICENSE/</loc>
-        <lastmod>2014-02-04T21:34:39+05:30</lastmod>
+        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
     </url>
 </urlset>

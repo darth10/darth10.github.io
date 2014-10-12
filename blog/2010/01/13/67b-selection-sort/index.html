@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>LICENSE - darth10.github.io</title>
+  <title>67B selection sort - darth10.github.io</title>
   <meta name="author" content="Akhil Wali">
 
   
-  <meta name="description" content="LICENSE Copyright (c) 2013 Akhil Wali This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General &hellip;">
+  <meta name="description" content="Here&#8217;s the absolutely smallest array sorting function in C. It&#8217;s in fact an article written by M. Doughlas McIlroy of Darthmouth College &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ it under the terms of the GNU General &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://darth10.github.io/LICENSE/">
+  <link rel="canonical" href="http://darth10.github.io/blog/2010/01/13/67b-selection-sort/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,30 +63,91 @@ it under the terms of the GNU General &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">LICENSE</h1>
+    
+      <h1 class="entry-title">67B Selection Sort</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-13T00:00:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><div class='post'>
+<span class="Apple-style-span" style="font-family:verdana;"><span class="Apple-style-span" style="font-size: small;">Here&#8217;s the absolutely smallest array sorting function in C. It&#8217;s in fact an article written by </span></span><a href="http://www.cs.dartmouth.edu/~doug/"><span class="Apple-style-span" style="font-family:verdana;"><span class="Apple-style-span" style="font-size: small;">M. Doughlas McIlroy</span></span></a><span class="Apple-style-span" style="font-family:verdana;"><span class="Apple-style-span" style="font-size: small;"> of Darthmouth College, NH. It totals to 67B(ridiculously small) of memory.</span></span><div><span class="Apple-style-span" style="font-family:verdana;"><span class="Apple-style-span"><br /></span></span></div><div><span class="Apple-style-span" style="font-family:verdana;"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size: small;">In the function </span><i><span class="Apple-style-span" style="font-size: small;">s</span></i><span class="Apple-style-span" style="font-size: small;">, </span><i><span class="Apple-style-span" style="font-size: small;">a</span></i><span class="Apple-style-span" style="font-size: small;"> is the starting address of the array, and </span><i><span class="Apple-style-span" style="font-size: small;">b</span></i><span class="Apple-style-span" style="font-size: small;"> is the address of the last element plus one; note the scale factor of a C integer type is generally 4 bytes. The function uses pointers gloriously. Took me like 5 minutes to get what&#8217;s being assigned where</span><span class="Apple-style-span" style="font-size:small;">.</span><br /></span></span></div><div><br /><script type="text/javascript">hljs.initHighlightingOnLoad(); </script><pre><code class="cpp">void sort(int* a, int* b)<br />{<br /> for (int* c = b, t; c > a;)<br /> if (t = *c--, *c > t) c[1] = *c, *c = t, c = b;<br />}</code></pre><br /></div></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <p>Copyright (c) 2013 Akhil Wali</p>
 
-<p>This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.</p>
+<span class="byline author vcard">Posted by <span class="fn">Akhil Wali</span></span>
 
-<p>This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.</p>
+      
 
-<p>You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software Foundation,
-Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
+
+
+
+
+
+
 
   
+
+
+<time datetime="2010-01-13T00:00:00+05:30" pubdate data-updated="true">Jan 13<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/programming/'>Programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://darth10.github.io/blog/2010/01/13/67b-selection-sort/" data-via="" data-counturl="http://darth10.github.io/blog/2010/01/13/67b-selection-sort/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="large"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/08/07/my-irc-room/" title="Previous Post: My IRC room">&laquo; My IRC room</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/03/22/visual-studio-colors/" title="Next Post: Visual Studio Colors">Visual Studio Colors &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>
@@ -96,7 +156,7 @@ Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
   
     <section>
 <h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-<a href="http://darth10.github.io/LICENSE/index.html"><img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chld=|0&chco=165B94&chl=http://darth10.github.io/LICENSE/index.html" alt="post-qrcode"></a></section>
+<a href="http://darth10.github.io/blog/2010/01/13/67b-selection-sort/"><img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chld=|0&chco=165B94&chl=http://darth10.github.io/blog/2010/01/13/67b-selection-sort/" alt="post-qrcode"></a></section>
 
 <section>
   <h1>Coderwall</h1>

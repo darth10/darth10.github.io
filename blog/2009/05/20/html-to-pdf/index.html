@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>LICENSE - darth10.github.io</title>
+  <title>HTML to PDF - darth10.github.io</title>
   <meta name="author" content="Akhil Wali">
 
   
-  <meta name="description" content="LICENSE Copyright (c) 2013 Akhil Wali This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General &hellip;">
+  <meta name="description" content="How to convert an HTML to a .pdf file from your terminal? Here&#8217;s how! Well, one way to do this would be to do a wget, and then use htmldoc to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ it under the terms of the GNU General &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://darth10.github.io/LICENSE/">
+  <link rel="canonical" href="http://darth10.github.io/blog/2009/05/20/html-to-pdf/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,30 +63,99 @@ it under the terms of the GNU General &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">LICENSE</h1>
+    
+      <h1 class="entry-title">HTML to PDF</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-20T00:00:00+05:30" pubdate data-updated="true">May 20<span>th</span>, 2009</time>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><div class='post'>
+<span style="font-family:verdana;">How to convert an HTML to a </span><span style="font-style: italic;font-family:verdana;" >.pdf </span><span style="font-family:verdana;">file from your terminal? Here&#8217;s how!</span>  <span style="font-family:verdana;"><br /><br />Well, one way to do this would be to do a </span><span style="font-style: italic;font-family:verdana;" >wget</span><span style="font-family:verdana;">, and then use </span><a href="http://www.htmldoc.org/"><span style="font-style: italic;font-family:verdana;" >htmldoc</span></a><span style="font-family:verdana;"> to convert the HTML file to a </span><span style="font-style: italic;font-family:verdana;" >.pdf </span><span style="font-family:verdana;">file</span><span style="font-style: italic;font-family:verdana;" >.<br /><br /></span><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://2.bp.blogspot.com/_LayYGniQQRY/ShOeQF2E5mI/AAAAAAAABEQ/aBp1ZEjE9so/s1600-h/htmldoc.png"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 196px;" src="http://2.bp.blogspot.com/_LayYGniQQRY/ShOeQF2E5mI/AAAAAAAABEQ/aBp1ZEjE9so/s400/htmldoc.png" alt="" id="BLOGGER_PHOTO_ID_5337783982648256098" border="0" /></a><br /><span style="font-family:verdana;">This is NOT the easy way to do the job; and the output is somewhat weird for some web pages. I&#8217;ve shown a man page for <a href="http://opengroup.org/onlinepubs/007908775/xsh/mmap.html"><span style="font-style: italic;">mmap</span></a> here; but if you try more complex CSS/HTML pages, conversion anomalies are observable.<br /><br /></span> <a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://4.bp.blogspot.com/_LayYGniQQRY/ShOefnu8yoI/AAAAAAAABEY/wArTgP1tLzw/s1600-h/mmap1.png"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 304px;" src="http://4.bp.blogspot.com/_LayYGniQQRY/ShOefnu8yoI/AAAAAAAABEY/wArTgP1tLzw/s400/mmap1.png" alt="" id="BLOGGER_PHOTO_ID_5337784249443207810" border="0" /></a><span style="font-family:verdana;"><br />Wait! This is supposed to be a Py blog right? So here&#8217;s the Py way to do it! The key is a module called </span><a href="http://www.xhtml2pdf.com/doc/pisa-en.html"><span style="font-style: italic;font-family:verdana;" >ho.pisa</span></a><span style="font-family:verdana;">; which needs to be downloaded and installed the hard way on your system. Once you get it running, the conversion can be done from the command line using </span><span style="font-style: italic;font-family:verdana;" >pisa</span><span style="font-family:verdana;"> or <span style="font-style: italic;">xhtml2pdf</span>, or straight from a Py shell by doing an &#8217;<span style="font-style: italic;">import ho.pisa</span>&#8217; and scripting away.</span><br /><span style="font-family:verdana;"><br /></span><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://4.bp.blogspot.com/_LayYGniQQRY/ShOgyHR-YqI/AAAAAAAABEg/ZAG0dfpujc0/s1600-h/pisa.png"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 196px;" src="http://4.bp.blogspot.com/_LayYGniQQRY/ShOgyHR-YqI/AAAAAAAABEg/ZAG0dfpujc0/s400/pisa.png" alt="" id="BLOGGER_PHOTO_ID_5337786766172512930" border="0" /></a><br /><span style="font-family:verdana;">Here&#8217;s what the generated <span style="font-style: italic;">.pdf</span> looks like. It&#8217;s a looks a lot neater than the one generated using <span style="font-style: italic;">htmldoc</span> if you ask me; plus it has fewer pages. Hence, Py rules!<br /><br /></span><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://4.bp.blogspot.com/_LayYGniQQRY/ShOhC2134wI/AAAAAAAABEo/bPeVcy1TgsU/s1600-h/mmap2.png"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 400px; height: 338px;" src="http://4.bp.blogspot.com/_LayYGniQQRY/ShOhC2134wI/AAAAAAAABEo/bPeVcy1TgsU/s400/mmap2.png" alt="" id="BLOGGER_PHOTO_ID_5337787053817455362" border="0" /></a></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Deepti</div>
+<div class='content'>
+Nice..Will try it out and if it works for me..would thank you Then.</div>
+</div>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <p>Copyright (c) 2013 Akhil Wali</p>
 
-<p>This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.</p>
+<span class="byline author vcard">Posted by <span class="fn">Akhil Wali</span></span>
 
-<p>This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.</p>
+      
 
-<p>You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software Foundation,
-Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
+
+
+
+
+
+
 
   
+
+
+<time datetime="2009-05-20T00:00:00+05:30" pubdate data-updated="true">May 20<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/scripting/'>Scripting</a>, <a class='category' href='/blog/categories/www/'>www</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://darth10.github.io/blog/2009/05/20/html-to-pdf/" data-via="" data-counturl="http://darth10.github.io/blog/2009/05/20/html-to-pdf/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="large"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/05/19/network-packets-with-py/" title="Previous Post: Network packets with Py">&laquo; Network packets with Py</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/07/12/chasing-shade/" title="Next Post: Chasing the shade....">Chasing the shade.... &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>
@@ -96,7 +164,7 @@ Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
   
     <section>
 <h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-<a href="http://darth10.github.io/LICENSE/index.html"><img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chld=|0&chco=165B94&chl=http://darth10.github.io/LICENSE/index.html" alt="post-qrcode"></a></section>
+<a href="http://darth10.github.io/blog/2009/05/20/html-to-pdf/"><img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chld=|0&chco=165B94&chl=http://darth10.github.io/blog/2009/05/20/html-to-pdf/" alt="post-qrcode"></a></section>
 
 <section>
   <h1>Coderwall</h1>
