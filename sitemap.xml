@@ -1,27 +1,163 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-        <loc>http://darth10.github.io/blog/2012/09/23/the-webbrowser-nightmare/</loc>
-        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.io/blog/2013/01/25/lazy-sequences-and-streams/</loc>
-        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.io/blog/archives/</loc>
-        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.io/</loc>
-        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.io/robots.txt</loc>
-        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
-    </url>
-    <url>
-        <loc>http://darth10.github.io/LICENSE/</loc>
-        <lastmod>2014-04-30T12:01:51+05:30</lastmod>
-    </url>
+<url>
+<loc>
+http://darth10.github.io/p/2/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/404.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/archives/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/posts/network-packets-with-py/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/posts/byte-selection-sort/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/posts/name-and-http-servers/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/posts/abstract-and-parameterized-types/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/posts/lazy-sequences-and-streams/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/posts/the-webbrowser-nightmare/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/pages/another-page/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/pages/about/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/Scala/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/programming/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/Python/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/C/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/Clojure/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/C#/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/tags/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/authors/Akhil Wali/index.html
+</loc>
+<lastmod>
+2016-12-29
+</lastmod>
+</url>
 </urlset>

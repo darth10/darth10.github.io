@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>darth10.github.io</title>
-    <link rel="canonical" href="http://darth10.github.io">
+    <title>darth10.github.io: Archives</title>
+    <link rel="canonical" href="http://darth10.github.io/archives/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
@@ -29,9 +29,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li  class="active" ><a href="/">Home</a></li>
+                <li ><a href="/">Home</a></li>
                 <li
-                ><a href="/archives/">Archives</a></li>
+                 class="active" ><a href="/archives/">Archives</a></li>
                 
                 <li
                 >
@@ -52,67 +52,61 @@
         <div class="col-lg-9">
             <div id="content">
                 
-<div id="post">
-    
-    <div class="post-header">
-        <h2>Lazy sequences and streams</h2>
-        <div id="post-meta">
-            
-            <div class="date">January 25, 2013</div>
-        </div>
+<div id="posts">
+    <div id="page-header">
+        <h2>Archives</h2>
     </div>
-    <p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory. It would be wasteful to realize an entire infinite sequence before even using it. The basic idea is to only call the function that generates the sequence when needed, and cache the results. With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p><p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p><p></p>
-    <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
-    <hr>
     
-    <div class="post-header">
-        <h2>The WebBrowser nightmare</h2>
-        <div id="post-meta">
-            
-            <div class="date">September 23, 2012</div>
-        </div>
-    </div>
-    <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p></p>
-    <a href="/posts/the-webbrowser-nightmare/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-        <h2>Abstract and parameterized types</h2>
-        <div id="post-meta">
-            
-            <div class="date">August 16, 2012</div>
-        </div>
-    </div>
-    <p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p><p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it. The <code>apply</code> method in companion objects is the best place to start. Here's an example from the implementation of the <code>List</code> class in the Scala library.</p><pre><code class="scala">object List {
-
-  // ...
-
-  def apply[A](xs: A*): List[A] = xs.toList
-}
-</code></pre>
-    <a href="/posts/abstract-and-parameterized-types/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-        <h2>61 byte selection sort</h2>
-        <div id="post-meta">
-            
-            <div class="date">January 13, 2010</div>
-        </div>
-    </div>
-    <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/" shape="rect">M. Doughlas McIlroy</a> of Darthmouth College, NH USA. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
-{for(int*c=b,t;c>a;)if(t=*c--,*c>t)c[1]=*c,*c=t,c=b;}
-</code></pre><p>This can be made even smaller using recursion and by inferring the type specifiers of global object declarations, which is a GCC hack. In the following function, <code>n</code> is the number of elements in the array <code>a</code>.</p>
-    <a href="/posts/byte-selection-sort/">Continue reading &#8594;</a>
-    <hr>
-    
-
-    <div id="prev-next">
+        <h4>2013 January</h4>
+        <ul>
         
+        <li>
+            Jan 25 - <a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a>
+        </li>
         
-        <a class="right" href="/p/2/">Next &raquo;</a>
+        </ul>
+    
+        <h4>2012 September</h4>
+        <ul>
         
-    </div>
+        <li>
+            Sep 23 - <a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a>
+        </li>
+        
+        </ul>
+    
+        <h4>2012 August</h4>
+        <ul>
+        
+        <li>
+            Aug 16 - <a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a>
+        </li>
+        
+        </ul>
+    
+        <h4>2010 January</h4>
+        <ul>
+        
+        <li>
+            Jan 13 - <a href="/posts/byte-selection-sort/">61 byte selection sort</a>
+        </li>
+        
+        </ul>
+    
+        <h4>2009 May</h4>
+        <ul>
+        
+        <li>
+            May 19 - <a href="/posts/network-packets-with-py/">Network packets with Python</a>
+        </li>
+        
+        <li>
+            May 13 - <a href="/posts/name-and-http-servers/">__name__ and HTTP servers</a>
+        </li>
+        
+        </ul>
+    
+
 </div>
 
             </div>

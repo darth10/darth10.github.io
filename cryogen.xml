@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
+<channel>
+<atom:link href='http://darth10.github.io/' rel='self' type='application/rss+xml'/>
+<title>
+darth10.github.io
+</title>
+<link>
+http://darth10.github.io/
+</link>
+<description>
+darth10's blog
+</description>
+<lastBuildDate>
+Thu, 29 Dec 2016 01:40:02 +1300
+</lastBuildDate>
+<generator>
+clj-rss
+</generator>
+</channel>
+</rss>

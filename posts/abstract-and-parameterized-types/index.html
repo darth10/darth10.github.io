@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>darth10.github.io</title>
-    <link rel="canonical" href="http://darth10.github.io">
+    <title>darth10.github.io: Abstract and parameterized types</title>
+    <link rel="canonical" href="http://darth10.github.io/posts/abstract-and-parameterized-types/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
@@ -29,7 +29,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li  class="active" ><a href="/">Home</a></li>
+                <li ><a href="/">Home</a></li>
                 <li
                 ><a href="/archives/">Archives</a></li>
                 
@@ -53,66 +53,106 @@
             <div id="content">
                 
 <div id="post">
-    
     <div class="post-header">
-        <h2>Lazy sequences and streams</h2>
-        <div id="post-meta">
-            
-            <div class="date">January 25, 2013</div>
-        </div>
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">August 16, 2012</div>
+        
     </div>
-    <p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory. It would be wasteful to realize an entire infinite sequence before even using it. The basic idea is to only call the function that generates the sequence when needed, and cache the results. With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p><p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p><p></p>
-    <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
-    <hr>
+    <h2>Abstract and parameterized types</h2>
+</div>
+<div>
     
-    <div class="post-header">
-        <h2>The WebBrowser nightmare</h2>
-        <div id="post-meta">
-            
-            <div class="date">September 23, 2012</div>
-        </div>
-    </div>
-    <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p></p>
-    <a href="/posts/the-webbrowser-nightmare/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-        <h2>Abstract and parameterized types</h2>
-        <div id="post-meta">
-            
-            <div class="date">August 16, 2012</div>
-        </div>
-    </div>
     <p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p><p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it. The <code>apply</code> method in companion objects is the best place to start. Here's an example from the implementation of the <code>List</code> class in the Scala library.</p><pre><code class="scala">object List {
 
   // ...
 
-  def apply[A](xs: A*): List[A] = xs.toList
+  def apply&#91;A&#93;&#40;xs: A&#42;&#41;: List&#91;A&#93; = xs.toList
 }
-</code></pre>
-    <a href="/posts/abstract-and-parameterized-types/">Continue reading &#8594;</a>
-    <hr>
+</code></pre><p>Classes and traits can be parameterized as well.</p><p>In most languages, types are designed to reduce casting, which can be an expensive operation. Type systems also imply support for variance, i.e. <em>covariance</em> and <em>contravariance</em>.</p><p>However, consider the use of a parameterized type in a trait. You <em>must</em> specify the parameterized type(s) in the deriving class, i.e. the deriving class <em>has</em> to be concrete.</p><pre><code class="scala">import java.util.SimpleDateFormat
+
+trait JsonComment&#91;T&#93; {
+  def fromJson: T
+}
+
+class JsonComment&#40;comment: String, user: String, time: String&#41;
+  extends FromJson&#91;Comment&#93; {
+
+  lazy val dateFormat = new SimpleDateFormat&#40;&quot;yyyy/MM/dd HH:mm:ss&quot;&#41;
+
+  def fromJson = Comment&#40;
+    comment,
+    user,
+    dateFormat.parse&#40;time&#41;&#41;
+}
+</code></pre><p><code>JsonComment</code> has to define the type <code>Comment</code> (Ok, I admit this is a really bad example), and it cannot omit the type. Also, it's not possible to have members which are objects of the specified type.</p><p>Enter abstract types. Abstract types are types whose identity is not precisely known. Deriving classes <em>may</em> specify the abstract type(s) in a base class. As parameterized types have variance annotations, abstract types have <em>type bounds</em>.</p><pre><code class="scala">import java.util.{ DateFormat, SimpleDateFormat }
+
+trait FromJson {
+  type C
+  type F &lt;: DateFormat	// upper type bound specified
+
+  val formatter: F
+
+  def parseTime&#40;date: String&#41; = formatter.parse&#40;date&#41;
+
+  def fromJson: C
+}
+
+abstract class AbstractJsonComment extends FromJson {
+  type T = Comment
+}
+
+abstract class AbstractFormattedJsonComment extends AbstractJsonComment {
+  type F = SimpleDateFormat
+}
+
+class JsonComment&#40;comment: String, user: String, time: String&#41;
+  extends AbstractFormattedJsonComment {
+
+  val formatter = new SimpleDateFormat&#40;&quot;yyyy/MM/dd HH:mm:ss&quot;&#41;
+
+  def fromJson = Comment&#40;
+    comment,
+    user,
+    parseTime&#40;time&#41;&#41;
+}
+</code></pre><p>Here, <code>AbstractJsonComment</code> omits specifying the type <code>F</code> which has to be a subclass of <code>DateFormat</code>. The class <code>AbstractFormattedJsonComment</code> specifies <code>F</code>, but has to be abstract as it doesn't implement the functions in <code>FromJson</code>. Thus, these two classes specify the abstract types separately, and <code>JsonComment</code> specifies the implementation. Note that <code>FromJson</code> has a member of type <code>F</code>, which it uses to provide a partial implementation.</p><p>Almost any implementation with parameterized types can be turned into one with abstract types, and vice versa. However, abstract types make it easier to separate implementation and specification.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
     
-    <div class="post-header">
-        <h2>61 byte selection sort</h2>
-        <div id="post-meta">
-            
-            <div class="date">January 13, 2010</div>
-        </div>
-    </div>
-    <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/" shape="rect">M. Doughlas McIlroy</a> of Darthmouth College, NH USA. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
-{for(int*c=b,t;c>a;)if(t=*c--,*c>t)c[1]=*c,*c=t,c=b;}
-</code></pre><p>This can be made even smaller using recursion and by inferring the type specifiers of global object declarations, which is a GCC hack. In the following function, <code>n</code> is the number of elements in the array <code>a</code>.</p>
-    <a href="/posts/byte-selection-sort/">Continue reading &#8594;</a>
-    <hr>
+    <a href="/tags/Scala/">Scala</a>
     
+    <a href="/tags/programming/">programming</a>
+    
+</div>
+
 
     <div id="prev-next">
         
+        <a href="/posts/the-webbrowser-nightmare/">&laquo; The WebBrowser nightmare</a>
         
-        <a class="right" href="/p/2/">Next &raquo;</a>
+        
+        <a class="right" href="/posts/byte-selection-sort/">61 byte selection sort &raquo;</a>
         
     </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://darth10.github.io/posts/abstract-and-parameterized-types/";
+            this.page.identifier = "Abstract and parameterized types";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//darth10.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
 </div>
 
             </div>
