@@ -27,6 +27,6 @@ Welcome to Scapy (2.3.3)
 
 This generates a self-explanatory packet dump. You could also use a different reader; just change the `conf.prog.pdfreader` object.
 
-<img style="text-align: center;" src="/img/packets.png" />
+![packets](packets.png)
 
 <a href="http://www.secdev.org/projects/scapy/">Scapy</a> is more than just an educational tool. It comes with everything for network-induced chaos, from a sniffer to layer-2 sockets, and it's extensible through Python!
