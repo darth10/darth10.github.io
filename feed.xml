@@ -12,7 +12,7 @@ http://darth10.github.io/
 darth10's blog
 </description>
 <lastBuildDate>
-Thu, 29 Dec 2016 01:40:02 +1300
+Mon, 02 Jan 2017 21:12:46 +1300
 </lastBuildDate>
 <generator>
 clj-rss
@@ -274,7 +274,7 @@ Welcome to Scapy &amp;#40;2.3.3&amp;#41;
 
 &amp;gt;&amp;gt;&amp;gt; r = RIP&amp;#40;&amp;#41; / entry
 &amp;gt;&amp;gt;&amp;gt; r.pdfdump&amp;#40;&amp;#41;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This generates a self-explanatory packet dump. You could also use a different reader; just change the &lt;code&gt;conf.prog.pdfreader&lt;/code&gt; object.&lt;/p&gt;&lt;p&gt;&lt;img style=&quot;text-align: center;&quot; src=&quot;//img/packets.png&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://www.secdev.org/projects/scapy/&quot;&gt;Scapy&lt;/a&gt; is more than just an educational tool. It comes with everything for network-induced chaos, from a sniffer to layer-2 sockets, and it's extensible through Python!&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This generates a self-explanatory packet dump. You could also use a different reader; just change the &lt;code&gt;conf.prog.pdfreader&lt;/code&gt; object.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;packets.png&quot; alt=&quot;packets&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://www.secdev.org/projects/scapy/&quot;&gt;Scapy&lt;/a&gt; is more than just an educational tool. It comes with everything for network-induced chaos, from a sniffer to layer-2 sockets, and it's extensible through Python!&lt;/p&gt;
 </description>
 <enclosure>
 
