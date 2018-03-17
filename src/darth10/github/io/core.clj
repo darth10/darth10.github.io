@@ -1,4 +1,4 @@
-(ns cryogen.core
+(ns darth10.github.io.core
   (:require [cryogen-core.compiler :refer [compile-assets-timed]]
             [cryogen-core.plugins :refer [load-plugins]]))
 

@@ -1,4 +1,4 @@
-(ns cryogen.server
+(ns darth10.github.io.server
   (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
             [ring.util.response :refer [redirect resource-response]]
@@ -7,8 +7,7 @@
             [cryogen-core.watcher :refer [start-watcher!]]
             [cryogen-core.plugins :refer [load-plugins]]
             [cryogen-core.compiler :refer [compile-assets-timed read-config]]
-            [cryogen-core.io :refer [path]]
-            ))
+            [cryogen-core.io :refer [path]]))
 
 (defn init []
   (load-plugins)

@@ -8,6 +8,6 @@
                  [cryogen-markdown "0.1.4"]
                  [cryogen-core "0.1.46"]]
   :plugins [[lein-ring "0.9.7"]]
-  :main cryogen.core
-  :ring {:init cryogen.server/init
-         :handler cryogen.server/handler})
+  :main darth10.github.io.core
+  :ring {:init darth10.github.io.server/init
+         :handler darth10.github.io.server/handler})
