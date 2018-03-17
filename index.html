@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <title>darth10.github.io</title>
     <link rel="canonical" href="http://darth10.github.io">
+    <link rel="icon" href="/img/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
@@ -58,7 +59,7 @@
         <h2>Lazy sequences and streams</h2>
         <div id="post-meta">
             
-            <div class="date">January 25, 2013</div>
+            <div class="date">25 January 2013</div>
         </div>
     </div>
     <p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory. It would be wasteful to realize an entire infinite sequence before even using it. The basic idea is to only call the function that generates the sequence when needed, and cache the results. With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p><p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p><p></p>
@@ -69,7 +70,7 @@
         <h2>The WebBrowser nightmare</h2>
         <div id="post-meta">
             
-            <div class="date">September 23, 2012</div>
+            <div class="date">23 September 2012</div>
         </div>
     </div>
     <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p></p>
@@ -80,7 +81,7 @@
         <h2>Abstract and parameterized types</h2>
         <div id="post-meta">
             
-            <div class="date">August 16, 2012</div>
+            <div class="date">16 August 2012</div>
         </div>
     </div>
     <p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p><p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it. The <code>apply</code> method in companion objects is the best place to start. Here's an example from the implementation of the <code>List</code> class in the Scala library.</p><pre><code class="scala">object List {
@@ -97,7 +98,7 @@
         <h2>61 byte selection sort</h2>
         <div id="post-meta">
             
-            <div class="date">January 13, 2010</div>
+            <div class="date">13 January 2010</div>
         </div>
     </div>
     <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/" shape="rect">M. Doughlas McIlroy</a> of Darthmouth College, NH USA. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
@@ -165,7 +166,7 @@
             </div>
         </div>
     </div>
-    <footer>Copyright &copy; 2017 Akhil Wali
+    <footer>Copyright &copy; 2018 Akhil Wali
         <p style="text-align: center;">Powered by
             <a href="http://cryogenweb.org">Cryogen</a> and
             <a href="https://pages.github.com/">GitHub Pages</a>
