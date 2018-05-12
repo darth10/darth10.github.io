@@ -15,8 +15,8 @@ I'm particularly fond of mathematics, cloud computing and open source technologi
 <br>
 
 <div>
-[<a href="https://github.com/darth10/">https://github.com/darth10/</a>]
+[<a href="https://github.com/darth10/" target="_blank">https://github.com/darth10/</a>]
 </div>
 <div>
-[<a href="https://www.linkedin.com/in/darth10/">https://www.linkedin.com/in/darth10/</a>]
+[<a href="https://www.linkedin.com/in/darth10/" target="_blank">https://www.linkedin.com/in/darth10/</a>]
 </div>
