@@ -17,7 +17,7 @@
  :sass-dest          nil
  :theme              "blue"
  :resources          ["img"]
- :keep-files         [".git"]
+ :keep-files         [".git", "LICENSE.md"]
  :disqus?            true
  :disqus-shortname   "darth10"
  :ignored-files      [#"\.#.*" #".*\.swp$"]
