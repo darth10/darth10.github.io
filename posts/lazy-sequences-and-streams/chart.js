@@ -1,4 +1,4 @@
-$(function() {
+(function() {
 
   var chartData = {
     'scalaFiboList': [ [1, 9],
