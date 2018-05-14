@@ -1,6 +1,6 @@
 {:title "The WebBrowser nightmare"
  :date "2012-09-23"
- :layout post
+ :layout :post
  :tags ["programming" "C#"]}
 
 I recently had to use the `WebBrowser` .NET component in a project.

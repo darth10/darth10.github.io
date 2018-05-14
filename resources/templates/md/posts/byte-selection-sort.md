@@ -1,6 +1,6 @@
 {:title "61 byte selection sort"
  :date "2010-01-13"
- :layout post
+ :layout :post
  :tags ["programming" "C"]}
 
 

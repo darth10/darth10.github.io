@@ -1,6 +1,6 @@
 {:title "Network packets with Python"
  :date "2009-05-19"
- :layout post
+ :layout :post
  :tags ["programming" "Python"]}
 
 Next week, I'll have to start a project on implementing <a href="http://en.wikipedia.org/wiki/Routing_Information_Protocol">RIP</a> (Routing Information Protocol) using UDP sockets in C.

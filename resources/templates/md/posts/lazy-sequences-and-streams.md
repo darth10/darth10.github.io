@@ -1,6 +1,6 @@
 {:title "Lazy sequences and streams"
  :date "2013-01-25"
- :layout post
+ :layout :post
  :tags ["Clojure" "Scala"]}
 
 Functional languages have the notion of *lazy sequences*, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory.

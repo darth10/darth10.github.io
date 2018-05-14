@@ -1,6 +1,6 @@
 {:title "Abstract and parameterized types"
  :date "2012-08-16"
- :layout post
+ :layout :post
  :tags ["programming" "Scala"]}
 
 Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).
