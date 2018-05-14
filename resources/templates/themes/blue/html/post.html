@@ -1,7 +1,9 @@
 {% extends "/html/base.html" %}
-{%block subtitle %}: {{post.title}}{% endblock %}
+{% block subtitle %}: {{post.title}}{% endblock %}
+
 {% block content %}
 <div id="post">
+
     {% include "/html/post-content.html" %}
     <div id="prev-next">
         {% if post.prev %}
