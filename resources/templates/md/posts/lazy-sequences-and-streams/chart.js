@@ -96,4 +96,4 @@ function loadCharts () {
 };
 
   $(document).ready(loadCharts);
-});
+})();
