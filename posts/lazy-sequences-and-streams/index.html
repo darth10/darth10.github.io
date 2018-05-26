@@ -103,17 +103,10 @@
 </code></pre><p>Note that the time taken to print the result of a statement in the REPL shouldn't be measured. We can ensure this by binding the result to a variable. This is done by using <code>val fibo = time&#40;fiboLast&#40;5000&#41;</code> in Scala, and <code>&#40;time &#40;def fibo &#40;fibo-last 5000&#41;&#41;&#41;</code> in Clojure, for example. Memory usage can be ignored, as the GC is invoked unpredictably.</p><p>And here are the results!</p><p><div id="postchart" style="width: 660px; height: 300px;"></div> <script type="text/javascript" src="jquery.flot.min.js" defer></script> <script type="text/javascript" src="chart.js" defer></script></p><p>A weird observation in the Scala implementation is that <code>fiboList&#40;1&#41;</code> takes 8-10 milliseconds to evaluate. But Scala actually performs better on average, which is mostly due to the use of static types.</p><p>Interestingly, the Clojure <code>fibo-list</code> function evaluates in constant time, which is less than a millisecond! Clojure also fetches cached elements in the lazy sequence much faster than Scala. However, <code>fibo-last</code> performs linearly since the <code>last</code> function has linear time-complexity.</p>
 </div>
 
-<div id="post-tags">
-    <b>Tags: </b>
-    
-    <a href="/tags/Scala/">Scala</a>
-    
-    <a href="/tags/Clojure/">Clojure</a>
-    
-</div>
-
 
     <div id="prev-next">
+        
+        <a href="/posts/linq-is-not-fast/">&laquo; LINQ is not fast</a>
         
         
         <a class="right" href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare &raquo;</a>
@@ -147,34 +140,15 @@
                         <h3>Recent Posts</h3>
                         <ul>
                             
+                            <li><a href="/posts/linq-is-not-fast/">LINQ is not fast</a></li>
+                            
                             <li><a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a></li>
                             
                             <li><a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a></li>
                             
-                            <li><a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a></li>
-                            
                         </ul>
                     </div>
                     
-                    
-                    <div id="tags">
-                        <h3>Tags</h3>
-                        <ul>
-                            
-                            <li><a href="/tags/Scala/">Scala</a></li>
-                            
-                            <li><a href="/tags/Clojure/">Clojure</a></li>
-                            
-                            <li><a href="/tags/programming/">programming</a></li>
-                            
-                            <li><a href="/tags/C#/">C#</a></li>
-                            
-                            <li><a href="/tags/C/">C</a></li>
-                            
-                            <li><a href="/tags/Python/">Python</a></li>
-                            
-                        </ul>
-                    </div>
                     
                 </div>
             </div>
