@@ -1,7 +1,6 @@
 {:title "The WebBrowser nightmare"
  :date "2012-09-23"
- :layout :post
- :tags ["programming" "C#"]}
+ :layout :post}
 
 I recently had to use the `WebBrowser` .NET component in a project.
 The control is essentially Internet Explorer embedded in a `UserControl` component.

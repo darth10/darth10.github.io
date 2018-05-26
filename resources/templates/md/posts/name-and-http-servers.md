@@ -1,7 +1,6 @@
 {:title "__name__ and HTTP servers"
  :date "2009-05-13"
- :layout :post
- :tags ["programming" "Python"]}
+ :layout :post}
 
 The `__name__` built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.
 
