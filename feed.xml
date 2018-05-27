@@ -12,32 +12,11 @@ http://darth10.github.io/
 darth10's blog
 </description>
 <lastBuildDate>
-Sat, 26 May 2018 19:52:42 +1200
+Sun, 27 May 2018 19:09:18 +1200
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
-<item>
-<guid>
-http://darth10.github.io/posts/linq-is-not-fast/
-</guid>
-<link>
-http://darth10.github.io/posts/linq-is-not-fast/
-</link>
-<title>
-LINQ is not fast
-</title>
-<description>
-&lt;p&gt;Linq is not fast Vs. foreach&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash;more&amp;ndash;&gt;&lt;/p&gt;&lt;p&gt;TODO metrics &lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;csharp&quot;&gt;var i = 1;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;TODO slow is not fast enough TODO then again, how hard is it to replace  TODO thinking about data structures TODO CopyTo&lt;/p&gt;
-</description>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Sat, 26 May 2018 00:00:00 +1200
-</pubDate>
-</item>
 <item>
 <guid>
 http://darth10.github.io/posts/lazy-sequences-and-streams/

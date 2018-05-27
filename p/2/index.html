@@ -70,19 +70,6 @@
 <div id="post">
     
     <div class="post-header">
-        <h2>61 byte selection sort</h2>
-        <div id="post-meta">
-            
-            <div class="date">13 January 2010</div>
-        </div>
-    </div>
-    <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/" shape="rect">M. Doughlas McIlroy</a> of Darthmouth College, NH USA. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
-{for(int*c=b,t;c>a;)if(t=*c--,*c>t)c[1]=*c,*c=t,c=b;}
-</code></pre><p>This can be made even smaller using recursion and by inferring the type specifiers of global object declarations, which is a GCC hack. In the following function, <code>n</code> is the number of elements in the array <code>a</code>.</p>
-    <a href="/posts/byte-selection-sort/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
         <h2>Network packets with Python</h2>
         <div id="post-meta">
             
@@ -141,11 +128,11 @@ else:
                         <h3>Recent Posts</h3>
                         <ul>
                             
-                            <li><a href="/posts/linq-is-not-fast/">LINQ is not fast</a></li>
-                            
                             <li><a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a></li>
                             
                             <li><a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a></li>
+                            
+                            <li><a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a></li>
                             
                         </ul>
                     </div>
