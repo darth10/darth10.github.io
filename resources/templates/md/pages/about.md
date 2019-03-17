@@ -3,7 +3,7 @@
  :page-index 0
  :navbar? true}
 
-<img src="me.jpg" class="center-block"/>
+<img src="about/me.jpg" class="center-block"/>
 <br>
 
 I'm Akhil. I'm a software developer.

@@ -25,4 +25,7 @@
  :blocks-per-preview 3
  :previews?          true
  :clean-urls?        true
+ :collapse-subdirs?  true
+ :hide-future-posts? true
+ :debug?             false
  }

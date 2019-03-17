@@ -75,8 +75,8 @@ Memory usage can be ignored, as the GC is invoked unpredictably.
 And here are the results!
 
 <div id="postchart" style="width: 660px; height: 300px;"></div>
-<script type="text/javascript" src="jquery.flot.min.js" defer></script>
-<script type="text/javascript" src="chart.js" defer></script>
+<script type="text/javascript" src="lazy-sequences-and-streams/jquery.flot.min.js" defer></script>
+<script type="text/javascript" src="lazy-sequences-and-streams/chart.js" defer></script>
 
 A weird observation in the Scala implementation is that `fiboList(1)` takes 8-10 milliseconds to evaluate.
 But Scala actually performs better on average, which is mostly due to the use of static types.
