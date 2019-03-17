@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>darth10.github.io: Archives</title>
-    <link rel="canonical" href="http://darth10.github.io/archives/">
+    <title>darth10.github.io</title>
+    <link rel="canonical" href="http://darth10.github.io">
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -41,11 +41,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ><a href="/">Home</a></li>
                     <li
-                         class="active" ><a href="/archives/">Archives</a></li>
+                        ><a href="/archives">Archives</a></li>
                     
                     <li
                         >
-                        <a href="/pages/about/">About</a>
+                        <a href="/pages/about">About</a>
                     </li>
                     
                     <li><a href="/feed.xml">RSS</a></li>
@@ -60,61 +60,62 @@
             <div class="col-lg-9">
                 <div id="content">
                     
-<div id="posts">
-    <div id="page-header">
-        <h2>Archives</h2>
+
+<a href="https://xkcd.com/1312/" target="_blank">
+    <img src="https://imgs.xkcd.com/comics/haskell.png" alt="https://xkcd.com/1312/" class="center-block" />
+</a>
+<br>
+<hr>
+
+<div id="post">
+    
+    <div class="post-header">
+        <h2>Network packets with Python</h2>
+        <div id="post-meta">
+            
+            <div class="date">19 May 2009</div>
+        </div>
     </div>
+    <p>Next week, I'll have to start a project on implementing <a href="http://en.wikipedia.org/wiki/Routing&lt;i&gt;Information&lt;/i&gt;Protocol">RIP</a> (Routing Information Protocol) using UDP sockets in C. I needed a quick way to get the byte structure of RIP packets, and decided to use <a href="http://www.secdev.org/projects/scapy/">scapy</a>. It's quite a handy tool and has a simple interface, which is nothing more than an extended Python shell. Auto-completion is supported out-of-the-box, which is good news for all the command-line enthusiasts out there. Here's how we dump an RIP packet straight to a PDF file.</p><pre><code class="python">$ scapy
+Welcome to Scapy (2.3.3)
+&gt;&gt;&gt; entry = RIPEntry(addr='192.168.1.10', nextHop='192.168.1.1', mask='255.255.255.0')
+&gt;&gt;&gt; entry.show()
+###[ RIP entry ]###
+  AF= IP
+  RouteTag= 0
+  addr= 192.168.1.10
+  mask= 255.255.255.0
+  nextHop= 192.168.1.1
+  metric= 1
+
+&gt;&gt;&gt; r = RIP() / entry
+&gt;&gt;&gt; r.pdfdump()
+</code></pre><p>This generates a self-explanatory packet dump. You could also use a different reader; just change the <code>conf.prog.pdfreader</code> object.</p>
+    <a href="/posts/network-packets-with-py">Continue reading &#8594;</a>
+    <hr>
     
-        <h4>2013 January</h4>
-        <ul>
-        
-        <li>
-            Jan 25 - <a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2012 September</h4>
-        <ul>
-        
-        <li>
-            Sep 23 - <a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2012 August</h4>
-        <ul>
-        
-        <li>
-            Aug 16 - <a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2010 January</h4>
-        <ul>
-        
-        <li>
-            Jan 13 - <a href="/posts/byte-selection-sort/">61 byte selection sort</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2009 May</h4>
-        <ul>
-        
-        <li>
-            May 19 - <a href="/posts/network-packets-with-py/">Network packets with Python</a>
-        </li>
-        
-        <li>
-            May 13 - <a href="/posts/name-and-http-servers/">__name__ and HTTP servers</a>
-        </li>
-        
-        </ul>
+    <div class="post-header">
+        <h2>__name__ and HTTP servers</h2>
+        <div id="post-meta">
+            
+            <div class="date">13 May 2009</div>
+        </div>
+    </div>
+    <p>The <code>__name__</code> built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.</p><p>Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.</p><pre><code class="python">if __name__ == __main__:
+    print "Just got executed!"
+else:
+    print "Got imported! I'm so cool!"
+</code></pre>
+    <a href="/posts/name-and-http-servers">Continue reading &#8594;</a>
+    <hr>
     
 
+    <div id="prev-next">
+        
+        <a class="left" href="/">&laquo; Prev</a>
+        
+        
+    </div>
 </div>
 
                 </div>
@@ -127,11 +128,11 @@
                         <h3>Recent Posts</h3>
                         <ul>
                             
-                            <li><a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a></li>
+                            <li><a href="/posts/lazy-sequences-and-streams">Lazy sequences and streams</a></li>
                             
-                            <li><a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a></li>
+                            <li><a href="/posts/the-webbrowser-nightmare">The WebBrowser nightmare</a></li>
                             
-                            <li><a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a></li>
+                            <li><a href="/posts/abstract-and-parameterized-types">Abstract and parameterized types</a></li>
                             
                         </ul>
                     </div>
@@ -140,7 +141,7 @@
                 </div>
             </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2018 Akhil Wali
+        <footer>Copyright &copy; 2019 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md" target="_blank">GPLv2 License</a>)
             <p style="text-align: center;">Powered by
                 <a href="http://cryogenweb.org" target="_blank">Cryogen</a> and

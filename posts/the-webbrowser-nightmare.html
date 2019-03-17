@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>darth10.github.io: __name__ and HTTP servers</title>
-    <link rel="canonical" href="http://darth10.github.io/posts/name-and-http-servers/">
+    <title>darth10.github.io: The WebBrowser nightmare</title>
+    <link rel="canonical" href="http://darth10.github.io/posts/the-webbrowser-nightmare">
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -41,11 +41,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ><a href="/">Home</a></li>
                     <li
-                        ><a href="/archives/">Archives</a></li>
+                        ><a href="/archives">Archives</a></li>
                     
                     <li
                         >
-                        <a href="/pages/about/">About</a>
+                        <a href="/pages/about">About</a>
                     </li>
                     
                     <li><a href="/feed.xml">RSS</a></li>
@@ -64,28 +64,89 @@
 
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">13 May 2009</div>
+        <div class="col-lg-6">23 September 2012</div>
         
     </div>
-    <h2>__name__ and HTTP servers</h2>
+    <h2>The WebBrowser nightmare</h2>
 </div>
 <div>
     
-    <p>The <code>&#95;&#95;name&#95;&#95;</code> built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.</p><p>Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.</p><pre><code class="python">if &#95;&#95;name&#95;&#95; == &#95;&#95;main&#95;&#95;:
-    print &quot;Just got executed!&quot;
-else:
-    print &quot;Got imported! I'm so cool!&quot;
-</code></pre><p>Several modules that are part of the standard Python library use this in profound ways. For example, the <code>SimpleHTTPServer</code> module, which is run as shown below, starts a simple HTTP-based file server hosting the current working directory.</p><pre><code>$ python -m SimpleHTTPServer
-Serving HTTP on 0.0.0.0 port 8000 ...
-127.0.0.1 - - &#91;10/May/2009 18:55:05&#93; &quot;GET / HTTP/1.1&quot; 200 -
-</code></pre><p>So, don't overlook the use <code>&#95;&#95;name&#95;&#95;</code> in your code thinking no one will actually like your puny little module.</p>
+    <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p><!&ndash;more&ndash;></p><pre><code class="csharp">public class MyControl : UserControl
+{
+	WebBrowser &#95;webBrowser;
+
+	// ...
+
+	public MyControl&#40;&#41;
+	{
+
+		// ...
+
+		&#95;webBrowser.WebBrowserShortcutsEnabled = false;
+		&#95;webBrowser.PreviewKeyDown +=
+			new PreviewKeyDownEventHandler&#40;OnBrowserKeyInput&#41;;
+	}
+
+	private void OnBrowserKeyInput&#40;object sender, PreviewKeyDownEventArgs e&#41;
+	{
+		if &#40;e.KeyCode == Keys.W &amp;&amp;
+		    e.Modifiers == Keys.Control&#41;
+		{
+			Debug.WriteLine&#40;&quot;C-w pressed&quot;&#41;;
+		}
+	}
+}
+</code></pre><p>Surprisingly, the <code>OnBrowserKeyInput</code> method is called twice; once when the key is pressed and another time when the key is released. After some googling around, I found <a href='http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/f83d3d71-ea3e-4b18-a610-30a91fae060e/'>this discussion</a> on MSDN, and it turns out to be an accepted problem with the control. The workaround requires explicity maintaining state and is quite ugly.</p><pre><code class="csharp">bool &#95;skipNextKeyDown = false;
+
+private void OnBrowserKeyInput&#40;object sender, PreviewKeyDownEventArgs e&#41;
+{
+	if &#40;&#95;skipNextKeyDown&#41;
+	{
+		&#95;skipNextKeyDown = false;
+		return;
+	}
+
+	if &#40;e.KeyCode == Keys.W &amp;&amp;
+	    e.Modifiers == Keys.Control&#41;
+	{
+		Debug.WriteLine&#40;&quot;C-w pressed&quot;&#41;;
+		&#95;skipNextKeyDown = true;
+	}
+}
+</code></pre><p>And the nightmare only begins there. The control doesn't fire the event twice for some key combinations, and so the function ends up looking something like this.</p><pre><code class="csharp">bool &#95;skipNextKeyDown = false;
+
+private void OnBrowserKeyInput&#40;object sender, PreviewKeyDownEventArgs e&#41;
+{
+	if &#40;e.KeyCode == Keys.W &amp;&amp;
+	    e.Modifiers == &#40;Keys.Control | Keys.Alt&#41;&#41;
+	{
+		Debug.WriteLine&#40;&quot;C-M-w pressed&quot;&#41;;
+		return;
+	}
+
+	if &#40;&#95;skipNextKeyDown&#41;
+	{
+		&#95;skipNextKeyDown = false;
+		return;
+	}
+
+	if &#40;e.KeyCode == Keys.W &amp;&amp;
+	    e.Modifiers == Keys.Control&#41;
+	{
+		Debug.WriteLine&#40;&quot;C-w pressed&quot;&#41;;
+		&#95;skipNextKeyDown = true;
+	}
+}
+</code></pre><p>The thing that bothered me most was that this was an accepted bug in the control. Even in the .NET 4.0 version. The only way to figure out which keys made the event fire twice was by trial-and-error. It's almost like Microsoft was telling me not to use my own keyboard handling for the control, which sucked. The end result is some ugly and error prone code.</p>
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/posts/network-packets-with-py/">&laquo; Network packets with Python</a>
+        <a href="/posts/lazy-sequences-and-streams">&laquo; Lazy sequences and streams</a>
         
+        
+        <a class="right" href="/posts/abstract-and-parameterized-types">Abstract and parameterized types &raquo;</a>
         
     </div>
 
@@ -93,8 +154,8 @@ Serving HTTP on 0.0.0.0 port 8000 ...
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "http://darth10.github.io/posts/name-and-http-servers/";
-            this.page.identifier = "__name__ and HTTP servers";
+            this.page.url = "http://darth10.github.io/posts/the-webbrowser-nightmare";
+            this.page.identifier = "The WebBrowser nightmare";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
@@ -116,11 +177,11 @@ Serving HTTP on 0.0.0.0 port 8000 ...
                         <h3>Recent Posts</h3>
                         <ul>
                             
-                            <li><a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a></li>
+                            <li><a href="/posts/lazy-sequences-and-streams">Lazy sequences and streams</a></li>
                             
-                            <li><a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a></li>
+                            <li><a href="/posts/the-webbrowser-nightmare">The WebBrowser nightmare</a></li>
                             
-                            <li><a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a></li>
+                            <li><a href="/posts/abstract-and-parameterized-types">Abstract and parameterized types</a></li>
                             
                         </ul>
                     </div>
@@ -129,7 +190,7 @@ Serving HTTP on 0.0.0.0 port 8000 ...
                 </div>
             </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2018 Akhil Wali
+        <footer>Copyright &copy; 2019 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md" target="_blank">GPLv2 License</a>)
             <p style="text-align: center;">Powered by
                 <a href="http://cryogenweb.org" target="_blank">Cryogen</a> and
