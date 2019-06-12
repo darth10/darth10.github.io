@@ -1,6 +1,5 @@
 (ns darth10.github.io.server
-  (:require [cheshire.core :refer :all]
-            [compojure.core :refer [GET defroutes]]
+  (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
             [cryogen-core.compiler :refer [compile-assets-timed read-config]]
             [cryogen-core.io :refer [path]]
