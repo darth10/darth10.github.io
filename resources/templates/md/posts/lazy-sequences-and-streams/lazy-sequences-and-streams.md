@@ -74,7 +74,7 @@ Memory usage can be ignored, as the GC is invoked unpredictably.
 
 And here are the results!
 
-<div id="postchart" style="width: 660px; height: 300px;"></div>
+<div id="postchart" class="chart"></div>
 <script type="text/javascript" src="lazy-sequences-and-streams/jquery.flot.min.js" defer></script>
 <script type="text/javascript" src="lazy-sequences-and-streams/chart.js" defer></script>
 
