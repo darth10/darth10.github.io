@@ -12,7 +12,7 @@ http://darth10.github.io/
 darth10's blog
 </description>
 <lastBuildDate>
-Sun, 17 Mar 2019 22:30:43 +1300
+Wed, 12 Jun 2019 16:28:54 +1200
 </lastBuildDate>
 <generator>
 clj-rss
@@ -57,7 +57,7 @@ Lazy sequences and streams
   result
 }
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note that the time taken to print the result of a statement in the REPL shouldn't be measured. We can ensure this by binding the result to a variable. This is done by using &lt;code&gt;val fibo = time&amp;#40;fiboLast&amp;#40;5000&amp;#41;&lt;/code&gt; in Scala, and &lt;code&gt;&amp;#40;time &amp;#40;def fibo &amp;#40;fibo-last 5000&amp;#41;&amp;#41;&amp;#41;&lt;/code&gt; in Clojure, for example. Memory usage can be ignored, as the GC is invoked unpredictably.&lt;/p&gt;&lt;p&gt;And here are the results!&lt;/p&gt;&lt;p&gt;&lt;div id=&quot;postchart&quot; style=&quot;width: 660px; height: 300px;&quot;&gt;&lt;/div&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;lazy-sequences-and-streams/jquery.flot.min.js&quot; defer&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;lazy-sequences-and-streams/chart.js&quot; defer&gt;&lt;/script&gt;&lt;/p&gt;&lt;p&gt;A weird observation in the Scala implementation is that &lt;code&gt;fiboList&amp;#40;1&amp;#41;&lt;/code&gt; takes 8-10 milliseconds to evaluate. But Scala actually performs better on average, which is mostly due to the use of static types.&lt;/p&gt;&lt;p&gt;Interestingly, the Clojure &lt;code&gt;fibo-list&lt;/code&gt; function evaluates in constant time, which is less than a millisecond! Clojure also fetches cached elements in the lazy sequence much faster than Scala. However, &lt;code&gt;fibo-last&lt;/code&gt; performs linearly since the &lt;code&gt;last&lt;/code&gt; function has linear time-complexity.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note that the time taken to print the result of a statement in the REPL shouldn't be measured. We can ensure this by binding the result to a variable. This is done by using &lt;code&gt;val fibo = time&amp;#40;fiboLast&amp;#40;5000&amp;#41;&lt;/code&gt; in Scala, and &lt;code&gt;&amp;#40;time &amp;#40;def fibo &amp;#40;fibo-last 5000&amp;#41;&amp;#41;&amp;#41;&lt;/code&gt; in Clojure, for example. Memory usage can be ignored, as the GC is invoked unpredictably.&lt;/p&gt;&lt;p&gt;And here are the results!&lt;/p&gt;&lt;p&gt;&lt;div id=&quot;postchart&quot; class=&quot;chart&quot;&gt;&lt;/div&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;lazy-sequences-and-streams/jquery.flot.min.js&quot; defer&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot; src=&quot;lazy-sequences-and-streams/chart.js&quot; defer&gt;&lt;/script&gt;&lt;/p&gt;&lt;p&gt;A weird observation in the Scala implementation is that &lt;code&gt;fiboList&amp;#40;1&amp;#41;&lt;/code&gt; takes 8-10 milliseconds to evaluate. But Scala actually performs better on average, which is mostly due to the use of static types.&lt;/p&gt;&lt;p&gt;Interestingly, the Clojure &lt;code&gt;fibo-list&lt;/code&gt; function evaluates in constant time, which is less than a millisecond! Clojure also fetches cached elements in the lazy sequence much faster than Scala. However, &lt;code&gt;fibo-last&lt;/code&gt; performs linearly since the &lt;code&gt;last&lt;/code&gt; function has linear time-complexity.&lt;/p&gt;
 </description>
 <pubDate>
 Fri, 25 Jan 2013 00:00:00 +1300
