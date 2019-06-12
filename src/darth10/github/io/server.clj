@@ -1,19 +1,26 @@
 (ns darth10.github.io.server
-  (:require [compojure.core :refer [GET defroutes]]
+  (:require [cheshire.core :refer :all]
+            [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
+            [cryogen-core.compiler :refer [compile-assets-timed read-config]]
+            [cryogen-core.io :refer [path]]
+            [cryogen-core.plugins :refer [load-plugins]]
+            [cryogen-core.watcher :refer [start-watcher!]]
+            [darth10.github.io.reload :refer [ws-handler reload-page]]
+            [hawk.core :as hawk]
             [ring.util.response :refer [redirect resource-response]]
             [ring.util.codec :refer [url-decode]]
-            [ring.adapter.jetty :refer [run-jetty]]
-            [cryogen-core.watcher :refer [start-watcher!]]
-            [cryogen-core.plugins :refer [load-plugins]]
-            [cryogen-core.compiler :refer [compile-assets-timed read-config]]
-            [cryogen-core.io :refer [path]]))
+            [ring.adapter.jetty9 :refer [run-jetty]]))
 
 (defn init []
   (load-plugins)
   (compile-assets-timed)
   (let [ignored-files (-> (read-config) :ignored-files)]
-    (start-watcher! "resources/templates" ignored-files compile-assets-timed)))
+    (start-watcher!
+     "resources/templates" ignored-files
+     (fn []
+       (compile-assets-timed)
+       (reload-page)))))
 
 (defn wrap-subdirectories
   [handler]
@@ -32,21 +39,33 @@
   (route/resources "/")
   (route/not-found "Page not found"))
 
-(def handler
+(def http-handler
   (wrap-subdirectories routes))
+
+(defn reload-handler [req]
+  {:body (slurp (clojure.java.io/resource "livereload.js"))
+   :status 200})
 
 (defonce server (atom []))
 
 (defn start-server [& {:keys [port]
                        :or {port 4000}}]
-  (let [_ (init)
-        instance (run-jetty handler {:port port
-                                     :join? false})]
-    (swap! server conj instance)))
+  (let [file-watcher    (init)
+        http-instance   (run-jetty http-handler
+                                   {:port port
+                                    :join? false})
+        reload-instance (run-jetty reload-handler
+                                   {:port 35729
+                                    :websockets {"/livereload" ws-handler}
+                                    :allow-null-path-info true
+                                    :join? false})]
+    (swap! server conj file-watcher http-instance reload-instance)))
 
 (defn stop-server []
-  (when-let [[instance] (seq @server)]
-    (.stop instance)
+  (when-let [[file-watcher http-instance reload-instance] (seq @server)]
+    (hawk/stop! file-watcher)
+    (.stop http-instance)
+    (.stop reload-instance)
     (swap! server empty)))
 
 ;; (compile-assets-timed)
