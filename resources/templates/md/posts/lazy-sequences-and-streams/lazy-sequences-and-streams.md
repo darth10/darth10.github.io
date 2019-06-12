@@ -1,6 +1,6 @@
 {:title "Lazy sequences and streams"
  :date "2013-01-25"
- :layout :post}
+ :layout :post-with-charts}
 
 Functional languages have the notion of *lazy sequences*, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory.
 It would be wasteful to realize an entire infinite sequence before even using it.
@@ -75,7 +75,6 @@ Memory usage can be ignored, as the GC is invoked unpredictably.
 And here are the results!
 
 <div id="postchart" class="chart"></div>
-<script type="text/javascript" src="lazy-sequences-and-streams/jquery.flot.min.js" defer></script>
 <script type="text/javascript" src="lazy-sequences-and-streams/chart.js" defer></script>
 
 A weird observation in the Scala implementation is that `fiboList(1)` takes 8-10 milliseconds to evaluate.
