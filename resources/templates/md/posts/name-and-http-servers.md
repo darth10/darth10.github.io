@@ -8,7 +8,7 @@ The `__name__` built-in Python variable which describes exactly that - it's the 
 Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.
 
 ```python
-if __name__ == __main__:
+if __name__ == "__main__":
     print "Just got executed!"
 else:
     print "Got imported! I'm so cool!"
