@@ -71,7 +71,7 @@
 </div>
 <div>
     
-    <p>The <code>&#95;&#95;name&#95;&#95;</code> built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.</p><p>Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.</p><pre><code class="python">if &#95;&#95;name&#95;&#95; == &#95;&#95;main&#95;&#95;:
+    <p>The <code>&#95;&#95;name&#95;&#95;</code> built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.</p><p>Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.</p><pre><code class="python">if &#95;&#95;name&#95;&#95; == &quot;&#95;&#95;main&#95;&#95;&quot;:
     print &quot;Just got executed!&quot;
 else:
     print &quot;Got imported! I'm so cool!&quot;

@@ -12,7 +12,7 @@ http://darth10.github.io/
 darth10's blog
 </description>
 <lastBuildDate>
-Wed, 12 Jun 2019 16:56:54 +1200
+Tue, 02 Jul 2019 22:55:26 +1200
 </lastBuildDate>
 <generator>
 clj-rss
@@ -279,7 +279,7 @@ http://darth10.github.io/posts/name-and-http-servers
 __name__ and HTTP servers
 </title>
 <description>
-&lt;p&gt;The &lt;code&gt;&amp;#95;&amp;#95;name&amp;#95;&amp;#95;&lt;/code&gt; built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.&lt;/p&gt;&lt;p&gt;Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;if &amp;#95;&amp;#95;name&amp;#95;&amp;#95; == &amp;#95;&amp;#95;main&amp;#95;&amp;#95;:
+&lt;p&gt;The &lt;code&gt;&amp;#95;&amp;#95;name&amp;#95;&amp;#95;&lt;/code&gt; built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.&lt;/p&gt;&lt;p&gt;Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;if &amp;#95;&amp;#95;name&amp;#95;&amp;#95; == &amp;quot;&amp;#95;&amp;#95;main&amp;#95;&amp;#95;&amp;quot;:
     print &amp;quot;Just got executed!&amp;quot;
 else:
     print &amp;quot;Got imported! I'm so cool!&amp;quot;
