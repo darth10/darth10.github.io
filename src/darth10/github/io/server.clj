@@ -68,6 +68,5 @@
     (.stop reload-instance)
     (swap! server empty)))
 
-;; (compile-assets-timed)
 ;; (start-server)
 ;; (stop-server)
