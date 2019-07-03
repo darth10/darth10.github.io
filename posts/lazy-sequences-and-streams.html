@@ -59,17 +59,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-9">
-                <div id="content">
-                    
+            <div id="content">
 <div id="post">
 
     <div class="post-header">
-    <div id="post-meta" class="row">
-        <div class="col-lg-6">25 January 2013</div>
-        
-    </div>
     <h2>Lazy sequences and streams</h2>
+    <div class="post-meta">
+        <div class="date">25 January 2013</div>
+    </div>
 </div>
 <div>
     
@@ -92,7 +89,6 @@
 
   def fiboLast = fiboList&#40;&#95;: Int&#41;.last
 }
-
 </code></pre><p>This implementation uses the lazy right-associative <code>#::</code> function, which is actually the <code>Stream.cons</code> method. There's also an implicit conversion from a sequence to a stream, from the <code>Stream</code> companion object. I'm sure Haskell programmers will eagerly point out the need for a <code>zipWith</code> function.</p><p>Let's look at how these two implementations match up against eachother in terms of performance. In Clojure, the <code>time</code> macro can be used to measure the time taken to evaluate a form. There's really no equivalent in Scala, so let's implement our own. We should be able to simply say <code>time&#40;fiboLast&#40;n&#41;&#41;</code>, for example.</p><pre><code class="scala">def time&#91;R&#93;&#40;block: =&gt; R&#41;: R = {
   val t0 = System.currentTimeMillis
   val result = block
@@ -101,7 +97,6 @@
   println&#40;&quot;Elapsed time: &quot; + &#40;t1 - t0&#41; + &quot;ms&quot;&#41;
   result
 }
-
 </code></pre><p>Note that the time taken to print the result of a statement in the REPL shouldn't be measured. We can ensure this by binding the result to a variable. This is done by using <code>val fibo = time&#40;fiboLast&#40;5000&#41;</code> in Scala, and <code>&#40;time &#40;def fibo &#40;fibo-last 5000&#41;&#41;&#41;</code> in Clojure, for example. Memory usage can be ignored, as the GC is invoked unpredictably.</p><p>And here are the results!</p><p><div id="postchart" class="chart"></div> <script type="text/javascript" src="lazy-sequences-and-streams/chart.js" defer></script></p><p>A weird observation in the Scala implementation is that <code>fiboList&#40;1&#41;</code> takes 8-10 milliseconds to evaluate. But Scala actually performs better on average, which is mostly due to the use of static types.</p><p>Interestingly, the Clojure <code>fibo-list</code> function evaluates in constant time, which is less than a millisecond! Clojure also fetches cached elements in the lazy sequence much faster than Scala. However, <code>fibo-last</code> performs linearly since the <code>last</code> function has linear time-complexity.</p>
 </div>
 
@@ -129,29 +124,7 @@
     
 
 </div>
-
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div id="sidebar">
-                    
-                    <div id="recent">
-                        <h3>Recent Posts</h3>
-                        <ul>
-                            
-                            <li><a href="/posts/lazy-sequences-and-streams">Lazy sequences and streams</a></li>
-                            
-                            <li><a href="/posts/the-webbrowser-nightmare">The WebBrowser nightmare</a></li>
-                            
-                            <li><a href="/posts/abstract-and-parameterized-types">Abstract and parameterized types</a></li>
-                            
-                        </ul>
-                    </div>
-                    
-                    
-                </div>
-            </div>
+</div>
         </div><!--/.row -->
         <footer>Copyright &copy; 2019 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md" target="_blank">GPLv2 License</a>)

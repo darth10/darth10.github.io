@@ -13,6 +13,11 @@ body {
     max-width: 1000px;
 }
 
+.row {
+    margin: auto;
+    max-width: 80%;
+}
+
 .right {
     float: right;
     text-align: right;
@@ -71,8 +76,14 @@ body {
 }
 
 #content img {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
+}
+
+#content img.photo {
+    max-width: 80%;
+    height: auto;
+    border-radius: 4px;
 }
 
 footer {
@@ -91,13 +102,25 @@ footer {
 }
 
 .post-header {
+    border-bottom: 1px solid #dbdbdb;
     margin-bottom: 20px;
+    padding-bottom: 8px;
 }
+
 .post-header h2 {
     font-size: 32px;
 }
 
-#post-meta {
+.post-preview-header {
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+}
+
+.post-preview-header h2 {
+    font-size: 32px;
+}
+
+.post-meta {
     font-size: 14px;
     color: rgba(0,0,0,0.4)
 }
@@ -112,6 +135,8 @@ footer {
 
 pre {
     overflow-x: auto;
+    padding: inherit;
+    border: none;
 }
 pre code {
     overflow-wrap: normal;
@@ -126,10 +151,14 @@ pre, code, .hljs {
     background-color: #f7f9fd;
 }
 
+.chart {
+    width: 90%;
+    margin: auto;
+}
+
 @media (min-width:320px) {
     .chart {
-        width: 300px;
-        height: 180px;
+        height: 200px;
     }
 }
 
@@ -149,7 +178,6 @@ pre, code, .hljs {
         padding: 30px 40px;
     }
     .chart {
-        width: 660px;
         height: 300px;
     }
 }
@@ -164,7 +192,7 @@ pre, code, .hljs {
     #content{
         padding: 15px;
     }
-    #post-meta .right {
+    .post-meta .right {
         float:left;
         text-align: left;
     }
