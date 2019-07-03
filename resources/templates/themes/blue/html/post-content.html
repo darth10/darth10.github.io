@@ -1,11 +1,9 @@
+
 <div class="post-header">
-    <div id="post-meta" class="row">
-        <div class="col-lg-6">{{post.date|date:longDate}}</div>
-        {% if post.author %}
-        <span class="col-lg-6 right">By: {{post.author}}</span>
-        {% endif %}
-    </div>
     <h2>{{post.title}}</h2>
+    <div class="post-meta">
+        <div class="date">{{post.date|date:longDate}}</div>
+    </div>
 </div>
 <div>
     {% if post.toc %}{{post.toc|safe}}{% endif %}

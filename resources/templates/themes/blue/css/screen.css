@@ -96,13 +96,25 @@ footer {
 }
 
 .post-header {
+    border-bottom: 1px solid #dbdbdb;
     margin-bottom: 20px;
+    padding-bottom: 8px;
 }
+
 .post-header h2 {
     font-size: 32px;
 }
 
-#post-meta {
+.post-preview-header {
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+}
+
+.post-preview-header h2 {
+    font-size: 32px;
+}
+
+.post-meta {
     font-size: 14px;
     color: rgba(0,0,0,0.4)
 }
@@ -174,7 +186,7 @@ pre, code, .hljs {
     #content{
         padding: 15px;
     }
-    #post-meta .right {
+    .post-meta .right {
         float:left;
         text-align: left;
     }
