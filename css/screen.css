@@ -186,12 +186,19 @@ pre, code, .hljs {
     body{
         font-size: 14px;
     }
+
+    .row {
+        max-width: 100%;
+    }
+
     .navbar-default .navbar-brand {
         font-size: 30px;
     }
+
     #content{
         padding: 15px;
     }
+
     .post-meta .right {
         float:left;
         text-align: left;
