@@ -126,10 +126,14 @@ pre, code, .hljs {
     background-color: #f7f9fd;
 }
 
+.chart {
+    width: 90%;
+    margin: auto;
+}
+
 @media (min-width:320px) {
     .chart {
-        width: 300px;
-        height: 180px;
+        height: 200px;
     }
 }
 
@@ -149,7 +153,6 @@ pre, code, .hljs {
         padding: 30px 40px;
     }
     .chart {
-        width: 660px;
         height: 300px;
     }
 }
