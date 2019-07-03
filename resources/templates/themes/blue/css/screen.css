@@ -9,13 +9,38 @@ body {
     font-size: 16px;
 }
 
+pre {
+    overflow-x: auto;
+    padding: inherit;
+    border: none;
+}
+
+pre code {
+    overflow-wrap: normal;
+    white-space: pre;
+}
+
+code {
+    color: #428bca;
+}
+
+pre, code, .hljs {
+    background-color: #f7f9fd;
+}
+
+footer {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 75px;
+    padding-bottom: 30px;
+}
+
 .container {
     max-width: 1000px;
 }
 
 .row {
     margin: auto;
-    max-width: 80%;
 }
 
 .right {
@@ -64,43 +89,6 @@ body {
     background-color: #fff;
 }
 
-#sidebar {
-    margin-left: 15px;
-    margin-top: 50px;
-}
-
-#content {
-    background-color: #fff;
-    border-radius: 3px;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
-}
-
-#content img {
-    max-width: 90%;
-    height: auto;
-}
-
-#content img.photo {
-    max-width: 80%;
-    height: auto;
-    border-radius: 4px;
-}
-
-footer {
-    font-size: 14px;
-    text-align: center;
-    padding-top: 75px;
-    padding-bottom: 30px;
-}
-
-#post-tags {
-    margin-top: 30px;
-}
-
-#prev-next {
-    padding: 15px 0;
-}
-
 .post-header {
     border-bottom: 1px solid #dbdbdb;
     margin-bottom: 20px;
@@ -125,6 +113,11 @@ footer {
     color: rgba(0,0,0,0.4)
 }
 
+.chart {
+    width: 90%;
+    margin: auto;
+}
+
 #page-header {
     border-bottom: 1px solid #dbdbdb;
     margin-bottom: 20px;
@@ -133,32 +126,43 @@ footer {
     font-size: 32px;
 }
 
-pre {
-    overflow-x: auto;
-    padding: inherit;
-    border: none;
-}
-pre code {
-    overflow-wrap: normal;
-    white-space: pre;
+#sidebar {
+    margin-left: 15px;
+    margin-top: 50px;
 }
 
-code {
-    color: #428bca;
+#content {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
 }
 
-pre, code, .hljs {
-    background-color: #f7f9fd;
+#content img {
+    max-width: 90%;
+    height: auto;
 }
 
-.chart {
-    width: 90%;
-    margin: auto;
+#content img.photo {
+    max-width: 80%;
+    height: auto;
+    border-radius: 4px;
+}
+
+#post-tags {
+    margin-top: 30px;
+}
+
+#prev-next {
+    padding: 15px 0;
 }
 
 @media (min-width:320px) {
     .chart {
         height: 200px;
+    }
+
+    .row {
+        max-width: 100%;
     }
 }
 
@@ -173,12 +177,18 @@ pre, code, .hljs {
         font-size: 36px;
         padding: 30px 15px;
     }
+
+    .chart {
+        height: 300px;
+    }
+
+    .row {
+        max-width: 80%;
+    }
+
     #content{
         margin-top: 30px;
         padding: 30px 40px;
-    }
-    .chart {
-        height: 300px;
     }
 }
 
@@ -187,20 +197,16 @@ pre, code, .hljs {
         font-size: 14px;
     }
 
-    .row {
-        max-width: 100%;
-    }
-
     .navbar-default .navbar-brand {
         font-size: 30px;
-    }
-
-    #content{
-        padding: 15px;
     }
 
     .post-meta .right {
         float:left;
         text-align: left;
+    }
+
+    #content{
+        padding: 15px;
     }
 }
