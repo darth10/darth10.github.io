@@ -117,6 +117,8 @@ footer {
 
 pre {
     overflow-x: auto;
+    padding: inherit;
+    border: none;
 }
 pre code {
     overflow-wrap: normal;
