@@ -43,7 +43,6 @@ object Fibo {
 
   def fiboLast = fiboList(_: Int).last
 }
-
 ```
 
 This implementation uses the lazy right-associative `#::` function, which is actually the `Stream.cons` method.
@@ -64,7 +63,6 @@ def time[R](block: => R): R = {
   println("Elapsed time: " + (t1 - t0) + "ms")
   result
 }
-
 ```
 
 Note that the time taken to print the result of a statement in the REPL shouldn't be measured.
