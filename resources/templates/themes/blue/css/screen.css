@@ -13,6 +13,11 @@ body {
     max-width: 1000px;
 }
 
+.row {
+    margin: auto;
+    max-width: 80%;
+}
+
 .right {
     float: right;
     text-align: right;
