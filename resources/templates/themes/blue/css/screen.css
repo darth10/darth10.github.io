@@ -76,8 +76,14 @@ body {
 }
 
 #content img {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
+}
+
+#content img.photo {
+    max-width: 80%;
+    height: auto;
+    border-radius: 4px;
 }
 
 footer {
