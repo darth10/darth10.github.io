@@ -12,7 +12,7 @@ http://darth10.github.io/
 darth10's blog
 </description>
 <lastBuildDate>
-Thu, 04 Jul 2019 00:20:34 +1200
+Thu, 18 Jul 2019 13:27:55 +1200
 </lastBuildDate>
 <generator>
 clj-rss
@@ -74,69 +74,69 @@ The WebBrowser nightmare
 <description>
 &lt;p&gt;I recently had to use the &lt;code&gt;WebBrowser&lt;/code&gt; .NET component in a project. The control is essentially Internet Explorer embedded in a &lt;code&gt;UserControl&lt;/code&gt; component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.&lt;/p&gt;&lt;p&gt;To override keyboard input handing in the control, we need to set the &lt;code&gt;WebBrowserShortcutsEnabled&lt;/code&gt; property to &lt;code&gt;false&lt;/code&gt; and handle the &lt;code&gt;PreviewKeyDown&lt;/code&gt; event.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash;more&amp;ndash;&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;csharp&quot;&gt;public class MyControl : UserControl
 {
-	WebBrowser &amp;#95;webBrowser;
+    WebBrowser &amp;#95;webBrowser;
 
-	// ...
+    // ...
 
-	public MyControl&amp;#40;&amp;#41;
-	{
+    public MyControl&amp;#40;&amp;#41;
+    {
 
-		// ...
+        // ...
 
-		&amp;#95;webBrowser.WebBrowserShortcutsEnabled = false;
-		&amp;#95;webBrowser.PreviewKeyDown +=
-			new PreviewKeyDownEventHandler&amp;#40;OnBrowserKeyInput&amp;#41;;
-	}
+        &amp;#95;webBrowser.WebBrowserShortcutsEnabled = false;
+        &amp;#95;webBrowser.PreviewKeyDown +=
+            new PreviewKeyDownEventHandler&amp;#40;OnBrowserKeyInput&amp;#41;;
+    }
 
-	private void OnBrowserKeyInput&amp;#40;object sender, PreviewKeyDownEventArgs e&amp;#41;
-	{
-		if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
-		    e.Modifiers == Keys.Control&amp;#41;
-		{
-			Debug.WriteLine&amp;#40;&amp;quot;C-w pressed&amp;quot;&amp;#41;;
-		}
-	}
+    private void OnBrowserKeyInput&amp;#40;object sender, PreviewKeyDownEventArgs e&amp;#41;
+    {
+        if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
+            e.Modifiers == Keys.Control&amp;#41;
+        {
+            Debug.WriteLine&amp;#40;&amp;quot;C-w pressed&amp;quot;&amp;#41;;
+        }
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Surprisingly, the &lt;code&gt;OnBrowserKeyInput&lt;/code&gt; method is called twice; once when the key is pressed and another time when the key is released. After some googling around, I found &lt;a href='http://social.msdn.microsoft.com/Forums/en-US/csharpgeneral/thread/f83d3d71-ea3e-4b18-a610-30a91fae060e/'&gt;this discussion&lt;/a&gt; on MSDN, and it turns out to be an accepted problem with the control. The workaround requires explicity maintaining state and is quite ugly.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;csharp&quot;&gt;bool &amp;#95;skipNextKeyDown = false;
 
 private void OnBrowserKeyInput&amp;#40;object sender, PreviewKeyDownEventArgs e&amp;#41;
 {
-	if &amp;#40;&amp;#95;skipNextKeyDown&amp;#41;
-	{
-		&amp;#95;skipNextKeyDown = false;
-		return;
-	}
+    if &amp;#40;&amp;#95;skipNextKeyDown&amp;#41;
+    {
+        &amp;#95;skipNextKeyDown = false;
+        return;
+    }
 
-	if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
-	    e.Modifiers == Keys.Control&amp;#41;
-	{
-		Debug.WriteLine&amp;#40;&amp;quot;C-w pressed&amp;quot;&amp;#41;;
-		&amp;#95;skipNextKeyDown = true;
-	}
+    if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
+        e.Modifiers == Keys.Control&amp;#41;
+    {
+        Debug.WriteLine&amp;#40;&amp;quot;C-w pressed&amp;quot;&amp;#41;;
+        &amp;#95;skipNextKeyDown = true;
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the nightmare only begins there. The control doesn't fire the event twice for some key combinations, and so the function ends up looking something like this.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;csharp&quot;&gt;bool &amp;#95;skipNextKeyDown = false;
 
 private void OnBrowserKeyInput&amp;#40;object sender, PreviewKeyDownEventArgs e&amp;#41;
 {
-	if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
-	    e.Modifiers == &amp;#40;Keys.Control | Keys.Alt&amp;#41;&amp;#41;
-	{
-		Debug.WriteLine&amp;#40;&amp;quot;C-M-w pressed&amp;quot;&amp;#41;;
-		return;
-	}
+    if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
+        e.Modifiers == &amp;#40;Keys.Control | Keys.Alt&amp;#41;&amp;#41;
+    {
+        Debug.WriteLine&amp;#40;&amp;quot;C-M-w pressed&amp;quot;&amp;#41;;
+        return;
+    }
 
-	if &amp;#40;&amp;#95;skipNextKeyDown&amp;#41;
-	{
-		&amp;#95;skipNextKeyDown = false;
-		return;
-	}
+    if &amp;#40;&amp;#95;skipNextKeyDown&amp;#41;
+    {
+        &amp;#95;skipNextKeyDown = false;
+        return;
+    }
 
-	if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
-	    e.Modifiers == Keys.Control&amp;#41;
-	{
-		Debug.WriteLine&amp;#40;&amp;quot;C-w pressed&amp;quot;&amp;#41;;
-		&amp;#95;skipNextKeyDown = true;
-	}
+    if &amp;#40;e.KeyCode == Keys.W &amp;amp;&amp;amp;
+        e.Modifiers == Keys.Control&amp;#41;
+    {
+        Debug.WriteLine&amp;#40;&amp;quot;C-w pressed&amp;quot;&amp;#41;;
+        &amp;#95;skipNextKeyDown = true;
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The thing that bothered me most was that this was an accepted bug in the control. Even in the .NET 4.0 version. The only way to figure out which keys made the event fire twice was by trial-and-error. It's almost like Microsoft was telling me not to use my own keyboard handling for the control, which sucked. The end result is some ugly and error prone code.&lt;/p&gt;
 </description>
