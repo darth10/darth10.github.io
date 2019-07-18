@@ -13,28 +13,28 @@ To override keyboard input handing in the control, we need to set the `WebBrowse
 ```csharp
 public class MyControl : UserControl
 {
-	WebBrowser _webBrowser;
+    WebBrowser _webBrowser;
 
-	// ...
+    // ...
 
-	public MyControl()
-	{
+    public MyControl()
+    {
 
-		// ...
+        // ...
 
-		_webBrowser.WebBrowserShortcutsEnabled = false;
-		_webBrowser.PreviewKeyDown +=
-			new PreviewKeyDownEventHandler(OnBrowserKeyInput);
-	}
+        _webBrowser.WebBrowserShortcutsEnabled = false;
+        _webBrowser.PreviewKeyDown +=
+            new PreviewKeyDownEventHandler(OnBrowserKeyInput);
+    }
 
-	private void OnBrowserKeyInput(object sender, PreviewKeyDownEventArgs e)
-	{
-		if (e.KeyCode == Keys.W &&
-		    e.Modifiers == Keys.Control)
-		{
-			Debug.WriteLine("C-w pressed");
-		}
-	}
+    private void OnBrowserKeyInput(object sender, PreviewKeyDownEventArgs e)
+    {
+        if (e.KeyCode == Keys.W &&
+            e.Modifiers == Keys.Control)
+        {
+            Debug.WriteLine("C-w pressed");
+        }
+    }
 }
 ```
 
@@ -46,18 +46,18 @@ bool _skipNextKeyDown = false;
 
 private void OnBrowserKeyInput(object sender, PreviewKeyDownEventArgs e)
 {
-	if (_skipNextKeyDown)
-	{
-		_skipNextKeyDown = false;
-		return;
-	}
+    if (_skipNextKeyDown)
+    {
+        _skipNextKeyDown = false;
+        return;
+    }
 
-	if (e.KeyCode == Keys.W &&
-	    e.Modifiers == Keys.Control)
-	{
-		Debug.WriteLine("C-w pressed");
-		_skipNextKeyDown = true;
-	}
+    if (e.KeyCode == Keys.W &&
+        e.Modifiers == Keys.Control)
+    {
+        Debug.WriteLine("C-w pressed");
+        _skipNextKeyDown = true;
+    }
 }
 ```
 
@@ -68,25 +68,25 @@ bool _skipNextKeyDown = false;
 
 private void OnBrowserKeyInput(object sender, PreviewKeyDownEventArgs e)
 {
-	if (e.KeyCode == Keys.W &&
-	    e.Modifiers == (Keys.Control | Keys.Alt))
-	{
-		Debug.WriteLine("C-M-w pressed");
-		return;
-	}
+    if (e.KeyCode == Keys.W &&
+        e.Modifiers == (Keys.Control | Keys.Alt))
+    {
+        Debug.WriteLine("C-M-w pressed");
+        return;
+    }
 
-	if (_skipNextKeyDown)
-	{
-		_skipNextKeyDown = false;
-		return;
-	}
+    if (_skipNextKeyDown)
+    {
+        _skipNextKeyDown = false;
+        return;
+    }
 
-	if (e.KeyCode == Keys.W &&
-	    e.Modifiers == Keys.Control)
-	{
-		Debug.WriteLine("C-w pressed");
-		_skipNextKeyDown = true;
-	}
+    if (e.KeyCode == Keys.W &&
+        e.Modifiers == Keys.Control)
+    {
+        Debug.WriteLine("C-w pressed");
+        _skipNextKeyDown = true;
+    }
 }
 ```
 
