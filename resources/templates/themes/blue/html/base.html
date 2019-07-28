@@ -7,14 +7,14 @@
     <link rel="canonical" href="{{site-url}}{{uri}}">
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous" defer></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous" defer></script>
 
     {% style "css/screen.css" %}
@@ -26,38 +26,30 @@
     {% block files %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li {% if home %} class="active" {% endif %}><a href="{{index-uri}}">Home</a></li>
-                    <li
-                        {% if archives %} class="active" {% endif %}><a href="{{archives-uri}}">Archives</a></li>
-                    {% for nav-page in navbar-pages %}
-                    <li
-                        {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
-                        <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
-                    </li>
-                    {% endfor %}
-                    <li><a href="{{rss-uri}}">RSS</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item {% if home %}active{% endif %}"><a class="nav-link" href="{{index-uri}}">Home</a></li>
+                <li class="nav-item {% if archives %}active{% endif %}"><a class="nav-link" href="{{archives-uri}}">Archives</a></li>
+                {% for nav-page in navbar-pages %}
+                <li class="nav-item {%ifequal page.uri nav-page.uri %}active{% endifequal %}">
+                    <a class="nav-link" href="{{nav-page.uri}}">{{nav-page.title}}</a>
+                </li>
+                {% endfor %}
+                <li class="nav-item"><a class="nav-link" href="{{rss-uri}}">RSS</a></li>
+            </ul>
+        </div>
     </nav>
 
 
     <div class="container">
         <div class="row">
-            <div id="content">{% block content %}{% endblock %}</div>
+            <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
         </div><!--/.row -->
         <footer>Copyright &copy; {{today|date:yyyy}} {{author}}
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md" target="_blank">GPLv2 License</a>)

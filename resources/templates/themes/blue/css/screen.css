@@ -31,12 +31,12 @@ pre, code, .hljs {
 footer {
     font-size: 14px;
     text-align: center;
-    padding-top: 75px;
-    padding-bottom: 30px;
+    padding-top: 14px;
 }
 
 .container {
     max-width: 1000px;
+    padding-top: 60px;
 }
 
 .row {
@@ -48,45 +48,13 @@ footer {
     text-align: right;
 }
 
-.navbar {
-    border-radius: 0;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.3);
-}
-
-.navbar-default {
-    background-color: #222222;
-    border: none;
-}
-
-.navbar-default .navbar-brand {
-    color: #fff;
+.navbar-brand {
     font-family: 'Alegreya Sans';
+    font-size: 24px;
 }
 
-.navbar-default .navbar-brand:hover {
-    color: #fff;
-}
-
-.navbar-default .navbar-nav li a {
-    color: #fff;
-}
-
-.navbar-default .navbar-nav li a:hover {
-    color: #fff;
-    background-color: #3d80ba;
-}
-
-.navbar-default .navbar-nav .active a {
-    color: #fff;
-    background-color: #3d80ba;
-}
-
-.navbar-default .navbar-toggle:hover{
-    background-color: #3d80ba;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #fff;
+.navbar-nav {
+    flex-grow: inherit;
 }
 
 .post-header {
@@ -140,6 +108,7 @@ footer {
 #content img {
     max-width: 90%;
     height: auto;
+    display: block;
 }
 
 #content img.photo {
@@ -167,17 +136,6 @@ footer {
 }
 
 @media (min-width: 768px) {
-    .navbar {
-        min-height: 70px;
-    }
-    .navbar-nav>li>a {
-        padding: 30px 20px;
-    }
-    .navbar-default .navbar-brand {
-        font-size: 36px;
-        padding: 30px 15px;
-    }
-
     .chart {
         height: 300px;
     }
@@ -195,10 +153,6 @@ footer {
 @media (max-width: 767px) {
     body{
         font-size: 14px;
-    }
-
-    .navbar-default .navbar-brand {
-        font-size: 30px;
     }
 
     .post-meta .right {
