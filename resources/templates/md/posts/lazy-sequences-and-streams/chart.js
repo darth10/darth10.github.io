@@ -41,15 +41,17 @@
   function loadCharts () {
     var chartId = "#postchart";
     var plot = $.plot($(chartId),
-		              [ { data: chartData['scalaFiboList'], label: "fiboList(x)", color: "#aaff00"},
+		              [
+                        { data: chartData['scalaFiboList'], label: "fiboList(x)", color: "#aaff00"},
 		                { data: chartData['scalaFiboLast'], label: "fiboLast(x)", color: "#00ff00" },
 		                { data: chartData['clojureFiboList'], label: "(fibo-list x)", color: "#00ccee" },
 		                { data: chartData['clojureFiboLast'], label: "(fibo-last x)", color: "#0066ff" },
 		              ],
-		              { series: {
-			            lines: { show: true },
-			            points: { show: true }
-		              },
+		              {
+                        series: {
+			              lines: { show: true },
+			              points: { show: true }
+		                },
 		                grid: { hoverable: true },
 		                xaxis: {  max: 50500, tickFormatter: nFormatter },
 		                yaxis: { min: -50, max: 1550, tickFormatter: timeFormatter },
