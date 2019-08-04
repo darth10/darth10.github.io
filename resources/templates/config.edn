@@ -20,7 +20,7 @@
  :keep-files         [".git", "LICENSE.md"]
  :disqus?            true
  :disqus-shortname   "darth10"
- :ignored-files      [#"\.#.*" #".*\.swp$"]
+ :ignored-files      [#"\.#.*" #".*\.swp$" #"darth10.github.io.js$"]
  :posts-per-page     4
  :blocks-per-preview 3
  :previews?          true
