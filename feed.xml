@@ -12,7 +12,7 @@ http://darth10.github.io/
 darth10's blog
 </description>
 <lastBuildDate>
-Sun, 04 Aug 2019 18:32:34 +1200
+Mon, 05 Aug 2019 17:35:35 +1200
 </lastBuildDate>
 <generator>
 clj-rss
@@ -246,7 +246,7 @@ http://darth10.github.io/posts/network-packets-with-py
 Network packets with Python
 </title>
 <description>
-&lt;p&gt;Next week, I'll have to start a project on implementing &lt;a href=&quot;http://en.wikipedia.org/wiki/Routing&lt;i&gt;Information&lt;/i&gt;Protocol&quot;&gt;RIP&lt;/a&gt; (Routing Information Protocol) using UDP sockets in C. I needed a quick way to get the byte structure of RIP packets, and decided to use &lt;a href=&quot;http://www.secdev.org/projects/scapy/&quot;&gt;scapy&lt;/a&gt;. It's quite a handy tool and has a simple interface, which is nothing more than an extended Python shell. Auto-completion is supported out-of-the-box, which is good news for all the command-line enthusiasts out there. Here's how we dump an RIP packet straight to a PDF file.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;$ scapy
+&lt;p&gt;Next week, I'll have to start a project on implementing &lt;a href='https://en.wikipedia.org/wiki/Routing_Information_Protocol'&gt;RIP (Routing Information Protocol)&lt;/a&gt; using UDP sockets in C. I needed a quick way to get the byte structure of RIP packets, and decided to use &lt;a href=&quot;http://www.secdev.org/projects/scapy/&quot;&gt;scapy&lt;/a&gt;. It's quite a handy tool and has a simple interface, which is nothing more than an extended Python shell. Auto-completion is supported out-of-the-box, which is good news for all the command-line enthusiasts out there. Here's how we dump an RIP packet straight to a PDF file.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;$ scapy
 Welcome to Scapy &amp;#40;2.3.3&amp;#41;
 &amp;gt;&amp;gt;&amp;gt; entry = RIPEntry&amp;#40;addr='192.168.1.10', nextHop='192.168.1.1', mask='255.255.255.0'&amp;#41;
 &amp;gt;&amp;gt;&amp;gt; entry.show&amp;#40;&amp;#41;
