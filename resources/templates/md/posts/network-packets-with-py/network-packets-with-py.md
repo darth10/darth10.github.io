@@ -2,7 +2,7 @@
  :date "2009-05-19"
  :layout :post}
 
-Next week, I'll have to start a project on implementing <a href="http://en.wikipedia.org/wiki/Routing_Information_Protocol">RIP</a> (Routing Information Protocol) using UDP sockets in C.
+Next week, I'll have to start a project on implementing [RIP (Routing Information Protocol)](https://en.wikipedia.org/wiki/Routing_Information_Protocol) using UDP sockets in C.
 I needed a quick way to get the byte structure of RIP packets, and decided to use <a href="http://www.secdev.org/projects/scapy/">scapy</a>. It's quite a handy tool and has a simple interface, which is nothing more than an extended Python shell. Auto-completion is supported out-of-the-box, which is good news for all the command-line enthusiasts out there.
 Here's how we dump an RIP packet straight to a PDF file.
 
