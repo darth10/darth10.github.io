@@ -88,7 +88,7 @@ summary of the results.
 
 <div id="postchart1" class="chart"></div>
 
-The results essentially show that using LINQ is slightly more performant than
+The results show that using LINQ is slightly more performant than
 imperative approaches in only one case. Even in this case, the difference in
 performance is not really significant. LinqFaster also performs better than
 LINQ, but is generally slower on arrays compared to imperative code.
