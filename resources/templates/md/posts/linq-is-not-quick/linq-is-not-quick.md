@@ -10,7 +10,7 @@ microbenchmarks or premature optimization. I also feel that
 extensions are a fine addition to the .NET standard library. The LINQ query
 syntax is also an integral part of the C# and F# languages. That being said,
 there's an interesting and revealing tale to be told about the performance of
-LINQ.
+[LINQ to Objects](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects).
 
 LINQ provides a unified abstraction through a set of operations we can perform
 over any collection. Regardless of the underlying concrete collection of a given
@@ -117,7 +117,18 @@ There's a great
 [quote by Linus Torvalds](https://softwareengineering.stackexchange.com/questions/163185/torvalds-quote-about-good-programmer) 
 regarding the use of appropriate data structures.
 
-> _"Bad programmers worry about the code. Good programmers worry about data structures and their relationships."_
+> _"Bad programmers worry about the code._
+_Good programmers worry about data structures and their relationships."_
+
+Developers often conflate premature optimization with understanding performance
+implications of certain features and writing code accordingly. Optimization
+largely involves lots of measurements through profiling and even digging into
+the generated IL or machine code if needed. There's practically no value to be
+gained from guessing where your performance bottlenecks are. If you know that a
+given method will be called frequently beforehand, it's definitely a good idea
+to implement something reasonably performant at the first go. That's probably 
+the reasoning behind the contributing guidelines of Roslyn, the C# compiler
+itself, stating that LINQ should be avoided in certain places.
 
 To be fair, LINQ isn't really a part of the C# or F# languages. It's an
 assortment of extension methods in the standard library that you have to import
@@ -149,4 +160,5 @@ variance introduced by outliers: 19% (moderately inflated)
 Looks like the Haskell equivalent is slower than imperative C# code by a tiny
 bit. It still performs significantly better than LINQ. So the next time you
 spot a `using System.Linq;` statement in a program, you should think twice about
-the problem you're trying to solve.
+the problem you're trying to solve. There are definitely good reasons to use
+LINQ, but performance shouldn't be one of them.
