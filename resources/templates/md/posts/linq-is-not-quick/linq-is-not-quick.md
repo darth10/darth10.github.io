@@ -12,6 +12,8 @@ syntax is also an integral part of the C# and F# languages. That being said,
 there's an interesting and revealing tale to be told about the performance of
 [LINQ to Objects](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects).
 
+<!--more-->
+
 LINQ provides a unified abstraction through a set of operations we can perform
 over any collection. Regardless of the underlying concrete collection of a given
 `IEnumerable<T>` object, we can invoke methods like `First` to
