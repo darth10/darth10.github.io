@@ -60,6 +60,19 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>61 byte selection sort</h2>
+        <div class="post-meta">
+            
+            <div class="date">13 January 2010</div>
+        </div>
+    </div>
+    <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/">M. Doughlas McIlroy</a> of Darthmouth College, NH USA. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
+{for(int*c=b,t;c&gt;a;)if(t=*c--,*c&gt;t)c[1]=*c,*c=t,c=b;}
+</code></pre><p>This can be made even smaller using recursion and by inferring the type specifiers of global object declarations, which is a GCC hack. In the following function, <code>n</code> is the number of elements in the array <code>a</code>.</p>
+    <a href="/posts/byte-selection-sort">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>Network packets with Python</h2>
         <div class="post-meta">
             

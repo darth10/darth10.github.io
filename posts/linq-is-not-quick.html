@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>darth10.github.io: LINQ Is Not Quick</title>
+    <link rel="canonical" href="http://darth10.github.io/posts/linq-is-not-quick">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous" defer></script>
+
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+    <link href="/css/solarized-dark.css" rel="stylesheet" type="text/css" />
+
+    <script src="/js/turbolinks.min.js" defer></script>
+    <script src="/js/highlight.pack.min.js" defer></script>
+    <script src="/js/darth10.github.io.min.js" defer></script>
+    
+<script src="/js/jquery.flot.min.js" defer></script>
+<script src="/js/jquery.flot.orderBars.min.js" defer></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">darth10.github.io</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives">Archives</a></li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/pages/about">About</a>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/feed.xml">RSS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="container-fluid">
+<div id="post">
+
+    <div class="post-header">
+    <h2>LINQ Is Not Quick</h2>
+    <div class="post-meta">
+        <div class="date">18 October 2019</div>
+    </div>
+</div>
+<div>
+    
+    <p><script type="text/javascript" src="linq-is-not-quick/chart.js" defer></script></p><p>Let me just say that I am not particularly a fan of either  microbenchmarks or premature optimization. I also feel that <a href='https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries'>LINQ</a> extensions are a fine addition to the .NET standard library. The LINQ query syntax is also an integral part of the C# and F# languages. That being said, there's an interesting and revealing tale to be told about the performance of LINQ.</p><p>LINQ provides a unified abstraction through a set of operations we can perform over any collection. Regardless of the underlying concrete collection of a given <code>IEnumerable&lt;T&gt;</code> object, we can invoke methods like <code>First</code> to obtain the first element of the collection, or <code>Where</code> to filter out elements that do not satisfy a supplied predicate. All of this sounds very compelling, and yet the <a href='https://github.com/dotnet/roslyn/blob/5addcdeec3f2c4dc99b07507ca4f558aa91a0586/CONTRIBUTING.md#csharp'>contributing guidelines of the Roslyn compiler</a> recommend avoiding the use of LINQ in <i>compiler hot paths</i> where performance is important.</p><p>Is LINQ really that bad for performance critical code? I thought I'd run a few  benchmarks using <a href='https://github.com/dotnet/BenchmarkDotNet'>BenchmarkDotNet</a> to find out on my own.</p><p>If we have a reasonably sized collection, we can find the first element in it that matches a given predicate using the <code>First</code> extension method. For example, in a collection of 100,000 integers, we can find the first element <code>i</code> such that <code>i &#42; 2</code> is equal to <code>100000</code> using <code>First</code> as shown below.</p><pre><code class="csharp">List&lt;int&gt; itemsList = Enumerable.Range&#40;0, 100000&#41;.ToList&#40;&#41;;
+
+int result = itemsList.First&#40;i =&gt; &#40;i &#42; 2&#41; == 100000&#41;;
+</code></pre><p>The imperative equivalent of using <code>First</code> like this would be a combination of <code>for</code> and <code>if</code> statements. Since the collection we're dealing with is a <code>List&lt;int&gt;</code> object, we can also use methods such as <code>Find</code> and <code>FindAll</code> to achieve the same result. In fact, the <a href='https://github.com/jackmott/LinqFaster'>LinqFaster</a> library wraps these methods in the <code>FirstF</code> extension method.</p><p>Similarly, the <code>Select</code> and <code>Where</code> extension methods can be used to filter and transform elements in a collection. For example, we can find elements in the <code>itemsList</code> collection that are multiples of <code>10</code> and add <code>5</code> to them as shown below.</p><pre><code class="csharp">var results = itemsList
+    .Where&#40;i =&gt; i % 10 == 0&#41;
+    .Select&#40;i =&gt; i + 5&#41;
+    .ToList&#40;&#41;;
+</code></pre><p>Again, the same result can be obtained using some combination of <code>for</code> and <code>if</code> statements. You could even use the <code>ToArray</code> and <code>CopyTo</code> methods to avoid extra allocations. LinqFaster also provides the <code>WhereSelectF</code> method for this exact pattern, which allows the LINQ query shown above to be written as  <code>itemsList.WhereSelectF&#40;i =&gt; i % 10 == 0, i =&gt; i + 5&#41;</code>.</p><p>Let's benchmark the code shown above and also include results using arrays instead of lists. The code and results of this comparison can be found in <a href='https://github.com/darth10/linq-performance'>this repository</a>. Here's a  summary of the results.</p><pre><code class="html">|                     Method |      Mean |     Error |    StdDev | Allocated |
+|----------------------------|-----------|-----------|-----------|-----------|
+|         IterativeFirstList | 153.39 us | 2.3878 us | 2.1167 us |         - |
+|              LinqFirstList | 478.37 us | 4.2302 us | 3.7500 us |      40 B |
+|        LinqFasterFirstList | 138.72 us | 1.0194 us | 0.9036 us |         - |
+|                            |           |           |           |           |
+|        IterativeFirstArray |  30.63 us | 0.0569 us | 0.0444 us |         - |
+|             LinqFirstArray | 390.25 us | 7.4436 us | 7.3106 us |      32 B |
+|       LinqFasterFirstArray | 138.69 us | 1.2221 us | 1.1431 us |         - |
+|                            |           |           |           |           |
+|   IterativeWhereSelectList |  497.2 us |  9.904 us |  9.264 us | 128.33 KB |
+|        LinqWhereSelectList |  462.0 us |  8.960 us |  8.381 us | 128.48 KB |
+|  LinqFasterWhereSelectList |  457.1 us |  3.676 us |  3.439 us | 128.33 KB |
+|                            |           |           |           |           |
+|  IterativeWhereSelectArray |  225.4 us |  4.192 us |  4.305 us | 167.41 KB |
+|       LinqWhereSelectArray |  411.0 us |  3.993 us |  3.540 us |  103.8 KB |
+| LinqFasterWhereSelectArray |  415.5 us |  3.324 us |  2.947 us | 429.73 KB |
+</code></pre><p><div id="postchart1" class="chart"></div></p><p>The results show that using LINQ is slightly more performant than imperative approaches in only one case. Even in this case, the difference in performance is not really significant. LinqFaster also performs better than LINQ, but is generally slower on arrays compared to imperative code. In most cases however, imperative code is multiple times faster than LINQ. In the comparison between LINQ and <code>for</code>/<code>if</code> statements to find the first element matching a predicate in an array, LINQ is <i>13 times</i> slower!</p><p>Since the differences highlighted are in microseconds, we're treading in the territory of microbenchmarks. Also, all of the code used in these comparisons is CPU-bound, while real-world applications typically use more IO-bound code. In practice, the HTTP middleware of a web application could have a much higher impact on overall performance than the usage of LINQ.</p><p>LINQ is definitely useful in performing a complex series of operations on a given collection. This is essentially what LINQ provides - an abstraction of the <a href='https://en.wikipedia.org/wiki/Iterator_pattern'>iterator pattern</a>. Of course, most data structures provide methods to efficiently use or traverse them. For example, <code>List&lt;T&gt;</code> provides the <code>Find</code> and <code>FindAll</code> methods, and  similarly <code>Dictionary&lt;K, V&gt;</code> has <code>ContainsKey</code> and <code>GetValueOrDefault</code>.</p><p>The real argument against using LINQ is that it lets developers disregard choosing the right data structure to solve a problem. Avoiding LINQ can be thought of as premature optimization, but using <code>First</code> instead of <code>&#91;0&#93;</code> to obtain the first element of a list sounds more like <i>premature abstraction</i>.  There's a great  <a href='https://softwareengineering.stackexchange.com/questions/163185/torvalds-quote-about-good-programmer'>quote by Linus Torvalds</a>  regarding the use of appropriate data structures.</p><blockquote><p> <i>"Bad programmers worry about the code. Good programmers worry about data structures and their relationships."</i> </p></blockquote><p>To be fair, LINQ isn't really a part of the C# or F# languages. It's an assortment of extension methods in the standard library that you have to import through <code>using System.Linq;</code>. Let's compare with Haskell, a language in which <code>map</code> and <code>filter</code> are part of the core language constructs.</p><pre><code class="haskell">items :: &#91;Int&#93;
+items = &#91;1..100000&#93;
+
+doSameThingAsFirst :: &#91;Int&#93; -&gt; Int
+doSameThingAsFirst xs = head $ filter &#40;\i -&gt; &#40;i &#42; 2&#41; == 100000&#41; xs
+</code></pre><p>This code can be compiled using the <code>-O2</code> flag and benchmarked using the <a href='https://hackage.haskell.org/package/criterion'>criterion</a> library.</p><pre><code class="html">benchmarking doSameThingAsFirst/1
+time                 180.8 μs   &#40;179.2 μs .. 181.9 μs&#41;
+                     0.999 R²   &#40;0.999 R² .. 1.000 R²&#41;
+mean                 180.3 μs   &#40;179.2 μs .. 182.0 μs&#41;
+std dev              4.508 μs   &#40;3.249 μs .. 7.936 μs&#41;
+variance introduced by outliers: 19% &#40;moderately inflated&#41;
+</code></pre><p><div id="postchart2" class="chart"></div></p><p>Looks like the Haskell equivalent is slower than imperative C# code by a tiny bit. It still performs significantly better than LINQ. So the next time you spot a <code>using System.Linq;</code> statement in a program, you should think twice about the problem you're trying to solve.</p>
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts/lazy-sequences-and-streams">Lazy sequences and streams &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://darth10.github.io/posts/linq-is-not-quick";
+            this.page.identifier = "LINQ Is Not Quick";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
+            dsq.src = '//darth10.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+</div>
+</div>
+        </div><!--/.row -->
+        <footer>Copyright &copy; 2019 Akhil Wali
+            (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md" target="_blank">GPLv2 License</a>)
+            <p style="text-align: center;">Powered by
+                <a href="http://cryogenweb.org" target="_blank">Cryogen</a> and
+                <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+            </p>
+        </footer>
+    </div><!--/.container -->
+</body>
+</html>
