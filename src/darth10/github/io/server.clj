@@ -42,7 +42,7 @@
 (def http-handler
   (wrap-subdirectories routes))
 
-(defn reload-handler [req]
+(defn reload-handler [_]
   {:body (slurp (clojure.java.io/resource "livereload.js"))
    :status 200})
 
