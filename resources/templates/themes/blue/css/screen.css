@@ -40,6 +40,11 @@ button.darkmode-toggle {
     color: gray;
 }
 
+i.fab, i.far {
+    margin-right: 0.5em;
+    color: gray;
+}
+
 .container {
     max-width: 1000px;
     padding-top: 60px;
@@ -89,6 +94,11 @@ button.darkmode-toggle {
 
 .chart {
     width: 90%;
+    margin: auto;
+}
+
+.contact-info {
+    display: table;
     margin: auto;
 }
 
