@@ -10,7 +10,7 @@
 
   function initDarkMode() {
     var options = {
-      label: '☾',
+      label: '<i class="fas fa-moon"></i>',
       right: '0.75em',
       bottom: '0.75em'
     };
