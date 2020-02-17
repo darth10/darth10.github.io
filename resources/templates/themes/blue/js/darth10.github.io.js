@@ -8,12 +8,20 @@
     blocks.forEach.call(blocks, hljs.highlightBlock);
   };
 
-  function addHighlightingListener(e) {
-      document.addEventListener(e, initHighlighting, false);
+  function initDarkMode() {
+    var options = {
+      label: '🌗'
+    };
+
+    var darkmode = new Darkmode(options);
+    darkmode.showWidget();
   };
 
-  addHighlightingListener('turbolinks:load');
-  addHighlightingListener('turbolinks:render');
-  addHighlightingListener('DOMContentLoaded');
-  addHighlightingListener('load');
+  function addListeners(e) {
+    document.addEventListener(e, initHighlighting, false);
+    document.addEventListener('turbolinks:load', initDarkMode, false);
+  };
+
+  addListeners('turbolinks:load');
+  addListeners('DOMContentLoaded');
 })();
