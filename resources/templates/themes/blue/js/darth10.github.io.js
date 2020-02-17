@@ -10,7 +10,9 @@
 
   function initDarkMode() {
     var options = {
-      label: '🌗'
+      label: '☾',
+      right: '0.75em',
+      bottom: '0.75em'
     };
 
     var darkmode = new Darkmode(options);

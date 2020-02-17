@@ -14,6 +14,7 @@ pre {
     padding: inherit;
     border: none;
     border-radius: 4px;
+    isolation: isolate;
 }
 
 pre code {
@@ -33,6 +34,10 @@ footer {
     font-size: 14px;
     text-align: center;
     padding-top: 14px;
+}
+
+button.darkmode-toggle {
+    color: gray;
 }
 
 .container {
