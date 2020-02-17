@@ -2,15 +2,14 @@
  :date "2019-10-18"
  :layout :post-with-charts}
 
-<script type="text/javascript" src="linq-is-not-quick/chart.js" defer></script>
-
 Let me just say that I am not particularly a fan of either 
 microbenchmarks or premature optimization. I also feel that
 [LINQ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries)
 extensions are a fine addition to the .NET standard library. The LINQ query
-syntax is also an integral part of the C# and F# languages. That being said,
-there's an interesting and revealing tale to be told about the performance of
-[LINQ to Objects](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects).
+syntax is also an integral part of the C# and F# languages.
+
+That being said, there's an interesting and revealing tale to be told about the
+performance of [LINQ to Objects](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects).
 
 <!--more-->
 
@@ -164,3 +163,5 @@ bit. It still performs significantly better than LINQ. So the next time you
 spot a `using System.Linq;` statement in a program, you should think twice about
 the problem you're trying to solve. There are definitely good reasons to use
 LINQ, but performance shouldn't be one of them.
+
+<script type="text/javascript" src="linq-is-not-quick/chart.js" defer></script>
