@@ -2,14 +2,6 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url>
 <loc>
-http://darth10.github.io/tags.html
-</loc>
-<lastmod>
-2020-02-17
-</lastmod>
-</url>
-<url>
-<loc>
 http://darth10.github.io/index.html
 </loc>
 <lastmod>
@@ -18,7 +10,7 @@ http://darth10.github.io/index.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/byte-selection-sort.html
+http://darth10.github.io/tags.html
 </loc>
 <lastmod>
 2020-02-17
@@ -26,7 +18,7 @@ http://darth10.github.io/posts/byte-selection-sort.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/name-and-http-servers.html
+http://darth10.github.io/404.html
 </loc>
 <lastmod>
 2020-02-17
@@ -34,7 +26,31 @@ http://darth10.github.io/posts/name-and-http-servers.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/linq-is-not-quick.html
+http://darth10.github.io/p/2.html
+</loc>
+<lastmod>
+2020-02-17
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/pages/about.html
+</loc>
+<lastmod>
+2020-02-17
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/archives.html
+</loc>
+<lastmod>
+2020-02-17
+</lastmod>
+</url>
+<url>
+<loc>
+http://darth10.github.io/authors/Akhil Wali.html
 </loc>
 <lastmod>
 2020-02-17
@@ -43,14 +59,6 @@ http://darth10.github.io/posts/linq-is-not-quick.html
 <url>
 <loc>
 http://darth10.github.io/posts/network-packets-with-py.html
-</loc>
-<lastmod>
-2020-02-17
-</lastmod>
-</url>
-<url>
-<loc>
-http://darth10.github.io/posts/the-webbrowser-nightmare.html
 </loc>
 <lastmod>
 2020-02-17
@@ -74,7 +82,7 @@ http://darth10.github.io/posts/abstract-and-parameterized-types.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/authors/Akhil Wali.html
+http://darth10.github.io/posts/byte-selection-sort.html
 </loc>
 <lastmod>
 2020-02-17
@@ -82,7 +90,7 @@ http://darth10.github.io/authors/Akhil Wali.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/404.html
+http://darth10.github.io/posts/linq-is-not-quick.html
 </loc>
 <lastmod>
 2020-02-17
@@ -90,7 +98,7 @@ http://darth10.github.io/404.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/archives.html
+http://darth10.github.io/posts/name-and-http-servers.html
 </loc>
 <lastmod>
 2020-02-17
@@ -98,15 +106,7 @@ http://darth10.github.io/archives.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/pages/about.html
-</loc>
-<lastmod>
-2020-02-17
-</lastmod>
-</url>
-<url>
-<loc>
-http://darth10.github.io/p/2.html
+http://darth10.github.io/posts/the-webbrowser-nightmare.html
 </loc>
 <lastmod>
 2020-02-17
