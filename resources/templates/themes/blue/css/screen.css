@@ -40,8 +40,8 @@ button.darkmode-toggle {
     color: gray;
 }
 
-i.fab, i.far {
-    margin-right: 0.5em;
+svg[data-prefix=fab], svg[data-prefix=far] {
+    margin-right: 16px;
     color: gray;
 }
 
