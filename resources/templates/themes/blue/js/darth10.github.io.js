@@ -21,7 +21,6 @@
 
   function addListeners(e) {
     document.addEventListener(e, initHighlighting, false);
-    document.addEventListener('turbolinks:load', initDarkMode, false);
   };
 
   addListeners('turbolinks:load');
