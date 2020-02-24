@@ -26,11 +26,6 @@ code {
     color: #428bca;
 }
 
-/* what? */
-pre, code, .hljs {
-    background-color: #f7f9fd;
-}
-
 footer {
     font-size: 14px;
     text-align: center;
