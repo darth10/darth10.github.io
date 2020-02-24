@@ -26,6 +26,7 @@ code {
     color: #428bca;
 }
 
+/* what? */
 pre, code, .hljs {
     background-color: #f7f9fd;
 }
@@ -40,8 +41,8 @@ button.darkmode-toggle {
     color: gray;
 }
 
-i.fab, i.far {
-    margin-right: 0.5em;
+svg[data-prefix=fab], svg[data-prefix=far] {
+    margin-right: 16px;
     color: gray;
 }
 
