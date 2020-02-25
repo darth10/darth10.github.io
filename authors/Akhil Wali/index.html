@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>darth10.github.io: Network packets with Python</title>
-    <link rel="canonical" href="http://darth10.github.io/posts/network-packets-with-py">
+    <title>darth10.github.io: Posts by Akhil Wali </title>
+    <link rel="canonical" href="https://darth10.github.io/authors/Akhil Wali/">
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Alegreya Sans:400italic,700italic,400,700">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -38,10 +38,10 @@
         <div id="navbar-main" class="navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item "><a class="nav-link" href="/archives">Archives</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
                 
                 <li class="nav-item ">
-                    <a class="nav-link" href="/pages/about">About</a>
+                    <a class="nav-link" href="/pages/about/">About</a>
                 </li>
                 
                 <li class="nav-item"><a class="nav-link" href="/feed.xml">RSS</a></li>
@@ -53,59 +53,69 @@
     <div class="container">
         <div class="row">
             <div id="content" class="container-fluid">
-<div id="post">
-
-    <div class="post-header">
-    <h2>Network packets with Python</h2>
-    <div class="post-meta">
-        <div class="date">19 May 2009</div>
-    </div>
-</div>
-<div>
+<div id="posts">
+  <div id="page-header" class="post-header">
+    <h2>Posts by Akhil Wali</h2>
+  </div>
+  
+  <h4>2019 October</h4>
+  <ul>
     
-    <p>Next week, I'll have to start a project on implementing <a href='https://en.wikipedia.org/wiki/Routing_Information_Protocol'>RIP (Routing Information Protocol)</a> using UDP sockets in C. I needed a quick way to get the byte structure of RIP packets, and decided to use <a href="http://www.secdev.org/projects/scapy/">scapy</a>. It's quite a handy tool and has a simple interface, which is nothing more than an extended Python shell. Auto-completion is supported out-of-the-box, which is good news for all the command-line enthusiasts out there. Here's how we dump an RIP packet straight to a PDF file.</p><pre><code class="python">$ scapy
-Welcome to Scapy &#40;2.3.3&#41;
-&gt;&gt;&gt; entry = RIPEntry&#40;addr='192.168.1.10', nextHop='192.168.1.1', mask='255.255.255.0'&#41;
-&gt;&gt;&gt; entry.show&#40;&#41;
-###&#91; RIP entry &#93;###
-  AF= IP
-  RouteTag= 0
-  addr= 192.168.1.10
-  mask= 255.255.255.0
-  nextHop= 192.168.1.1
-  metric= 1
-
-&gt;&gt;&gt; r = RIP&#40;&#41; / entry
-&gt;&gt;&gt; r.pdfdump&#40;&#41;
-</code></pre><p>This generates a self-explanatory packet dump. You could also use a different reader; just change the <code>conf.prog.pdfreader</code> object.</p><p><img src="network-packets-with-py/packets.png" alt="packets" /></p><p><a href="http://www.secdev.org/projects/scapy/">Scapy</a> is more than just an educational tool. It comes with everything for network-induced chaos, from a sniffer to layer-2 sockets, and it's extensible through Python!</p>
-</div>
-
-
-    <div id="prev-next">
-        
-        <a href="/posts/byte-selection-sort">&laquo; 61 byte selection sort</a>
-        
-        
-        <a class="right" href="/posts/name-and-http-servers">__name__ and HTTP servers &raquo;</a>
-        
-    </div>
-
+    <li>
+      Oct 18 - <a href="/posts/linq-is-not-quick/">LINQ Is Not Quick</a>
+    </li>
     
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_config = function () {
-            this.page.url = "http://darth10.github.io/posts/network-packets-with-py";
-            this.page.identifier = "Network packets with Python";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
-            dsq.src = '//darth10.disqus.com/embed.js';
-            dsq.setAttribute('samesite', 'Secure');
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
+  </ul>
+  
+  <h4>2013 January</h4>
+  <ul>
     
-
+    <li>
+      Jan 25 - <a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a>
+    </li>
+    
+  </ul>
+  
+  <h4>2012 September</h4>
+  <ul>
+    
+    <li>
+      Sep 23 - <a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a>
+    </li>
+    
+  </ul>
+  
+  <h4>2012 August</h4>
+  <ul>
+    
+    <li>
+      Aug 16 - <a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a>
+    </li>
+    
+  </ul>
+  
+  <h4>2010 January</h4>
+  <ul>
+    
+    <li>
+      Jan 13 - <a href="/posts/byte-selection-sort/">61 byte selection sort</a>
+    </li>
+    
+  </ul>
+  
+  <h4>2009 May</h4>
+  <ul>
+    
+    <li>
+      May 19 - <a href="/posts/network-packets-with-py/">Network packets with Python</a>
+    </li>
+    
+    <li>
+      May 13 - <a href="/posts/name-and-http-servers/">__name__ and HTTP servers</a>
+    </li>
+    
+  </ul>
+  
 </div>
 </div>
         </div><!--/.row -->

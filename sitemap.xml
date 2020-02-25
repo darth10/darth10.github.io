@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url>
 <loc>
-http://darth10.github.io/index.html
+https://darth10.github.io/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -10,7 +10,7 @@ http://darth10.github.io/index.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/tags.html
+https://darth10.github.io/tags/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -18,7 +18,7 @@ http://darth10.github.io/tags.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/404.html
+https://darth10.github.io/archives/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -26,7 +26,7 @@ http://darth10.github.io/404.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/p/2.html
+https://darth10.github.io/404.html
 </loc>
 <lastmod>
 2020-02-25
@@ -34,7 +34,7 @@ http://darth10.github.io/p/2.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/pages/about.html
+https://darth10.github.io/p/2/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -42,7 +42,7 @@ http://darth10.github.io/pages/about.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/archives.html
+https://darth10.github.io/pages/about/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -50,7 +50,7 @@ http://darth10.github.io/archives.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/authors/Akhil Wali.html
+https://darth10.github.io/authors/Akhil Wali/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -58,7 +58,7 @@ http://darth10.github.io/authors/Akhil Wali.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/network-packets-with-py.html
+https://darth10.github.io/posts/abstract-and-parameterized-types/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -66,7 +66,7 @@ http://darth10.github.io/posts/network-packets-with-py.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/lazy-sequences-and-streams.html
+https://darth10.github.io/posts/network-packets-with-py/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -74,7 +74,7 @@ http://darth10.github.io/posts/lazy-sequences-and-streams.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/abstract-and-parameterized-types.html
+https://darth10.github.io/posts/linq-is-not-quick/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -82,7 +82,7 @@ http://darth10.github.io/posts/abstract-and-parameterized-types.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/byte-selection-sort.html
+https://darth10.github.io/posts/name-and-http-servers/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -90,7 +90,7 @@ http://darth10.github.io/posts/byte-selection-sort.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/linq-is-not-quick.html
+https://darth10.github.io/posts/the-webbrowser-nightmare/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -98,7 +98,7 @@ http://darth10.github.io/posts/linq-is-not-quick.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/name-and-http-servers.html
+https://darth10.github.io/posts/lazy-sequences-and-streams/index.html
 </loc>
 <lastmod>
 2020-02-25
@@ -106,7 +106,7 @@ http://darth10.github.io/posts/name-and-http-servers.html
 </url>
 <url>
 <loc>
-http://darth10.github.io/posts/the-webbrowser-nightmare.html
+https://darth10.github.io/posts/byte-selection-sort/index.html
 </loc>
 <lastmod>
 2020-02-25
