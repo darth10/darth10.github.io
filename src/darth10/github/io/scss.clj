@@ -20,6 +20,7 @@
             (str sass-src-dir ":" sass-dest-dir)))
 
 (defn compile-scss->css! [{:keys [sass-src ignored-files] :as config}]
+  (println (text/blue "compiling scss"))
   (if (and (seq sass-src)
            (not (sass-installed?)))
     (println

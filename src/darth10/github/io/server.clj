@@ -2,7 +2,7 @@
   (:require [clojure.string :as string]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
-            [cryogen-core.compiler :refer [compile-assets-timed]]
+            [cryogen-core.compiler :refer [compile-assets]]
             [cryogen-core.config :refer [resolve-config]]
             [cryogen-core.io :refer [path]]
             [cryogen-core.plugins :refer [load-plugins]]
@@ -15,9 +15,10 @@
             [ring.adapter.jetty9 :refer [run-jetty]]))
 
 (defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
-  (compile-assets-timed)
-  (compile-scss->css! (resolve-config))
-  (when reload? (reload-page)))
+  (let [config (resolve-config)]
+    (compile-assets config)
+    (compile-scss->css! config)
+    (when reload? (reload-page))))
 
 (defn init []
   (load-plugins)
