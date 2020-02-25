@@ -8,20 +8,23 @@
             [cryogen-core.plugins :refer [load-plugins]]
             [cryogen-core.watcher :refer [start-watcher!]]
             [darth10.github.io.reload :refer [ws-handler reload-page]]
+            [darth10.github.io.scss :refer [compile-scss->css!]]
             [hawk.core :as hawk]
             [ring.util.response :refer [redirect file-response]]
             [ring.util.codec :refer [url-decode]]
             [ring.adapter.jetty9 :refer [run-jetty]]))
 
+(defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
+  (compile-assets-timed)
+  (compile-scss->css! (resolve-config))
+  (when reload? (reload-page)))
+
 (defn init []
   (load-plugins)
-  (compile-assets-timed)
-  (let [ignored-files (-> (resolve-config) :ignored-files)
-        compile-and-reload (fn []
-                             (compile-assets-timed)
-                             (reload-page))]
-    (start-watcher! "content" ignored-files compile-and-reload)
-    (start-watcher! "themes" ignored-files compile-and-reload)))
+  (let [ignored-files (:ignored-files (resolve-config))]
+    (compile-all-assets :reload? false)
+    (start-watcher! "content" ignored-files compile-all-assets)
+    (start-watcher! "themes" ignored-files compile-all-assets)))
 
 (defn wrap-subdirectories
   [handler]

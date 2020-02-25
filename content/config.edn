@@ -13,19 +13,17 @@
  :rss-filters        ["cryogen"]
  :recent-posts       3
  :post-date-format   "yyyy-MM-dd"
- :sass-src           nil
- :sass-dest          nil
+ :sass-src           ["scss"]
  :theme              "blue"
  :resources          ["img"]
  :keep-files         [".git", "LICENSE.md"]
  :disqus?            true
  :disqus-shortname   "darth10"
- :ignored-files      [#"\.#.*" #".*\.swp$" #"darth10.github.io.js$"]
+ :ignored-files      [#"\.#.*" #".*\.swp$" #".gitkeep$" #"darth10.github.io.js$"]
  :posts-per-page     4
  :blocks-per-preview 3
  :previews?          true
  :clean-urls         :trailing-slash
  :collapse-subdirs?  true
  :hide-future-posts? true
- :debug?             false
- }
+ :debug?             false}

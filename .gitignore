@@ -9,6 +9,7 @@
 /log/
 /out/
 /target/
+/themes/*/css/*
 figwheel_server.log
 pom.xml
 pom.xml.asc
