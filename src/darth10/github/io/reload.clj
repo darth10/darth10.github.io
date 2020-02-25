@@ -1,5 +1,5 @@
 (ns darth10.github.io.reload
-    (:require [cheshire.core :refer :all]
+    (:require [cheshire.core :as json]
               [ring.adapter.jetty9 :refer [send!]]))
 
 (def hello-response {"command" "hello"
@@ -12,15 +12,15 @@
                  :liveCSS true })
 
 (defn- on-ws-text [ws text-message]
-  (when (= "hello" (get (parse-string text-message) "command"))
-    (send! ws (generate-string hello-response))))
+  (when (= "hello" (get (json/parse-string text-message) "command"))
+    (send! ws (json/generate-string hello-response))))
 
 (def ws-handler {:on-connect (fn [ws]
                                (swap! sockets conj ws))
-                 :on-close (fn [ws status-code reason]
+                 :on-close (fn [ws _ _]
                              (swap! sockets disj ws))
                  :on-text on-ws-text})
 
 (defn reload-page []
   (doseq [ws @sockets]
-    (send! ws (generate-string (merge reload-map {:path "."})))))
+    (send! ws (json/generate-string (merge reload-map {:path "."})))))
