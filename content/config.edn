@@ -1,7 +1,7 @@
 {:site-title         "darth10.github.io"
  :author             "Akhil Wali"
  :description        "darth10's blog"
- :site-url           "http://darth10.github.io/"
+ :site-url           "https://darth10.github.io/"
  :post-root          "posts"
  :page-root          "pages"
  :post-root-uri      nil
@@ -24,7 +24,7 @@
  :posts-per-page     4
  :blocks-per-preview 3
  :previews?          true
- :clean-urls?        true
+ :clean-urls         :trailing-slash
  :collapse-subdirs?  true
  :hide-future-posts? true
  :debug?             false

@@ -1,49 +1,67 @@
 (ns darth10.github.io.server
-  (:require [compojure.core :refer [GET defroutes]]
+  (:require [clojure.string :as string]
+            [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
-            [cryogen-core.compiler :refer [compile-assets-timed read-config]]
+            [cryogen-core.compiler :refer [compile-assets-timed]]
+            [cryogen-core.config :refer [resolve-config]]
             [cryogen-core.io :refer [path]]
             [cryogen-core.plugins :refer [load-plugins]]
             [cryogen-core.watcher :refer [start-watcher!]]
             [darth10.github.io.reload :refer [ws-handler reload-page]]
             [hawk.core :as hawk]
-            [ring.util.response :refer [redirect resource-response]]
+            [ring.util.response :refer [redirect file-response]]
             [ring.util.codec :refer [url-decode]]
             [ring.adapter.jetty9 :refer [run-jetty]]))
 
 (defn init []
   (load-plugins)
   (compile-assets-timed)
-  (let [ignored-files (-> (read-config) :ignored-files)]
-    (start-watcher!
-     "resources/templates" ignored-files
-     (fn []
-       (compile-assets-timed)
-       (reload-page)))))
+  (let [ignored-files (-> (resolve-config) :ignored-files)
+        compile-and-reload (fn []
+                             (compile-assets-timed)
+                             (reload-page))]
+    (start-watcher! "content" ignored-files compile-and-reload)
+    (start-watcher! "themes" ignored-files compile-and-reload)))
 
 (defn wrap-subdirectories
   [handler]
   (fn [request]
-    (let [req-uri (.substring (url-decode (:uri request)) 1)
-          res-path (if (or (= req-uri "") (= req-uri "/"))
-                     (path "/index.html")
-                     (path (str req-uri ".html")))]
-      (or (resource-response res-path {:root "public"})
+    (let [{:keys [clean-urls blog-prefix public-dest]} (resolve-config)
+          req-uri (.substring (url-decode (:uri request)) 1)
+          res-path (if (or (.endsWith req-uri "/")
+                           (.endsWith req-uri ".html")
+                           (-> (string/split req-uri #"/")
+                               last
+                               (string/includes? ".")
+                               not))
+                     (condp = clean-urls
+                       :trailing-slash (path req-uri "index.html")
+                       :no-trailing-slash (if (or (= req-uri "")
+                                                  (= req-uri "/")
+                                                  (= req-uri
+                                                     (if (string/blank? blog-prefix)
+                                                       blog-prefix
+                                                       (.substring blog-prefix 1))))
+                                            (path req-uri "index.html")
+                                            (path (str req-uri ".html")))
+                       :dirty (path (str req-uri ".html")))
+                     req-uri)]
+      (or (file-response res-path {:root public-dest})
           (handler request)))))
 
 (defroutes routes
-  (GET "/" [] (redirect
-               (let [config (read-config)]
-                 (path (:blog-prefix config)
-                       (when-not (:clean-urls? config) "index.html")))))
-  (route/resources "/")
+  (GET "/" [] (redirect (let [config (resolve-config)]
+                          (path (:blog-prefix config)
+                                (when (= (:clean-urls config) :dirty)
+                                  "index.html")))))
+  (route/files "/")
   (route/not-found "Page not found"))
 
 (def http-handler
   (wrap-subdirectories routes))
 
 (defn reload-handler [_]
-  {:body (slurp (clojure.java.io/resource "livereload.js"))
+  {:body (slurp (path "content" "livereload.js"))
    :status 200})
 
 (defonce server (atom []))

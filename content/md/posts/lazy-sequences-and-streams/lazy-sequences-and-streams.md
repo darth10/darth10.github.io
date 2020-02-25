@@ -81,4 +81,4 @@ Interestingly, the Clojure `fibo-list` function evaluates in constant time, whic
 Clojure also fetches cached elements in the lazy sequence much faster than Scala.
 However, `fibo-last` performs linearly since the `last` function has linear time-complexity.
 
-<script type="text/javascript" src="lazy-sequences-and-streams/chart.js" defer></script>
+<script type="text/javascript" src="chart.js" defer></script>
