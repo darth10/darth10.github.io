@@ -8,17 +8,6 @@
     blocks.forEach.call(blocks, hljs.highlightBlock);
   };
 
-  function initDarkMode() {
-    var options = {
-      label: '<i class="fas fa-moon"></i>',
-      right: '0.75em',
-      bottom: '0.75em'
-    };
-
-    var darkmode = new Darkmode(options);
-    darkmode.showWidget();
-  };
-
   function addListeners(e) {
     document.addEventListener(e, initHighlighting, false);
   };
