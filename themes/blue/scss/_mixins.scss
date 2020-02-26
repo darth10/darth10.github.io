@@ -1,0 +1,19 @@
+@mixin border {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+@mixin header {
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 32px;
+  }
+}
+
+@mixin header-padding {
+  padding-bottom: 8px;
+}
+
+@mixin meta-font {
+  font-size: 14px;
+}

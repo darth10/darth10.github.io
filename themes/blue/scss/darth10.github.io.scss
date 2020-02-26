@@ -1,12 +1,16 @@
 @import "_code";
+@import "_mixins";
+
+$light-color: #f2f2f2;
+$header-font: 'Alegreya Sans';
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Alegreya Sans';
+  font-family: $header-font;
 }
 
 body {
   color: #333;
-  background-color: #f2f2f2;
+  background-color: $light-color;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
@@ -28,13 +32,10 @@ code {
 }
 
 footer {
-  font-size: 14px;
+  @include meta-font;
+
   text-align: center;
   padding-top: 14px;
-}
-
-button.darkmode-toggle {
-  color: gray;
 }
 
 svg {
@@ -59,7 +60,7 @@ svg {
 }
 
 .navbar-brand {
-  font-family: 'Alegreya Sans';
+  font-family: $header-font;
   font-size: 24px;
 }
 
@@ -68,26 +69,18 @@ svg {
 }
 
 .post-header {
-  border-bottom: 1px solid #dbdbdb;
-  margin-bottom: 20px;
-  padding-bottom: 8px;
-
-  h2 {
-    font-size: 32px;
-  }
+  @include border;
+  @include header;
+  @include header-padding;
 }
 
 .post-preview-header {
-  margin-bottom: 20px;
-  padding-bottom: 8px;
-
-  h2 {
-    font-size: 32px;
-  }
+  @include header;
+  @include header-padding;
 }
 
 .post-meta {
-  font-size: 14px;
+  @include meta-font;
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -102,12 +95,8 @@ svg {
 }
 
 #page-header {
-  border-bottom: 1px solid #dbdbdb;
-  margin-bottom: 20px;
-
-  h2 {
-    font-size: 32px;
-  }
+  @include border;
+  @include header;
 }
 
 #sidebar {
@@ -168,7 +157,7 @@ svg {
 
 @media (max-width: 767px) {
   body {
-    font-size: 14px;
+    @include meta-font;
   }
 
   .post-meta .right {
@@ -183,7 +172,7 @@ svg {
 
 @media (prefers-color-scheme: dark) {
   body {
-    color: #f2f2f2;
+    color: $light-color;
     background-color: black;
   }
 
