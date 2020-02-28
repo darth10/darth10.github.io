@@ -4,5 +4,5 @@
 
 (defn -main []
   (load-plugins)
-  (compile-all-assets)
+  (compile-all-assets :reload? false)
   (System/exit 0))

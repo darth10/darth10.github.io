@@ -1,6 +1,7 @@
 (defproject darth10-github-io "1.0.0"
-  :description "Code for site darth10.github.io"
+  :description "Code for darth10.github.io"
   :url "https://github.com/darth10/darth10.github.io"
+  :source-paths ["src/clj"]
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [info.sunng/ring-jetty9-adapter "0.12.5"]
                  [ring/ring-devel "1.8.0"]
