@@ -14,19 +14,6 @@
             [ring.util.codec :refer [url-decode]]
             [ring.adapter.jetty9 :refer [run-jetty]]))
 
-(defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
-  (let [config (resolve-config)]
-    (compile-assets config)
-    (compile-scss->css! config)
-    (when reload? (reload-page))))
-
-(defn init []
-  (load-plugins)
-  (let [ignored-files (:ignored-files (resolve-config))]
-    (compile-all-assets :reload? false)
-    (start-watcher! "content" ignored-files compile-all-assets)
-    (start-watcher! "themes" ignored-files compile-all-assets)))
-
 (defn wrap-subdirectories
   [handler]
   (fn [request]
@@ -68,11 +55,28 @@
   {:body (slurp (path "content" "livereload.js"))
    :status 200})
 
+(defonce plugins-loaded? (atom false))
+
+(defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
+  (let [config (resolve-config)]
+    (compile-assets config)
+    (compile-scss->css! config)
+    (when reload? (reload-page))))
+
+(defn init []
+  (let [ignored-files (:ignored-files (resolve-config))]
+    (when (not @plugins-loaded?)
+      (load-plugins)
+      (swap! plugins-loaded? not))
+    (compile-all-assets :reload? false)
+    [(start-watcher! "content" ignored-files compile-all-assets)
+     (start-watcher! "themes" ignored-files compile-all-assets)]))
+
 (defonce server (atom []))
 
 (defn start-server [& {:keys [port]
                        :or {port 4000}}]
-  (let [file-watcher    (init)
+  (let [file-watchers   (init)
         http-instance   (run-jetty http-handler
                                    {:port port
                                     :join? false})
@@ -81,11 +85,13 @@
                                     :websockets {"/livereload" ws-handler}
                                     :allow-null-path-info true
                                     :join? false})]
-    (swap! server conj file-watcher http-instance reload-instance)))
+    (swap! server conj file-watchers http-instance reload-instance)))
 
 (defn stop-server []
-  (when-let [[file-watcher http-instance reload-instance] (seq @server)]
-    (hawk/stop! file-watcher)
+  (when-let [[[& file-watchers]
+              http-instance reload-instance] (seq @server)]
+    (doseq [w file-watchers]
+      (hawk/stop! w))
     (.stop http-instance)
     (.stop reload-instance)
     (swap! server empty)))
