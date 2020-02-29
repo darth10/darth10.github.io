@@ -57,8 +57,6 @@
                       "livereload.min.js"))
    :status 200})
 
-(defonce plugins-loaded? (atom false))
-
 (defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
   (let [config (resolve-config)
         create-dir #(->> % (path "themes" (:theme config))
@@ -71,14 +69,16 @@
     (run-webpack!)
     (when reload? (reload-page))))
 
+(defonce plugins-loaded? (atom false))
+
 (defn init []
-  (let [ignored-files (:ignored-files (resolve-config))]
+  (let [config (resolve-config)
+        ignored-files (:ignored-files config)]
     (when (not @plugins-loaded?)
       (load-plugins)
       (swap! plugins-loaded? not))
     (compile-all-assets :reload? false)
-    (for [dir ["content" "themes"
-               (path "src" "js") (path "src" "scss")]]
+    (for [dir (:watch-dirs config)]
       (start-watcher! dir ignored-files compile-all-assets))))
 
 (defonce server (atom []))
