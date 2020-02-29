@@ -79,8 +79,8 @@
       (load-plugins)
       (swap! plugins-loaded? not))
     (compile-all-assets :reload? false)
-    [(start-watcher! "content" ignored-files compile-all-assets)
-     (start-watcher! "themes" ignored-files compile-all-assets)]))
+    (for [dir ["content" "themes"]]
+      (start-watcher! dir ignored-files compile-all-assets))))
 
 (defonce server (atom []))
 
