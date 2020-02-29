@@ -1,50 +1,74 @@
 // Styles for code highlighting using highlight.js
+/*
+
+Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
+
+*/
 
 .hljs {
   display: block;
   overflow-x: auto;
-  padding: 1em;
+  padding: 0.5em;
   background: #002b36;
   color: #839496;
 }
 
-.hljs-comment, .hljs-quote {
+.hljs-comment,
+.hljs-quote {
   color: #586e75;
 }
 
-.hljs-keyword, .hljs-selector-tag, .hljs-addition {
+/* Solarized Green */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
   color: #859900;
 }
 
-.hljs-number, .hljs-string, .hljs-meta .hljs-meta-string, .hljs-literal, .hljs-doctag, .hljs-regexp {
+/* Solarized Cyan */
+.hljs-number,
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
+.hljs-doctag,
+.hljs-regexp {
   color: #2aa198;
 }
 
-.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id, .hljs-selector-class {
+/* Solarized Blue */
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
   color: #268bd2;
 }
 
-.hljs-attribute, .hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-class .hljs-title, .hljs-type {
+/* Solarized Yellow */
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
   color: #b58900;
 }
 
-.hljs-symbol, .hljs-bullet, .hljs-subst {
+/* Solarized Orange */
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
   color: #cb4b16;
 }
 
-.hljs-meta {
-  color: #cb4b16;
-
-  .hljs-keyword {
-    color: #cb4b16;
-  }
-}
-
-.hljs-selector-attr, .hljs-selector-pseudo, .hljs-link {
-  color: #cb4b16;
-}
-
-.hljs-built_in, .hljs-deletion {
+/* Solarized Red */
+.hljs-built_in,
+.hljs-deletion {
   color: #dc322f;
 }
 
