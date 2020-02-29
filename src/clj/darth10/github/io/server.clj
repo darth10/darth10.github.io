@@ -71,7 +71,7 @@
 
 (defonce plugins-loaded? (atom false))
 
-(defn init []
+(defn init-server []
   (let [config (resolve-config)
         ignored-files (:ignored-files config)]
     (when (not @plugins-loaded?)
@@ -85,7 +85,7 @@
 
 (defn start-server [& {:keys [port]
                        :or {port 4000}}]
-  (let [file-watchers   (init)
+  (let [file-watchers   (init-server)
         http-instance   (run-jetty http-handler
                                    {:port port
                                     :join? false})

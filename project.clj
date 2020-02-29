@@ -13,5 +13,5 @@
                  [ring-server "0.5.0"]]
   :plugins [[lein-ring "0.12.5"]]
   :main darth10.github.io.core
-  :ring {:init darth10.github.io.server/init
+  :ring {:init darth10.github.io.server/init-server
          :handler darth10.github.io.server/http-handler})
