@@ -1,6 +1,6 @@
 {:title "LINQ Is Not Quick"
  :date "2019-10-18"
- :layout :post-with-charts}
+ :layout :post}
 
 Let me just say that I am not particularly a fan of either 
 microbenchmarks or premature optimization. I also feel that
@@ -164,4 +164,4 @@ spot a `using System.Linq;` statement in a program, you should think twice about
 the problem you're trying to solve. There are definitely good reasons to use
 LINQ, but performance shouldn't be one of them.
 
-<script type="text/javascript" src="chart.js" defer></script>
+<script type="text/javascript" src="linq-is-not-quick.min.js" defer></script>

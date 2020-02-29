@@ -5,11 +5,13 @@ const mode = 'production';
 
 module.exports = [{
   mode: mode,
-  entry: './darth10.github.io.js',
+  entry: {
+    'darth10.github.io': './darth10.github.io.js',
+  },
   context: path.resolve(__dirname, 'src/js'),
   output: {
     path: path.resolve(__dirname, 'public/js'),
-    filename: "darth10.github.io.min.js"
+    filename: '[name].min.js'
   },
   module: {
     rules: [
@@ -30,12 +32,36 @@ module.exports = [{
           'css-loader',
           'sass-loader'
         ],
-      },
+      }
     ]
   },
   plugins: [
     new CopyPlugin([{
       from: '*.min.js'
     }])
-  ]
-}];
+  ]}, {
+    mode: mode,
+    entry: {
+      'lazy-sequences-and-streams': './lazy-sequences-and-streams.js',
+      'linq-is-not-quick':          './linq-is-not-quick.js'
+    },
+    context: path.resolve(__dirname, 'src/js'),
+    output: {
+      path: path.resolve(__dirname, 'public/posts/'),
+      filename: '[name]/[name].min.js'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        }
+      ]
+    }
+  }];
