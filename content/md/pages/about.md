@@ -10,7 +10,7 @@ I'm Akhil. I'm a software developer.
 
 I like programming in C#, Clojure, Haskell, JavaScript and C.
 I'm obsessed with using GNU/Linux and Emacs for everything.
-I'm particularly fond of mathematics, distributed computing and open source technologies.
+I'm particularly fond of mathematics, distributed computing and open source software.
 
 <div class="contact-info">
 <a href="https://github.com/darth10" target="_blank"><i class="fab fa-github fa-w-16 fa-2x"></i></a>
