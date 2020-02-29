@@ -26,15 +26,15 @@ var chartData2 = {
 };
 
 function timeFormatter(v, axis) {
-  return v + " µs ";
+  return v + ' µs ';
 };
 
 function loadCharts () {
-  $.plot($("#postchart1"),
+  $.plot($('#postchart1'),
          [
-           { data: chartData1['iterative'], label: "Iterative", color: "#1e90ff",order: 0 },
-           { data: chartData1['linq'], label: "LINQ", color: "#ffa500", order:1 },
-           { data: chartData1['linqFaster'], label: "LinqFaster", color: "#00fa9a", order:2 }
+           { data: chartData1['iterative'], label: 'Iterative', color: '#1e90ff',order: 0 },
+           { data: chartData1['linq'], label: 'LINQ', color: '#ffa500', order:1 },
+           { data: chartData1['linqFaster'], label: 'LinqFaster', color: '#00fa9a', order:2 }
          ],
          {
            series: {
@@ -46,22 +46,22 @@ function loadCharts () {
              autoscaleMargin: 0.05,
              labelWidth: 18,
              ticks: [
-               [1000, "First (List)" ],
-               [2000, "First (Array)" ],
-               [3000, "Where Select (List)" ],
-               [4000, "Where Select (Array)" ]
+               [1000, 'First (List)' ],
+               [2000, 'First (Array)' ],
+               [3000, 'Where Select (List)' ],
+               [4000, 'Where Select (Array)' ]
              ]
            },
            legend: { position: 'ne', backgroundOpacity: 0.5 }
          });
 
 
-  $.plot($("#postchart2"),
+  $.plot($('#postchart2'),
          [
-           { data: chartData2['iterative'], label: "Iterative", color: "#1e90ff" },
-           { data: chartData2['linq'], label: "LINQ", color: "#ffa500" },
-           { data: chartData2['linqFaster'], label: "LinqFaster", color: "#00fa9a" },
-           { data: chartData2['haskell'], label: "Haskell", color: "#4b0082" }
+           { data: chartData2['iterative'], label: 'Iterative', color: '#1e90ff' },
+           { data: chartData2['linq'], label: 'LINQ', color: '#ffa500' },
+           { data: chartData2['linqFaster'], label: 'LinqFaster', color: '#00fa9a' },
+           { data: chartData2['haskell'], label: 'Haskell', color: '#4b0082' }
          ],
          {
            series: {
@@ -71,7 +71,7 @@ function loadCharts () {
            yaxis: {
              autoscaleMargin: 0.25,
              ticks: [
-               [1000, "First (List)" ]
+               [1000, 'First (List)' ]
              ]
            },
            xaxis: { max: 500, tickFormatter: timeFormatter, ticks: 4 },

@@ -31,21 +31,21 @@ var chartData = {
 };
 
 function timeFormatter(v, axis) {
-  return (v.toFixed(2) / 1000) + " s ";
+  return (v.toFixed(2) / 1000) + ' s ';
 };
 
 function nFormatter(v, axis) {
-  return (v / 1000) + "k";
+  return (v / 1000) + 'k';
 };
 
 function loadCharts () {
 
-  $.plot($("#postchart"),
+  $.plot($('#postchart'),
          [
-           { data: chartData['scalaFiboList'], label: "fiboList(x)", color: "#aaff00"},
-           { data: chartData['scalaFiboLast'], label: "fiboLast(x)", color: "#00ff00" },
-           { data: chartData['clojureFiboList'], label: "(fibo-list x)", color: "#00ccee" },
-           { data: chartData['clojureFiboLast'], label: "(fibo-last x)", color: "#0066ff" },
+           { data: chartData['scalaFiboList'], label: 'fiboList(x)', color: '#aaff00'},
+           { data: chartData['scalaFiboLast'], label: 'fiboLast(x)', color: '#00ff00' },
+           { data: chartData['clojureFiboList'], label: '(fibo-list x)', color: '#00ccee' },
+           { data: chartData['clojureFiboLast'], label: '(fibo-last x)', color: '#0066ff' },
          ],
          {
            series: {
