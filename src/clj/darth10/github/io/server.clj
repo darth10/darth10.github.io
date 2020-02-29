@@ -77,7 +77,8 @@
       (load-plugins)
       (swap! plugins-loaded? not))
     (compile-all-assets :reload? false)
-    (for [dir ["content" "themes"]]
+    (for [dir ["content" "themes"
+               (path "src" "js") (path "src" "scss")]]
       (start-watcher! dir ignored-files compile-all-assets))))
 
 (defonce server (atom []))
