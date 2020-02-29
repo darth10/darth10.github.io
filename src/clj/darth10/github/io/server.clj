@@ -9,6 +9,7 @@
             [cryogen-core.watcher :refer [start-watcher!]]
             [darth10.github.io.reload :refer [ws-handler reload-page]]
             [darth10.github.io.scss :refer [compile-scss->css!]]
+            [darth10.github.io.webpack :refer [run-webpack!]]
             [hawk.core :as hawk]
             [ring.util.response :refer [redirect file-response]]
             [ring.util.codec :refer [url-decode]]
@@ -61,6 +62,7 @@
   (let [config (resolve-config)]
     (compile-assets config)
     (compile-scss->css! config)
+    (run-webpack!)
     (when reload? (reload-page))))
 
 (defn init []
