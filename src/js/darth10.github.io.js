@@ -1,3 +1,5 @@
+import './../scss/darth10.github.io.scss';
+
 import turbolinks from 'turbolinks';
 
 function initHighlighting() {

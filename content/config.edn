@@ -13,7 +13,6 @@
  :rss-filters        ["cryogen"]
  :recent-posts       3
  :post-date-format   "yyyy-MM-dd"
- :sass-src           ["scss"]
  :theme              "blue"
  :resources          ["img"]
  :keep-files         [".git", "LICENSE.md"]
