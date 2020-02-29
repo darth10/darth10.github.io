@@ -1,4 +1,4 @@
-(defproject darth10-github-io "1.0.0"
+(defproject darth10-github-io "1.1.0"
   :description "Code for darth10.github.io"
   :url "https://github.com/darth10/darth10.github.io"
   :source-paths ["src/clj"]
