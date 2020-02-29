@@ -59,7 +59,13 @@
 (defonce plugins-loaded? (atom false))
 
 (defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
-  (let [config (resolve-config)]
+  (let [config (resolve-config)
+        create-dir #(->> % (path "themes" (:theme config))
+                         java.io.File. .mkdir)]
+    ;; Directories themes/*/css and themes/*/js need to be
+    ;; created or compile-assets will fail.
+    (create-dir "css")
+    (create-dir "js")
     (compile-assets config)
     (compile-scss->css! config)
     (run-webpack!)
