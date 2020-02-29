@@ -48,7 +48,7 @@ module.exports = [{
     context: path.resolve(__dirname, 'src/js'),
     output: {
       path: path.resolve(__dirname, 'public/posts/'),
-      filename: '[name]/[name].min.js'
+      filename: '[name]/post.min.js'
     },
     module: {
       rules: [

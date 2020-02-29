@@ -164,4 +164,4 @@ spot a `using System.Linq;` statement in a program, you should think twice about
 the problem you're trying to solve. There are definitely good reasons to use
 LINQ, but performance shouldn't be one of them.
 
-<script type="text/javascript" src="linq-is-not-quick.min.js" defer></script>
+<script type="text/javascript" src="post.min.js" defer></script>
