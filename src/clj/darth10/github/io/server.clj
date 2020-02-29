@@ -53,7 +53,9 @@
   (wrap-subdirectories routes))
 
 (defn reload-handler [_]
-  {:body (slurp (path "content" "livereload.js"))
+  ;; Serve livereload.js from npm modules.
+  {:body (slurp (path "node_modules" "livereload-js" "dist"
+                      "livereload.min.js"))
    :status 200})
 
 (defonce plugins-loaded? (atom false))
