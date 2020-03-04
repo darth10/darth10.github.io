@@ -20,7 +20,8 @@ To solve the expression problem, you should:
 1. Retain static type safety.
 1. Not recompile existing code.
 
-That seems simple enough. For example, let's say we're defining types and
+That seems simple enough. As an example, let's say we're implementing
+_expression trees_<sup><a href="#ref2">[2]</a></sup> by defining types and
 operations to represent arithmetic expressions. A numeric literal can be
 represented by a `Const` type and an `Add` type can represent an addition of two
 expressions. Let's define an operation to evaluate the result of an expression.
@@ -35,9 +36,9 @@ TODO Clojure has [multimethods](https://clojure.org/reference/multimethods).
 TODO [in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
 
 Is it possible to implement a solution in C#? If we define the types `Const` and
-`Add` to implement an interface `IExp`. This interface would define `Eval` as a
+`Add` to implement an interface `IExpr`. This interface would define `Eval` as a
 method. This would make it easy to add a new type `Mult`, but adding a new
-method `View` in the interface `IExp` would require changes to all existing
+method `View` in the interface `IExpr` would require changes to all existing
 types. So, it's easy to add new types with this approach, but it's not possible
 to add new operations without changing and recompiling existing definitions.
 
@@ -152,17 +153,24 @@ var a = new ...;
 // => ((7 * 2) + (2 * 3))
 ```
 
-TODO _open classes_<sup><a href="#ref1">[2]</a></sup>
+TODO _open classes_<sup><a href="#ref3">[3]</a></sup>
 
 
 But, they cannot span multiple assemblies. Also, must be same namespace.
+
+Sort of cheating, as partial classes get compiled into the same class in the
+assembly.
 
 ### References
 1. <a id="ref1"
    href="http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt"
    target="_blank">
    The Expression Problem</a> -  Wadler, Philip (1998).
-2. <a id="ref2"
+1. <a id="ref2"
+   href="https://web.archive.org/web/20170119094603/http://www.brpreiss.com/books/opus5/html/page264.html"
+   target="_blank">
+   Expression Trees</a> -  Preiss, Bruno R. (1998).
+1. <a id="ref3"
    href="https://people.csail.mit.edu/dnj/teaching/6898/papers/multijava.pdf"
    target="_blank">
    MultiJava: Modular Open Classes and Symmetric Multiple Dispatch for Java
