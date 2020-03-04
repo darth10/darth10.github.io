@@ -30,6 +30,10 @@ how easy would it be to add a new type `Mult` to represent multiplication? Does
 adding these new types and operations require recompilation or remove type
 safety from the solution?
 
+TODO Clojure has [multimethods](https://clojure.org/reference/multimethods).
+
+TODO [in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
+
 Is it possible to implement a solution in C#? If we define the types `Const` and
 `Add` to implement an interface `IExp`. This interface would define `Eval` as a
 method. This would make it easy to add a new type `Mult`, but adding a new
@@ -95,7 +99,7 @@ public partial interface IExpr
 }
 ```
 
-TODO
+TODO compiler errors now
 
 ```csharp
 public partial class Const
@@ -136,7 +140,7 @@ public partial class Mult
 }
 ```
 
-TODO
+TODO can be in separate files. Let's try it
 
 ```csharp
 var a = new ...;
@@ -151,7 +155,7 @@ var a = new ...;
 TODO _open classes_<sup><a href="#ref1">[2]</a></sup>
 
 
-But, they cannot span multiple assemblies.
+But, they cannot span multiple assemblies. Also, must be same namespace.
 
 ### References
 1. <a id="ref1"
@@ -159,7 +163,7 @@ But, they cannot span multiple assemblies.
    target="_blank">
    The Expression Problem</a> -  Wadler, Philip (1998).
 2. <a id="ref2"
-   href="http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt"
+   href="https://people.csail.mit.edu/dnj/teaching/6898/papers/multijava.pdf"
    target="_blank">
    MultiJava: Modular Open Classes and Symmetric Multiple Dispatch for Java
    </a> - Clifton, Curtis; Leavens, Gary T.; Chambers, Craig; Millstein, Todd (2000).
