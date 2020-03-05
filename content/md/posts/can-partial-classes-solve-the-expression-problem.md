@@ -3,38 +3,37 @@
  :layout :post
  :tags ["Solving the expression problem"]}
 
-Programmers and programming language designers are always designing abstractions
-over types and operations to work with these types. It's the essence of
-developing features in working software. The _expression problem_<sup><a href="#ref1">[1]</a></sup>
-asks how easy it is to define these abstractions in a given programming language
-or paradigm, and is stated as:
+Programmers are always defining types and operations to use these types.
+It's the essence of developing features in working software. The
+_expression problem_<sup><a href="#ref1">[1]</a></sup> asks how easy it is to
+define these abstractions in a given programming language or paradigm, and is
+stated as follows:
 
 > _"The goal is to define a datatype by cases, where one can add new cases to the_
 _datatype and new functions over the datatype, without recompiling existing_
 _code, and while retaining static type safety (e.g., no casts)."_
 
 To solve the expression problem, you should:
-1. Be able to add new _data types_, or simply _types_.
-1. Be able to add new _functions_. These are also called _operations_ over the
-   defined types.
+1. Add new _data types_, or simply _types_.
+1. Add new _functions_, or _operations_ over the defined types.
 1. Retain static type safety.
 1. Not recompile existing code.
-
-That seems simple enough. As an example, let's say we're implementing
-_expression trees_<sup><a href="#ref2">[2]</a></sup> by defining types and
-operations to represent arithmetic expressions. A numeric literal can be
-represented by a `Const` type and an `Add` type can represent an addition of two
-expressions. Let's define an operation to evaluate the result of an expression.
-We'll call this operation `Eval`. Now, how do we define these abstractions so
-that it's possible to add a new operation `View` to print an expression? Also,
-how easy would it be to add a new type `Mult` to represent multiplication? Does
-adding these new types and operations require recompilation or remove type
-safety from the solution?
 
 TODO Clojure has [multimethods](https://clojure.org/reference/multimethods).
 
 TODO [in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
 
+As an example, let's say we're implementing
+_expression trees_<sup><a href="#ref2">[2]</a></sup> by defining types and
+operations to represent arithmetic expressions. A numeric literal can be
+represented by a `Const` type and an `Add` type can represent an addition of two
+expressions. Let's define an operation to evaluate the result of an expression.
+We'll call this operation `Eval`. Now, without recompiling existing code or
+removing type safety, is it possible to make the following changes?
+1. Add a new operation `View` to print an expression.
+1. Add a new type `Mult` to represent multiplication of two expressions.
+
+That seems simple enough.
 Is it possible to implement a solution in C#? If we define the types `Const` and
 `Add` to implement an interface `IExpr`. This interface would define `Eval` as a
 method. This would make it easy to add a new type `Mult`, but adding a new
@@ -155,6 +154,7 @@ var a = new ...;
 
 TODO _open classes_<sup><a href="#ref3">[3]</a></sup>
 
+TODO link to all code
 
 But, they cannot span multiple assemblies. Also, must be same namespace.
 
