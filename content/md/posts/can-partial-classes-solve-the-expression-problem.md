@@ -6,30 +6,31 @@
 Programmers are always defining types and operations to use these types.
 It's the essence of developing features in working software. The
 _expression problem_<sup><a href="#ref1">[1]</a></sup> asks how easy it is to
-define these abstractions in a given programming language or paradigm, and is
+define types and operations in a given programming language or paradigm, and is
 stated as follows:
 
-> _"The goal is to define a datatype by cases, where one can add new cases to the_
-_datatype and new functions over the datatype, without recompiling existing_
+> _"The goal is to define a datatype by cases, where one can add new cases to_
+_the datatype and new functions over the datatype, without recompiling existing_
 _code, and while retaining static type safety (e.g., no casts)."_
 
-To solve the expression problem, you should:
+To elaborate, a set of definitions or abstractions can claim to have solved the
+expression problem if it is possible to:
 1. Add new _data types_, or simply _types_.
 1. Add new _functions_, or _operations_ over the defined types.
+1. Not recompile existing code while adding new types or operations.
 1. Retain static type safety.
-1. Not recompile existing code.
 
 TODO Clojure has [multimethods](https://clojure.org/reference/multimethods).
 
 TODO [in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
 
 As an example, let's say we're implementing
-_expression trees_<sup><a href="#ref2">[2]</a></sup> by defining types and
-operations to represent arithmetic expressions. A numeric literal can be
-represented by a `Const` type and an `Add` type can represent an addition of two
-expressions. Let's define an operation to evaluate the result of an expression.
-We'll call this operation `Eval`. Now, without recompiling existing code or
-removing type safety, is it possible to make the following changes?
+_expression trees_<sup><a href="#ref2">[2]</a></sup>, which are used to
+represent arithmetic expressions. A numeric literal can be represented by a
+`Const` type and an `Add` type can represent an addition of two expressions.
+Let's define an operation to evaluate the result of an expression. We'll call
+this operation `Eval`. Now, without recompiling existing code or compromising
+type safety, is it possible to make the following changes?
 1. Add a new operation `View` to print an expression.
 1. Add a new type `Mult` to represent multiplication of two expressions.
 
