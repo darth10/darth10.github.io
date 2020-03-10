@@ -3,7 +3,7 @@
  :layout :post
  :tags ["Solving the expression problem"]}
 
-TODO intro and previous post
+TODO intro and previous post(s)
 
 [Extension methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods)
 in C# can be used to defines operation over a given type without modifying the
