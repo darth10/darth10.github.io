@@ -151,3 +151,7 @@ getAlgebra x
 ```
 
 TODO conclusion
+
+### References (?)
+
+1. TODO
