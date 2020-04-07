@@ -62,15 +62,6 @@ e2 = mult (const 2)
                (const 3))
 ```
 
-TODO
-
-```haskell
-getAlgebra x
-  | x < 10    = const 2
-  | otherwise = add (const 4) (const 5)
-```
-
-
 TODO operations as typeclasses
 
 ```haskell
@@ -149,6 +140,14 @@ TODO
 ```haskell
 e1 :: Expr t => t
 e1 = Add (Const 4) (Const 5)    -- fails compilation
+```
+
+TODO
+
+```haskell
+getAlgebra x
+  | x < 10    = const 2
+  | otherwise = add (const 4) (const 5)
 ```
 
 TODO conclusion
