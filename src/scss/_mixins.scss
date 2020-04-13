@@ -17,3 +17,7 @@
 @mixin meta-font {
   font-size: 14px;
 }
+
+@mixin code-font {
+  font-family: Consolas,monaco,monospace;
+}

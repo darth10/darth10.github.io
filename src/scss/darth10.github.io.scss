@@ -22,12 +22,14 @@ pre {
   border-radius: 4px;
 
   code {
+    @include code-font;
     overflow-wrap: normal;
     white-space: pre;
   }
 }
 
 code {
+  @include code-font;
   color: #428bca;
 }
 
