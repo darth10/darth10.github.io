@@ -5,13 +5,15 @@
 
 Programmers are always defining types and operations to use these types.
 It's the essence of developing features in working software. The
-_expression problem_<sup><a href="#ref1">[1]</a></sup> asks how easy it is to
+_expression problem_<sup>[\[1\]](#ref-1)</sup> asks how easy it is to
 define types and operations in a given programming language or paradigm, and is
 stated as follows:
 
 > _"The goal is to define a datatype by cases, where one can add new cases to_
 _the datatype and new functions over the datatype, without recompiling existing_
 _code, and while retaining static type safety (e.g., no casts)."_
+
+<!--more-->
 
 To elaborate, a set of definitions or abstractions can claim to have solved the
 expression problem if it is possible to:
@@ -20,12 +22,19 @@ expression problem if it is possible to:
 1. Not recompile existing code while adding new types or operations.
 1. Retain static type safety.
 
-TODO Clojure has [multimethods](https://clojure.org/reference/multimethods).
-
-TODO [in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
+Programming languages generally provide several features to tackle the
+expression problem. These features have their trade-offs, just like the
+languages that provide them. Clojure, for example, has support for
+[multimethods][multimethods] that allow us to
+define any number of polymorphic functions that operate over a set of data
+types. Of course, Clojure is dynamically typed, which doesn't meet the
+requirement of static type safety by definition. On the other hand, most
+statically typed languages support interfaces that can be implemented by
+multiple data types. However, such implementations often make use of type
+casting, which is rather dubious for static type safety.
 
 As an example, let's say we're implementing
-_expression trees_<sup><a href="#ref2">[2]</a></sup>, which are used to
+_expression trees_<sup>[\[2\]](#ref-2)</sup>, which are used to
 represent arithmetic expressions. A numeric literal can be represented by a
 `Const` type and an `Add` type can represent an addition of two expressions.
 Let's define an operation to evaluate the result of an expression. We'll call
@@ -42,9 +51,13 @@ method `View` in the interface `IExpr` would require changes to all existing
 types. So, it's easy to add new types with this approach, but it's not possible
 to add new operations without changing and recompiling existing definitions.
 
+Another approach would be to use multiple interfaces for different operations 
+like `Eval` and `View`. These interfaces could then be 
+[implemented explicitly][explicit-interfaces] in types like
+`Const`, `Add` and `Mult`. However, this implementation would require type 
+casting, which doesn't really maintain static type safety.
 
-TODO
-[partial classes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods)
+TODO [partial classes][partial-classes]
 
 TODO
 
@@ -153,7 +166,7 @@ var a = new ...;
 // => ((7 * 2) + (2 * 3))
 ```
 
-TODO _open classes_<sup><a href="#ref3">[3]</a></sup>
+TODO _open classes_<sup>[\[3\]](#ref-3)</sup>
 
 TODO link to all code
 
@@ -163,17 +176,17 @@ Sort of cheating, as partial classes get compiled into the same class in the
 assembly.
 
 ### References
-1. <a id="ref1"
-   href="http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt"
-   target="_blank">
+1. <a name="ref-1" rel="nofollow" target="_blank" class="ref-link"
+   href="http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt">
    The Expression Problem</a> -  Wadler, Philip (1998).
-1. <a id="ref2"
-   href="https://web.archive.org/web/20170119094603/http://www.brpreiss.com/books/opus5/html/page264.html"
-   target="_blank">
+1. <a name="ref-2" rel="nofollow" target="_blank" class="ref-link"
+   href="https://web.archive.org/web/20170119094603/http://www.brpreiss.com/books/opus5/html/page264.html">
    Expression Trees</a> -  Preiss, Bruno R. (1998).
-1. <a id="ref3"
-   href="https://people.csail.mit.edu/dnj/teaching/6898/papers/multijava.pdf"
-   target="_blank">
+1. <a name="ref-3" rel="nofollow" target="_blank" class="ref-link"
+   href="https://people.csail.mit.edu/dnj/teaching/6898/papers/multijava.pdf">
    MultiJava: Modular Open Classes and Symmetric Multiple Dispatch for Java
    </a> - Clifton, Curtis; Leavens, Gary T.; Chambers, Craig; Millstein, Todd (2000).
 
+[multimethods]: https://clojure.org/reference/multimethods
+[explicit-interfaces]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation
+[partial-classes]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods
