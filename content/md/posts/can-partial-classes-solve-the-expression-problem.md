@@ -175,17 +175,19 @@ But, they cannot span multiple assemblies. Also, must be same namespace.
 Sort of cheating, as partial classes get compiled into the same class in the
 assembly.
 
-### References
-1. <a name="ref-1" rel="nofollow" target="_blank" class="ref-link"
+#### References
+
+1. <a name="ref-1" rel="nofollow" target="_blank"
    href="http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt">
    The Expression Problem</a> -  Wadler, Philip (1998).
-1. <a name="ref-2" rel="nofollow" target="_blank" class="ref-link"
+1. <a name="ref-2" rel="nofollow" target="_blank"
    href="https://web.archive.org/web/20170119094603/http://www.brpreiss.com/books/opus5/html/page264.html">
    Expression Trees</a> -  Preiss, Bruno R. (1998).
-1. <a name="ref-3" rel="nofollow" target="_blank" class="ref-link"
+1. <a name="ref-3" rel="nofollow" target="_blank"
    href="https://people.csail.mit.edu/dnj/teaching/6898/papers/multijava.pdf">
    MultiJava: Modular Open Classes and Symmetric Multiple Dispatch for Java
-   </a> - Clifton, Curtis; Leavens, Gary T.; Chambers, Craig; Millstein, Todd (2000).
+   </a> - Clifton, Curtis; Leavens, Gary T.; Chambers, Craig; Millstein, Todd
+   (2000).
 
 [multimethods]: https://clojure.org/reference/multimethods
 [explicit-interfaces]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation

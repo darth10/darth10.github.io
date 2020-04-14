@@ -7,11 +7,27 @@ function initHighlighting() {
   blocks.forEach.call(blocks, hljs.highlightBlock);
 };
 
-function addListeners(e) {
-  document.addEventListener(e, initHighlighting, false);
+// This is a workaround for an issue with Turbolinks.
+// See: https://github.com/turbolinks/turbolinks/issues/75
+function checkAndPreventOnAnchor (event) {
+  if (event.target.getAttribute('href').charAt(0) === '#') {
+    setTimeout(function() {
+      // This is needed to scroll in-page anchor links below the
+      // Bootstrap NavBar.
+      if (window.location.hash) {
+        scrollBy(0, -66);
+      }}, 10);
+    return event.preventDefault();
+  }
 };
 
-addListeners('turbolinks:load');
-addListeners('DOMContentLoaded');
+function addListeners(e, func) {
+  document.addEventListener(e, func, false);
+};
+
+addListeners('turbolinks:load', initHighlighting);
+addListeners('DOMContentLoaded', initHighlighting);
+
+addListeners('turbolinks:click', checkAndPreventOnAnchor);
 
 turbolinks.start();

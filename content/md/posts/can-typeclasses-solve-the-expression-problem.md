@@ -152,6 +152,6 @@ getAlgebra x
 
 TODO conclusion
 
-### References (?)
+#### References (?)
 
 1. TODO
