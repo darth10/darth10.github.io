@@ -1,5 +1,5 @@
 {:title "Can object algebras solve the expression problem?"
- :date "2020-03-10"
+ :date "2020-03-28"
  :layout :post
  :tags ["Solving the expression problem"]}
 

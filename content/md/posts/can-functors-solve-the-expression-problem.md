@@ -1,5 +1,5 @@
 {:title "Can functors solve the expression problem?"
- :date "2020-03-17"
+ :date "2020-04-12"
  :layout :post
  :tags ["Solving the expression problem"]}
 
