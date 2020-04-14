@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "Alegreya Sans";
+  src: url("https://db.onlinewebfonts.com/t/4a888da2b1d11ef95c86bc00f5904b3d.eot"); /* IE9*/
+  src: url("https://db.onlinewebfonts.com/t/4a888da2b1d11ef95c86bc00f5904b3d.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("https://db.onlinewebfonts.com/t/4a888da2b1d11ef95c86bc00f5904b3d.woff2") format("woff2"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/4a888da2b1d11ef95c86bc00f5904b3d.woff") format("woff"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/4a888da2b1d11ef95c86bc00f5904b3d.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+  url("https://db.onlinewebfonts.com/t/4a888da2b1d11ef95c86bc00f5904b3d.svg#Alegreya Sans") format("svg"); /* iOS 4.1- */
+}
+
+@font-face {
+  font-family: "Consolas";
+  src: url("https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot"); /* IE9*/
+  src: url("https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2") format("woff2"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff") format("woff"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+  url("https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas") format("svg"); /* iOS 4.1- */
+}
+
 @mixin border {
   border-bottom: 1px solid #dbdbdb;
 }
