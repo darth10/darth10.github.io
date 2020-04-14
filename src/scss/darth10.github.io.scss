@@ -16,14 +16,15 @@ body {
 }
 
 pre {
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
   padding: inherit;
   border: none;
   border-radius: 4px;
 
   code {
     @include code-font;
-    overflow-wrap: normal;
     white-space: pre;
   }
 }
