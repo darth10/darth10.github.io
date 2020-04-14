@@ -18,14 +18,14 @@ body {
 pre {
   overflow-x: scroll;
   overflow-y: hidden;
-  white-space: nowrap;
+  white-space: pre;
   padding: inherit;
   border: none;
   border-radius: 4px;
 
   code {
     @include code-font;
-    white-space: pre;
+    word-wrap: unset;
   }
 }
 
