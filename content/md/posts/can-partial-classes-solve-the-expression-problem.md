@@ -25,21 +25,21 @@ expression problem if it is possible to:
 Programming languages generally provide several features to tackle the
 expression problem. These features have their trade-offs, just like the
 languages that provide them. Clojure, for example, has support for
-[multimethods][multimethods] that allow us to
-define any number of polymorphic functions that operate over a set of data
-types. Of course, Clojure is dynamically typed, which doesn't meet the
-requirement of static type safety by definition. On the other hand, most
-statically typed languages support interfaces that can be implemented by
-multiple data types. However, such implementations often make use of type
-casting, which is rather dubious for static type safety.
+[multimethods][multimethods] that allow us to define any number of polymorphic
+functions that operate over a set of data types. Of course, Clojure is
+dynamically typed, which doesn't meet the requirement of static type safety by
+definition. On the other hand, most statically typed languages support
+interfaces that can be implemented by multiple data types. However, such
+implementations often make use of type casting, which is rather dubious for
+static type safety.
 
-As an example, let's say we're implementing
-_expression trees_<sup>[\[2\]](#ref-2)</sup>, which are used to
-represent arithmetic expressions. A numeric literal can be represented by a
-`Const` type and an `Add` type can represent an addition of two expressions.
-Let's define an operation to evaluate the result of an expression. We'll call
-this operation `Eval`. Now, without recompiling existing code or compromising
-type safety, is it possible to make the following changes?
+As an example, let's say we're implementing 
+_expression trees_<sup>[\[2\]](#ref-2)</sup>, which are used to represent
+arithmetic expressions. A numeric literal can be represented by a `Const` type
+and an `Add` type can represent an addition of two expressions. Let's define an
+operation to evaluate the result of an expression. We'll call this operation
+`Eval`. Now, without recompiling existing code or compromising type safety, is
+it possible to make the following changes?
 1. Add a new operation `View` to print an expression.
 1. Add a new type `Mult` to represent multiplication of two expressions.
 
@@ -57,9 +57,13 @@ like `Eval` and `View`. These interfaces could then be
 `Const`, `Add` and `Mult`. However, this implementation would require type 
 casting, which doesn't really maintain static type safety.
 
-TODO [partial classes][partial-classes]
+Let's try using [partial classes][partial-classes] to implement a solution.
+Essentially, partial classes allow the definition of a single class to be spread
+over multiple definitions or files through use of the `partial` qualifier.
+Interfaces can also be defined using the `partial` qualifier.
 
-TODO
+Firstly, let's define the `IExpr` interface. This interface will declare a
+single method `Eval`.
 
 ```csharp
 public partial interface IExpr
@@ -68,7 +72,8 @@ public partial interface IExpr
 }
 ```
 
-TODO
+The types `Const` and `Add` can now be defined as partial classes that implement
+this interface.
 
 ```csharp
 public partial class Const : IExpr
@@ -89,7 +94,11 @@ public partial class Add : IExpr
 }
 ```
 
-TODO
+A `Const` expression is defined to wrap a single `double` value, and an `Add`
+expression contains two properties `Left` and `Right` that are expressions
+themselves. Of course, this code won't compile as the `Eval` method isn't
+implemented by the `Const` and `Add` types. Let's go ahead and implement this
+method, but in separate definitions using `partial` as follows:
 
 ```csharp
 public partial class Const
@@ -104,7 +113,9 @@ public partial class Add
 }
 ```
 
-TODO
+So, the `Eval` operation is now implemented by the `Const` and `Add` types.
+Let's declare the `View` method in the `IExpr` interface by using a separate
+`partial` definition.
 
 ```csharp
 public partial interface IExpr
@@ -113,7 +124,9 @@ public partial interface IExpr
 }
 ```
 
-TODO compiler errors now
+Now, the compiler complains that the `Const` and `Add` types don't implement the
+`View` method. Similar to how the `Eval` method was implemented, the `View`
+method can be implemented in separate `partial` definitions as follows:
 
 ```csharp
 public partial class Const
@@ -129,7 +142,10 @@ public partial class Add
 }
 ```
 
-TODO
+Great! We can add an operation without modifying the existing definitions of
+`Const` and `Add`. If we had to implement a new type `Mult` to represent
+arithmetic multiplication of two expressions, we can easily define `Mult` as a
+partial class that implements the `IExpr` interface as follows:
 
 ```csharp
 public partial class Mult : IExpr
@@ -154,26 +170,28 @@ public partial class Mult
 }
 ```
 
-TODO can be in separate files. Let's try it
+That was real easy! It was almost as easy as defining the `Const` and `Add`
+types along with their implementations of `Eval` and `View`. In fact, it's easy
+to define types and independent operations as partial classes because they're
+actually _open classes_<sup>[\[3\]](#ref-3)</sup>.
 
-```csharp
-var a = new ...;
+It's worth noting that all definitions of a partial class are compiled into a
+single class in a given assembly. So, it can be argued that adding new
+definitions to an existing partial class causes recompilation of the entire
+class. While this is definitely true, existing methods in the class will produce
+the same compilation output as long as they haven't been modified. This way, the
+effect of not recompiling existing code is still very observable.
 
-....Eval();
-// => 20
+To truly avoid recompilation of a partial class after adding a new definition,
+the new definition would have to be in a different assembly. Unfortunately, this
+is not really possible as one of the limitations of parital classes is that they
+cannot span multiple assemblies or namespaces.
 
-....View();
-// => ((7 * 2) + (2 * 3))
-```
+Despite certain limitations, partial classes and interfaces can be used this way
+to implement an adequate solution to the expression problem in C#.
 
-TODO _open classes_<sup>[\[3\]](#ref-3)</sup>
-
-TODO link to all code
-
-But, they cannot span multiple assemblies. Also, must be same namespace.
-
-Sort of cheating, as partial classes get compiled into the same class in the
-assembly.
+The code in this post can be found [here][implementation-tree] along with 
+[relevant tests][tests-tree].
 
 #### References
 
@@ -192,3 +210,5 @@ assembly.
 [multimethods]: https://clojure.org/reference/multimethods
 [explicit-interfaces]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation
 [partial-classes]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods
+[implementation-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses 
+[tests-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses.Tests 
