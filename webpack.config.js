@@ -36,9 +36,10 @@ module.exports = [{
     ]
   },
   plugins: [
-    new CopyPlugin([{
-      from: '*.min.js'
-    }])
+    new CopyPlugin({
+      patterns: [
+        { from: '*.min.js'}
+      ]})
   ]}, {
     mode: mode,
     entry: {
