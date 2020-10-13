@@ -3,10 +3,10 @@
   :url "https://github.com/darth10/darth10.github.io"
   :source-paths ["src/clj"]
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [info.sunng/ring-jetty9-adapter "0.12.5"]
-                 [ring/ring-devel "1.8.0"]
+                 [info.sunng/ring-jetty9-adapter "0.14.0"]
+                 [ring/ring-devel "1.8.2"]
                  [cheshire "5.10.0"]
-                 [compojure "1.6.1"]
+                 [compojure "1.6.2"]
                  [cryogen-core "0.3.1"]
                  [cryogen-markdown "0.1.11"]
                  [hawk "0.2.11"]
