@@ -3,15 +3,16 @@
  :layout :post
  :tags ["Solving the expression problem"]}
 
-TODO intro and previous post(s)
+Let's explore how [extension methods][extension-methods] in C# can solve the
+_expression problem_. For an introduction to the expression problem, take a look
+at [the previous post](../can-partial-classes-solve-the-expression-problem') in
+[this series](../../tags/Solving%20the%20expression%20problem). Extension
+methods are essentially used to define operations over a given type without
+modifying the original definition of the type.
 
-[Extension methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods)
-in C# can be used to defines operation over a given type without modifying the
-definition of the type. Let's try to use extension methods over interfaces to
-implement a solution to the expression problem. First, we define `IExpr`
-as a marker interface and implement it in the `Const` and `Add` types.
-
-TODO code, almost like we did before
+First, we define `IExpr` as a marker interface and implement it in the `Const`
+and `Add` types. The implementation of `Const` and `Add` here is identical to
+that in the previous post.
 
 ```csharp
 public interface IExpr { }
@@ -34,7 +35,10 @@ public class Add : IExpr
 }
 ```
 
-TODO
+The `Eval` operation is now defined as an extension method over the `IExpr`
+type. The implementation of `Eval` here uses a `switch` expression. Note that 
+the class containing this extension method may or may not be in the same
+namespace as the `IExpr`, `Const` and `Add` types.
 
 ```csharp
 public static class IExprExtensions
@@ -47,7 +51,8 @@ public static class IExprExtensions
 }
 ```
 
-TODO in a different namespace
+The `View` operation is also defined as an extension method, but in a different
+namespace.
 
 ```csharp
 public static class IExprExtensions
@@ -60,7 +65,7 @@ public static class IExprExtensions
 }
 ```
 
-TODO
+Now, let's try adding a new `Mult` type that implements the `IExpr` interface.
 
 ```csharp
 public class Mult : IExpr
@@ -73,7 +78,10 @@ public class Mult : IExpr
 }
 ```
 
-TODO
+Again, the definition of the `Mult` type is identical to that in the previous
+post. However, the extension methods defined previously are not aware of this
+type, and so new extension methods that wrap around the previous definitions
+will be needed.
 
 ```csharp
 public static class IExprExtensions
@@ -93,16 +101,31 @@ public static class IExprExtensions
 }
 ```
 
-TODO limitations as namespaces
+While this does satisfy the compiler, the following code will raise an exception:
 
 ```csharp
-var a = new ...;
+var constExpr1 = new Const(7);
+var constExpr2 = new Const(2);
+var constExpr3 = new Const(3);
 
-....Eval();    // throws NotImplementedException 
+var multExpr1 = new Mult(constExpr1, constExpr2);
+var multExpr2 = new Mult(constExpr2, constExpr3);
 
+var addExpr = new Add(multExpr1, multExpr2);
+
+addExpr.Eval();    // throws NotImplementedException 
 ```
 
-TODO doesn't work, also match performs type casting 
+This doesn't work as the `Eval` call above invokes the first extension method we
+defined, which is still unaware of the `Mult` type. We're also overlooking an
+important detail about `switch` expressions - they perform type casting at
+runtime! This violates the type safety requirement of the expression problem and
+unfortunately concludes that extension methods _cannot_ solve the expression
+problem.
 
-#### References (?)
-1. TODO
+The code in this post can be found [here][implementation-tree] along with 
+[relevant tests][tests-tree].
+
+[extension-methods]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods
+[implementation-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/Extensions
+[tests-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/Extensions.Tests
