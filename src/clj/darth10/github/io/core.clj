@@ -2,7 +2,7 @@
   (:require [cryogen-core.plugins :refer [load-plugins]]
             [darth10.github.io.server :refer [compile-all-assets]]))
 
-(defn -main []
+(defn compile [& _]
   (load-plugins)
   (compile-all-assets :reload? false)
   (System/exit 0))
