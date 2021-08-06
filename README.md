@@ -10,7 +10,6 @@ To get started:
 
 1. Install all dependencies.
    ```sh
-   lein deps
    npm install
    ```
 1. Start the development server by calling
