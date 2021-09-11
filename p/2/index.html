@@ -56,6 +56,34 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>The WebBrowser nightmare</h2>
+        <div class="post-meta">
+            
+            <div class="date">23 September 2012</div>
+        </div>
+    </div>
+    <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p></p>
+    <a href="/posts/the-webbrowser-nightmare/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
+        <h2>Abstract and parameterized types</h2>
+        <div class="post-meta">
+            
+            <div class="date">16 August 2012</div>
+        </div>
+    </div>
+    <p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p><p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it. The <code>apply</code> method in companion objects is the best place to start. Here's an example from the implementation of the <code>List</code> class in the Scala library.</p><pre><code class="scala">object List {
+
+  // ...
+
+  def apply[A](xs: A*): List[A] = xs.toList
+}
+</code></pre>
+    <a href="/posts/abstract-and-parameterized-types/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>61 byte selection sort</h2>
         <div class="post-meta">
             
@@ -93,32 +121,19 @@ Welcome to Scapy (2.3.3)
     <a href="/posts/network-packets-with-py/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-preview-header">
-        <h2>__name__ and HTTP servers</h2>
-        <div class="post-meta">
-            
-            <div class="date">13 May 2009</div>
-        </div>
-    </div>
-    <p>The <code>__name__</code> built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.</p><p>Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.</p><pre><code class="python">if __name__ == "__main__":
-    print "Just got executed!"
-else:
-    print "Got imported! I'm so cool!"
-</code></pre>
-    <a href="/posts/name-and-http-servers/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
         <a class="left" href="/">&laquo; Prev</a>
         
         
+        <a class="right" href="/p/3/">Next &raquo;</a>
+        
     </div>
 </div>
 </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2020 Akhil Wali
+        <footer>Copyright &copy; 2021 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
                 target="_blank" rel="noreferrer">GPLv2 License</a>)
             <p style="text-align: center;">Powered by

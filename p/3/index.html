@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>darth10.github.io: Tags</title>
-    <link rel="canonical" href="https://darth10.github.io/tags/">
+    <title>darth10.github.io</title>
+    <link rel="canonical" href="https://darth10.github.io">
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -46,16 +46,37 @@
     <div class="container">
         <div class="row">
             <div id="content" class="container-fluid">
-<div id="tags-page">
-    <div id="page-header">
-        <h2>Tags</h2>
-    </div>
 
-    <ul>
+<a href="https://xkcd.com/1312/" target="_blank" rel="noreferrer">
+    <img src="https://imgs.xkcd.com/comics/haskell.png" alt="https://xkcd.com/1312/" class="mx-auto" />
+</a>
+<br>
+<hr>
+
+<div id="post">
+    
+    <div class="post-preview-header">
+        <h2>__name__ and HTTP servers</h2>
+        <div class="post-meta">
+            
+            <div class="date">13 May 2009</div>
+        </div>
+    </div>
+    <p>The <code>__name__</code> built-in Python variable which describes exactly that - it's the name of the module during runtime. Python modules use this variable to perform a particular action when the module is run, and probably do something else when imported by another module. It also facilitates module testing if you think about it.</p><p>Ideally, every Python module that is intended to be reused must have something like this in it, preferably at the end.</p><pre><code class="python">if __name__ == "__main__":
+    print "Just got executed!"
+else:
+    print "Got imported! I'm so cool!"
+</code></pre>
+    <a href="/posts/name-and-http-servers/">Continue reading &#8594;</a>
+    <hr>
+    
+
+    <div id="prev-next">
         
-        <li><a href="/tags/Solving the expression problem/">Solving the expression problem</a></li>
+        <a class="left" href="/p/2/">&laquo; Prev</a>
         
-    </ul>
+        
+    </div>
 </div>
 </div>
         </div><!--/.row -->

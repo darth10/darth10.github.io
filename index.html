@@ -56,6 +56,46 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>Can extension methods solve the expression problem?</h2>
+        <div class="post-meta">
+            
+            <div class="date">14 March 2020</div>
+        </div>
+    </div>
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../can-partial-classes-solve-the-expression-problem" _="_">the previous post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><pre><code class="csharp">public interface IExpr { }
+
+public class Const : IExpr
+{
+    public double Value { get; }
+
+    public Const(double value) =&gt;
+        Value = value;
+}
+
+public class Add : IExpr
+{
+    public IExpr Left { get; }
+    public IExpr Right { get; }
+
+    public Add(IExpr left, IExpr right) =&gt;
+        (Left, Right) = (left, right);
+}
+</code></pre>
+    <a href="/posts/can-extension-methods-solve-the-expression-problem/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
+        <h2>Can partial classes solve the expression problem?</h2>
+        <div class="post-meta">
+            
+            <div class="date">4 March 2020</div>
+        </div>
+    </div>
+    <p>Programmers are always defining types and operations to use these types. It's the essence of developing features in working software. The <i>expression problem</i><sup><a href="#ref-1">[1]</a></sup> asks how easy it is to define types and operations in a given programming language or paradigm, and is stated as follows:</p><blockquote><p> <i>"The goal is to define a datatype by cases, where one can add new cases to</i> <i>the datatype and new functions over the datatype, without recompiling existing</i> <i>code, and while retaining static type safety (e.g., no casts)."</i> </p></blockquote><p></p>
+    <a href="/posts/can-partial-classes-solve-the-expression-problem/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>LINQ Is Not Quick</h2>
         <div class="post-meta">
             
@@ -77,34 +117,6 @@
     <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-preview-header">
-        <h2>The WebBrowser nightmare</h2>
-        <div class="post-meta">
-            
-            <div class="date">23 September 2012</div>
-        </div>
-    </div>
-    <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p></p>
-    <a href="/posts/the-webbrowser-nightmare/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-preview-header">
-        <h2>Abstract and parameterized types</h2>
-        <div class="post-meta">
-            
-            <div class="date">16 August 2012</div>
-        </div>
-    </div>
-    <p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p><p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it. The <code>apply</code> method in companion objects is the best place to start. Here's an example from the implementation of the <code>List</code> class in the Scala library.</p><pre><code class="scala">object List {
-
-  // ...
-
-  def apply[A](xs: A*): List[A] = xs.toList
-}
-</code></pre>
-    <a href="/posts/abstract-and-parameterized-types/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -115,7 +127,7 @@
 </div>
 </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2020 Akhil Wali
+        <footer>Copyright &copy; 2021 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
                 target="_blank" rel="noreferrer">GPLv2 License</a>)
             <p style="text-align: center;">Powered by
