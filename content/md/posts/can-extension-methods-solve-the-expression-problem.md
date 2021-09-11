@@ -5,8 +5,8 @@
 
 Let's explore how [extension methods][extension-methods] in C# can solve the
 _expression problem_. For an introduction to the expression problem, take a look
-at [the previous post](../can-partial-classes-solve-the-expression-problem') in
-[this series](../../tags/Solving%20the%20expression%20problem). Extension
+at [my first post](../../posts/can-partial-classes-solve-the-expression-problem/)
+in [this series](../../tags/Solving%20the%20expression%20problem). Extension
 methods are essentially used to define operations over a given type without
 modifying the original definition of the type.
 
