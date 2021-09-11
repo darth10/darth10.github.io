@@ -62,25 +62,7 @@
             <div class="date">14 March 2020</div>
         </div>
     </div>
-    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../can-partial-classes-solve-the-expression-problem" _="_">the previous post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><pre><code class="csharp">public interface IExpr { }
-
-public class Const : IExpr
-{
-    public double Value { get; }
-
-    public Const(double value) =&gt;
-        Value = value;
-}
-
-public class Add : IExpr
-{
-    public IExpr Left { get; }
-    public IExpr Right { get; }
-
-    public Add(IExpr left, IExpr right) =&gt;
-        (Left, Right) = (left, right);
-}
-</code></pre>
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at the <a href="../../posts/can-partial-classes-solve-the-expression-problem/">first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><p></p>
     <a href="/posts/can-extension-methods-solve-the-expression-problem/">Continue reading &#8594;</a>
     <hr>
     
