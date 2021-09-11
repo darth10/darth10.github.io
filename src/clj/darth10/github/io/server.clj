@@ -105,5 +105,6 @@
     (.stop reload-instance)
     (swap! server empty)))
 
-;; (start-server)
-;; (stop-server)
+(comment
+ (start-server)
+ (stop-server))
