@@ -179,15 +179,15 @@ It's worth noting that all definitions of a partial class are compiled into a
 single class in a given assembly. So, it can be argued that adding new
 definitions to an existing partial class causes recompilation of the entire
 class. While this is definitely true, existing methods in the class will produce
-the same compilation output as long as they haven't been modified. This way, the
-effect of not recompiling existing code is still very observable.
+the same compilation output as long as they haven't been modified. Partial
+classes thus have the effect of not recompiling existing code.
 
 To truly avoid recompilation of a partial class after adding a new definition,
 the new definition would have to be in a different assembly. Unfortunately, this
 is not really possible as one of the limitations of parital classes is that they
 cannot span multiple assemblies or namespaces.
 
-Despite certain limitations, partial classes and interfaces can be used this way
+Despite these limitations, partial classes and interfaces can be used this way
 to implement an adequate solution to the expression problem in C#.
 
 The code in this post can be found [here][implementation-tree] along with 
