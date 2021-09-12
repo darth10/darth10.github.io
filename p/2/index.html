@@ -56,6 +56,17 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>Lazy sequences and streams</h2>
+        <div class="post-meta">
+            
+            <div class="date">25 January 2013</div>
+        </div>
+    </div>
+    <p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory. It would be wasteful to realize an entire infinite sequence before even using it. The basic idea is to only call the function that generates the sequence when needed, and cache the results. With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p><p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p><p></p>
+    <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>The WebBrowser nightmare</h2>
         <div class="post-meta">
             
@@ -94,31 +105,6 @@
 {for(int*c=b,t;c&gt;a;)if(t=*c--,*c&gt;t)c[1]=*c,*c=t,c=b;}
 </code></pre><p>This can be made even smaller using recursion and by inferring the type specifiers of global object declarations, which is a GCC hack. In the following function, <code>n</code> is the number of elements in the array <code>a</code>.</p>
     <a href="/posts/byte-selection-sort/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-preview-header">
-        <h2>Network packets with Python</h2>
-        <div class="post-meta">
-            
-            <div class="date">19 May 2009</div>
-        </div>
-    </div>
-    <p>Next week, I'll have to start a project on implementing <a href="https://en.wikipedia.org/wiki/Routing_Information_Protocol">RIP (Routing Information Protocol)</a> using UDP sockets in C. I needed a quick way to get the byte structure of RIP packets, and decided to use <a href="http://www.secdev.org/projects/scapy/">scapy</a>. It's quite a handy tool and has a simple interface, which is nothing more than an extended Python shell. Auto-completion is supported out-of-the-box, which is good news for all the command-line enthusiasts out there. Here's how we dump an RIP packet straight to a PDF file.</p><pre><code class="python">$ scapy
-Welcome to Scapy (2.3.3)
-&gt;&gt;&gt; entry = RIPEntry(addr='192.168.1.10', nextHop='192.168.1.1', mask='255.255.255.0')
-&gt;&gt;&gt; entry.show()
-###[ RIP entry ]###
-  AF= IP
-  RouteTag= 0
-  addr= 192.168.1.10
-  mask= 255.255.255.0
-  nextHop= 192.168.1.1
-  metric= 1
-
-&gt;&gt;&gt; r = RIP() / entry
-&gt;&gt;&gt; r.pdfdump()
-</code></pre><p>This generates a self-explanatory packet dump. You could also use a different reader; just change the <code>conf.prog.pdfreader</code> object.</p>
-    <a href="/posts/network-packets-with-py/">Continue reading &#8594;</a>
     <hr>
     
 

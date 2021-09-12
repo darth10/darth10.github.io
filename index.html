@@ -56,13 +56,42 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>A lesson from ownership in open-source software</h2>
+        <div class="post-meta">
+            
+            <div class="date">5 May 2021</div>
+        </div>
+    </div>
+    <p>I've always tried to contribute to open source software whenever I've seen the opportunity, but becoming a maintainer of an open source library gave me some completely new perspectives.</p><p>I've used Emacs for almost a decade, and I used Vim before that. Maybe the fact that vi key bindings are just another package in Emacs, called <a href="https://github.com/emacs-evil/evil">Evil</a>, was one of the reasons I switched to Emacs. I like modal editing, but I don't use Evil. Instead, I use <a href="https://github.com/emacsorphanage/god-mode">God mode</a> with Emacs key bindings.</p><p>At some point, I discovered <a href="https://github.com/hlissner/doom-emacs">Doom Emacs</a>, which packed a lot of functionality that interested me compared to other Emacs distributions.</p>
+    <a href="/posts/a-lesson-from-ownership-in-open-source-software/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>Can extension methods solve the expression problem?</h2>
         <div class="post-meta">
             
             <div class="date">14 March 2020</div>
         </div>
     </div>
-    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><p></p>
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><pre><code class="csharp">public interface IExpr { }
+
+public class Const : IExpr
+{
+    public double Value { get; }
+
+    public Const(double value) =&gt;
+        Value = value;
+}
+
+public class Add : IExpr
+{
+    public IExpr Left { get; }
+    public IExpr Right { get; }
+
+    public Add(IExpr left, IExpr right) =&gt;
+        (Left, Right) = (left, right);
+}
+</code></pre>
     <a href="/posts/can-extension-methods-solve-the-expression-problem/">Continue reading &#8594;</a>
     <hr>
     
@@ -86,17 +115,6 @@
     </div>
     <p>Let me just say that I am not particularly a fan of either  microbenchmarks or premature optimization. I also feel that <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries">LINQ</a> extensions are a fine addition to the .NET standard library. The LINQ query syntax is also an integral part of the C# and F# languages.</p><p>That being said, there's an interesting and revealing tale to be told about the performance of <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects">LINQ to Objects</a>.</p><p></p>
     <a href="/posts/linq-is-not-quick/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-preview-header">
-        <h2>Lazy sequences and streams</h2>
-        <div class="post-meta">
-            
-            <div class="date">25 January 2013</div>
-        </div>
-    </div>
-    <p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory. It would be wasteful to realize an entire infinite sequence before even using it. The basic idea is to only call the function that generates the sequence when needed, and cache the results. With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p><p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p><p></p>
-    <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
     <hr>
     
 

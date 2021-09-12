@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>darth10.github.io: A lesson from ownership in open-source software</title>
+    <link rel="canonical" href="https://darth10.github.io/posts/a-lesson-from-ownership-in-open-source-software/">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous" defer></script>
+    <script src="/js/highlight.pack.min.js" defer></script>
+    <script src="/js/darth10.github.io.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/50b9794b1c.js"
+            crossorigin="anonymous" samesite="Secure" defer></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">darth10.github.io</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/pages/about/">About</a>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/feed.xml">RSS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="container-fluid">
+<div id="post">
+
+    <div class="post-header">
+    <h2>A lesson from ownership in open-source software</h2>
+    <div class="post-meta">
+        <div class="date">5 May 2021</div>
+    </div>
+</div>
+<div>
+    
+    <p>I've always tried to contribute to open source software whenever I've seen the opportunity, but becoming a maintainer of an open source library gave me some completely new perspectives.</p><p>I've used Emacs for almost a decade, and I used Vim before that. Maybe the fact that vi key bindings are just another package in Emacs, called <a href="https://github.com/emacs-evil/evil">Evil</a>, was one of the reasons I switched to Emacs. I like modal editing, but I don't use Evil. Instead, I use <a href="https://github.com/emacsorphanage/god-mode">God mode</a> with Emacs key bindings.</p><p>At some point, I discovered <a href="https://github.com/hlissner/doom-emacs">Doom Emacs</a>, which packed a lot of functionality that interested me compared to other Emacs distributions.</p><p></p><p>I moved all of my personal Emacs configuration to Doom Emacs, which resulted in less code in my personal configuration. I still had a decent amount of code to personalise God mode, and someone suggested that I should make it a part of Doom Emacs. And so I did - I authored a <a href="https://github.com/hlissner/doom-emacs/commits/develop/modules/editor/god">God module in Doom Emacs</a>. Almost all of my personal configuration for God mode was moved to this module, and my personal Emacs configuration shrank even more.</p><p>Things were going great, until there were too many itches in God mode to scratch. Contributors would have submitted pull requests to God mode, but the repository <a href="https://github.com/hlissner/doom-emacs/issues/2236">was archived</a>. <a href="https://github.com/chrisdone">Chris Done</a>, the original author of God mode, had moved on to bigger things, and didn't have enough time to maintain God mode. I volunteered to maintain it, and had the repository <a href="https://github.com/melpa/melpa/pull/6642">transferred to Emacs Orphanage</a> where it would be actively maintained. That way, there would be more eyes on the repository and I wouldn't become a bottleneck in the future.</p><p>I started improving things at a small scale, such as:</p><ul><li>Reducing boilerplate configuration needed for God mode.</li><li>Improving test coverage.</li><li>Improving documentation.</li><li>Making versioning consistent (in <a href="https://stable.melpa.org/#/god-mode">MELPA stable</a>).</li></ul><p>Most of the code for configuring God mode shifted from the module in Doom Emacs to God mode itself. Contributions started pouring in, and I started doing things that a maintainer should be doing, such as:</p><ul><li>Investigating test failures in older versions of Emacs.</li><li>Deprecating support for <i>really</i> old versions of Emacs.</li><li>Improving naming conventions of methods and customisable variables, without breaking existing configurations.</li><li>Organising issues using labels.</li><li>Closing stale issues that would never be implemented in God mode.</li></ul><p>I was essentially supporting contributors who wanted to add features to God mode. The most significant feature, in my opinion, was allowing God mode to work in tandem with Evil (see <a href="https://github.com/emacsorphanage/god-mode/pull/113">#113</a>). More people started using God mode - <a href="https://github.com/emacsorphanage/god-mode/stargazers">stars on GitHub</a> went up, and <a href="https://melpa.org/#/god-mode">downloads on MELPA</a> went up. You could see how much people enjoyed using it through their comments on issues and pull requests.</p><p>From <a href="https://github.com/emacsorphanage/god-mode/pull/118#issuecomment-654114564">#118</a>:</p><blockquote><p> <i>"... I feel like god-mode has filled a massive hole in my emacs config."</i>  </p></blockquote><p>From <a href="https://github.com/emacsorphanage/god-mode/issues/125#issue-873891840">#125</a>:</p><blockquote><p> <i>"... A week ago, after using Vim for around 20 years, I have decided to</i> <i>try Emacs. I had tried Emacs multiple times in the past, but every time I would</i> <i>run away (screaming) due to its poor ergonomics ... I would like to thank the</i> <i>developers of God mode. Without you, I would not be using Emacs."</i>  </p></blockquote><p>This points to a fundamental principle:</p><blockquote><p> <i>Improving the developer experience of an API indirectly improves user</i> <i>experience of both the API and products consuming the API, presumably on a</i> <i>larger scale.</i> </p></blockquote><p>Call me old fashioned, but the term API here doesn't refer exclusively to hosted services - libraries and frameworks provide APIs too.</p><p>The line between users and developers is blurry in the context of Emacs packages. However, providing package users with guardrails to contribute, such as documentation and good automated test coverage, nudges them to contribute and become developers.</p>
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts/can-extension-methods-solve-the-expression-problem/">Can extension methods solve the expression problem? &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://darth10.github.io/posts/a-lesson-from-ownership-in-open-source-software/";
+            this.page.identifier = "A lesson from ownership in open-source software";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
+            dsq.src = '//darth10.disqus.com/embed.js';
+            dsq.setAttribute('samesite', 'Secure');
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+</div>
+</div>
+        </div><!--/.row -->
+        <footer>Copyright &copy; 2021 Akhil Wali
+            (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
+                target="_blank" rel="noreferrer">GPLv2 License</a>)
+            <p style="text-align: center;">Powered by
+                <a href="http://cryogenweb.org" target="_blank" rel="noreferrer">Cryogen</a> and
+                <a href="https://pages.github.com/" target="_blank" rel="noreferrer">GitHub Pages</a>
+            </p>
+        </footer>
+    </div><!--/.container -->
+</body>
+</html>

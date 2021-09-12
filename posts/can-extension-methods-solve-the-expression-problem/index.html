@@ -56,7 +56,7 @@
 </div>
 <div>
     
-    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><p></p><pre><code class="csharp">public interface IExpr { }
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><pre><code class="csharp">public interface IExpr { }
 
 public class Const : IExpr
 {
@@ -135,6 +135,8 @@ addExpr.Eval();    // throws NotImplementedException
 
 
     <div id="prev-next">
+        
+        <a href="/posts/a-lesson-from-ownership-in-open-source-software/">&laquo; A lesson from ownership in open-source software</a>
         
         
         <a class="right" href="/posts/can-partial-classes-solve-the-expression-problem/">Can partial classes solve the expression problem? &raquo;</a>
