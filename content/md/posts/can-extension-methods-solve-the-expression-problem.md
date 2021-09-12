@@ -14,8 +14,6 @@ First, we define `IExpr` as a marker interface and implement it in the `Const`
 and `Add` types. The implementation of `Const` and `Add` here is identical to
 that in the previous post.
 
-<!--more-->
-
 ```csharp
 public interface IExpr { }
 
