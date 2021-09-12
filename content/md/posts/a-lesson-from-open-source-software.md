@@ -1,4 +1,4 @@
-{:title "A lesson from ownership in open-source software"
+{:title "A lesson from open source software"
  :date "2021-05-05"
  :layout :post}
 
