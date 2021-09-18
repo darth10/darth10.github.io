@@ -1,18 +1,19 @@
 (ns darth10.github.io.server
-  (:require [clojure.string :as string]
-            [compojure.core :refer [GET defroutes]]
-            [compojure.route :as route]
-            [cryogen-core.compiler :refer [compile-assets]]
-            [cryogen-core.config :refer [resolve-config]]
-            [cryogen-core.io :refer [path]]
-            [cryogen-core.plugins :refer [load-plugins]]
-            [cryogen-core.watcher :refer [start-watcher!]]
-            [darth10.github.io.reload :refer [ws-handler reload-page]]
-            [darth10.github.io.webpack :refer [run-webpack!]]
-            [hawk.core :as hawk]
-            [ring.util.response :refer [redirect file-response]]
-            [ring.util.codec :refer [url-decode]]
-            [ring.adapter.jetty9 :refer [run-jetty]]))
+  (:require
+   [clojure.string :as string]
+   [compojure.core :refer [GET defroutes]]
+   [compojure.route :as route]
+   [cryogen-core.compiler :refer [compile-assets]]
+   [cryogen-core.config :refer [resolve-config]]
+   [cryogen-core.io :refer [path]]
+   [cryogen-core.plugins :refer [load-plugins]]
+   [cryogen-core.watcher :refer [start-watcher!]]
+   [darth10.github.io.reload :refer [reload-page ws-handler]]
+   [darth10.github.io.webpack :refer [run-webpack!]]
+   [hawk.core :as hawk]
+   [ring.adapter.jetty9 :refer [run-jetty]]
+   [ring.util.codec :refer [url-decode]]
+   [ring.util.response :refer [file-response redirect]]))
 
 (defn wrap-subdirectories
   [handler]

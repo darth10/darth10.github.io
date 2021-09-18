@@ -1,6 +1,7 @@
 (ns darth10.github.io.reload
-    (:require [cheshire.core :as json]
-              [ring.adapter.jetty9 :refer [send!]]))
+    (:require
+     [cheshire.core :as json]
+     [ring.adapter.jetty9 :refer [send!]]))
 
 (def hello-response {"command" "hello"
                      "serverName" "clj-live-reload"

@@ -1,6 +1,7 @@
 (ns darth10.github.io.webpack
-  (:require [clojure.java.shell :as shell]
-            [text-decoration.core :as text]))
+  (:require
+   [clojure.java.shell :as shell]
+   [text-decoration.core :as text]))
 
 (defn webpack-installed? []
   (zero? (:exit (shell/sh "npx" "webpack" "--version"))))

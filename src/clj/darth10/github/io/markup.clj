@@ -1,9 +1,11 @@
 (ns darth10.github.io.markup
-  (:require [markdown.core :refer [md-to-html-string]]
-            [cryogen-core.markup :as m]
-            [clojure.string :as s])
-  (:import org.asciidoctor.Asciidoctor$Factory
-           java.util.Collections))
+  (:require
+   [clojure.string :as s]
+   [cryogen-core.markup :as m]
+   [markdown.core :refer [md-to-html-string]])
+  (:import
+   java.util.Collections
+   org.asciidoctor.Asciidoctor$Factory))
 
 (defn- markdown []
   (reify m/Markup
