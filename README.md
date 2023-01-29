@@ -1,5 +1,7 @@
 ## darth10.github.io
 
+WARNING: `npx webpack` currently only works with v12.16.3.
+
 To get started:
 
 1. Initialize the `public/` submodule.
