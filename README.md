@@ -17,3 +17,5 @@ To get started:
    ```
 1. Start the development server by calling
    `darth10.github.io.server/start-server`.
+
+   Note that the `serve` command will not recompile assets.

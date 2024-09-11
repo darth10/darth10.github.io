@@ -11,4 +11,5 @@
   ring-server/ring-server {:mvn/version "0.5.0"}}
 
  :aliases
- {:compile {:exec-fn darth10.github.io.core/compile}}}
+ {:compile {:exec-fn darth10.github.io.core/compile}
+  :serve {:exec-fn darth10.github.io.server/start-server}}}
