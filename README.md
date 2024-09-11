@@ -19,3 +19,5 @@ To get started:
    `darth10.github.io.server/start-server`.
 
    Note that the `serve` command will not recompile assets.
+
+To update Clojure dependencies, run `clj -M:outdated` and `clj -M:upgrade`.

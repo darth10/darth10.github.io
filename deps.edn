@@ -2,6 +2,7 @@
 
  :deps
  {org.clojure/clojure {:mvn/version "1.12.0"}
+  com.github.liquidz/antq {:mvn/version "RELEASE"}
   info.sunng/ring-jetty9-adapter {:mvn/version "0.34.0"}
   cheshire/cheshire {:mvn/version "5.13.0"}
   compojure/compojure {:mvn/version "1.7.1"}
@@ -12,4 +13,6 @@
 
  :aliases
  {:compile {:exec-fn darth10.github.io.core/compile}
-  :serve {:exec-fn darth10.github.io.server/start-server}}}
+  :serve {:exec-fn darth10.github.io.server/start-server}
+  :outdated {:main-opts ["-m" "antq.core"]}
+  :upgrade {:main-opts ["-m" "antq.core" "--upgrade"]}}}
