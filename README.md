@@ -10,8 +10,9 @@ To get started:
 
 1. Install all dependencies.
    ```sh
-   asdf install
+   mise install
    npm install
+   npm install -g sass # Required for cryogen
    clj -M:deps
    ```
 1. Start the development server by calling
