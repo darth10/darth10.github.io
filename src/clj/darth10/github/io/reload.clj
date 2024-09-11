@@ -17,7 +17,7 @@
                                                                                      "protocols" ["http://livereload.com/protocols/official-7"]}))))}
    :ring.websocket/protocol (-> upgrade-request :websocket-subprotocols first)})
 
-(defn reload-page []
+(defn send! []
   (doseq [ws @sockets]
     (ring-ws/send ws (json/generate-string (merge {:command "reload"
                                                    :liveCSS true

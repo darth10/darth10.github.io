@@ -8,7 +8,7 @@
    [cryogen-core.io :refer [path]]
    [cryogen-core.plugins :refer [load-plugins]]
    [cryogen-core.watcher :refer [start-watcher!]]
-   [darth10.github.io.reload :refer [reload-page ws-handler]]
+   [darth10.github.io.reload :as reload]
    [darth10.github.io.webpack :refer [run-webpack!]]
    [hawk.core :as hawk]
    [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
@@ -54,7 +54,7 @@
 
 (defn reload-handler [request]
   (if (jetty/ws-upgrade-request? request)
-    (ws-handler request)
+    (reload/ws-handler request)
     ;; Serve livereload.js from npm modules.
     {:body (slurp (path "node_modules" "livereload-js" "dist"
                         "livereload.min.js"))
@@ -70,7 +70,7 @@
     (create-dir "js")
     (compile-assets config)
     (run-webpack!)
-    (when reload? (reload-page))))
+    (when reload? (reload/send!))))
 
 (defonce plugins-loaded? (atom false))
 
