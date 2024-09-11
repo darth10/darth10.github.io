@@ -1,27 +1,24 @@
 (ns darth10.github.io.reload
     (:require
      [cheshire.core :as json]
-     [ring.adapter.jetty9 :refer [send!]]))
+     [ring.websocket :as ring-ws]))
 
-(def hello-response {"command" "hello"
-                     "serverName" "clj-live-reload"
-                     "protocols" ["http://livereload.com/protocols/official-7"]})
+(defonce sockets (atom #{}))
 
-(def sockets (atom #{}))
-
-(def reload-map {:command "reload"
-                 :liveCSS true })
-
-(defn- on-ws-text [ws text-message]
-  (when (= "hello" (get (json/parse-string text-message) "command"))
-    (send! ws (json/generate-string hello-response))))
-
-(def ws-handler {:on-connect (fn [ws]
-                               (swap! sockets conj ws))
-                 :on-close (fn [ws _ _]
-                             (swap! sockets disj ws))
-                 :on-text on-ws-text})
+(defn ws-handler [upgrade-request]
+  {:ring.websocket/listener {:on-open (fn [ws]
+                                        (swap! sockets conj ws))
+                             :on-close (fn [ws _ _]
+                                         (swap! sockets disj ws))
+                             :on-message (fn on-ws-message [ws text-message]
+                                           (when (= "hello" (get (json/parse-string text-message) "command"))
+                                             (ring-ws/send ws (json/generate-string {"command" "hello"
+                                                                                     "serverName" "clj-live-reload"
+                                                                                     "protocols" ["http://livereload.com/protocols/official-7"]}))))}
+   :ring.websocket/protocol (-> upgrade-request :websocket-subprotocols first)})
 
 (defn reload-page []
   (doseq [ws @sockets]
-    (send! ws (json/generate-string (merge reload-map {:path "."})))))
+    (ring-ws/send ws (json/generate-string (merge {:command "reload"
+                                                   :liveCSS true
+                                                   :path "."})))))

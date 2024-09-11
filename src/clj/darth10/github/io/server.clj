@@ -11,7 +11,7 @@
    [darth10.github.io.reload :refer [reload-page ws-handler]]
    [darth10.github.io.webpack :refer [run-webpack!]]
    [hawk.core :as hawk]
-   [ring.adapter.jetty9 :refer [run-jetty]]
+   [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
    [ring.util.codec :refer [url-decode]]
    [ring.util.response :refer [file-response redirect]]))
 
@@ -52,11 +52,13 @@
 (def http-handler
   (wrap-subdirectories routes))
 
-(defn reload-handler [_]
-  ;; Serve livereload.js from npm modules.
-  {:body (slurp (path "node_modules" "livereload-js" "dist"
-                      "livereload.min.js"))
-   :status 200})
+(defn reload-handler [request]
+  (if (jetty/ws-upgrade-request? request)
+    (ws-handler request)
+    ;; Serve livereload.js from npm modules.
+    {:body (slurp (path "node_modules" "livereload-js" "dist"
+                        "livereload.min.js"))
+     :status 200}))
 
 (defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
   (let [config (resolve-config)
@@ -92,7 +94,6 @@
                                     :join? false})
         reload-instance (run-jetty reload-handler
                                    {:port 35729
-                                    :websockets {"/livereload" ws-handler}
                                     :allow-null-path-info true
                                     :join? false})]
     (swap! server conj file-watchers http-instance reload-instance)))
