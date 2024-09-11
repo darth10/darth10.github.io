@@ -31,7 +31,9 @@
 }
 
 @mixin header-padding {
-  padding-bottom: 8px;
+  & {
+    padding-bottom: 8px;
+  }
 }
 
 @mixin meta-font {
