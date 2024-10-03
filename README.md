@@ -2,6 +2,7 @@
 
 To get started:
 
+1. Install Nix flakes and `direnv`.
 1. Initialize the `public/` submodule.
    ``` sh
    git submodule init
@@ -10,9 +11,7 @@ To get started:
 
 1. Install all dependencies.
    ```sh
-   mise install
    npm install
-   npm install -g sass # Required for cryogen
    clj -M:deps
    ```
 1. Start the development server by calling
