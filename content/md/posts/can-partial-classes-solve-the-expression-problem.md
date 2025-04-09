@@ -43,13 +43,13 @@ it possible to make the following changes?
 1. Add a new operation `View` to print an expression.
 1. Add a new type `Mult` to represent multiplication of two expressions.
 
-That seems simple enough.
-Is it possible to implement a solution in C#? If we define the types `Const` and
-`Add` to implement an interface `IExpr`. This interface would define `Eval` as a
-method. This would make it easy to add a new type `Mult`, but adding a new
-method `View` in the interface `IExpr` would require changes to all existing
-types. So, it's easy to add new types with this approach, but it's not possible
-to add new operations without changing and recompiling existing definitions.
+This seems simple enough; is it possible to implement a solution in C#? We could
+define the types `Const` and `Add` to implement an interface `IExpr`. This
+interface would define `Eval` as a method. This would make it easy to add a new
+type `Mult`, but adding a new method `View` to the interface `IExpr` would
+require changes to all existing types. So it's easy to add new types with this
+approach, but adding new operations requires changing and recompiling existing
+definitions.
 
 Another approach would be to use multiple interfaces for different operations 
 like `Eval` and `View`. These interfaces could then be 
@@ -96,9 +96,9 @@ public partial class Add : IExpr
 
 A `Const` expression is defined to wrap a single `double` value, and an `Add`
 expression contains two properties `Left` and `Right` that are expressions
-themselves. Of course, this code won't compile as the `Eval` method isn't
-implemented by the `Const` and `Add` types. Let's go ahead and implement this
-method, but in separate definitions using `partial` as follows:
+themselves. Of course, this code won't compile because the `Eval` method isn't
+implemented in the `Const` and `Add` types. Let's implement this method in
+separate definitions using `partial` as follows:
 
 ```csharp
 public partial class Const
@@ -184,7 +184,7 @@ classes thus have the effect of not recompiling existing code.
 
 To truly avoid recompilation of a partial class after adding a new definition,
 the new definition would have to be in a different assembly. Unfortunately, this
-is not really possible as one of the limitations of parital classes is that they
+is not really possible as one of the limitations of partial classes is that they
 cannot span multiple assemblies or namespaces.
 
 Despite these limitations, partial classes and interfaces can be used this way
@@ -211,4 +211,5 @@ The code in this post can be found [here][implementation-tree] along with
 [explicit-interfaces]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation
 [partial-classes]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods
 [implementation-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses 
-[tests-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses.Tests 
+[tests-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses.Tests
+

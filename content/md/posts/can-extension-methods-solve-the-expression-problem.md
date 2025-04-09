@@ -4,15 +4,15 @@
  :tags ["Solving the expression problem"]}
 
 Let's explore how [extension methods][extension-methods] in C# can solve the
-_expression problem_. For an introduction to the expression problem, take a look
-at [my first post](../../posts/can-partial-classes-solve-the-expression-problem/)
+_expression problem_. For an introduction to the expression problem, refer to
+[my first post](../../posts/can-partial-classes-solve-the-expression-problem/)
 in [this series](../../tags/Solving%20the%20expression%20problem). Extension
-methods are essentially used to define operations over a given type without
-modifying the original definition of the type.
+methods allow operations to be defined over a type without modifying the type's
+original definition.
 
 First, we define `IExpr` as a marker interface and implement it in the `Const`
-and `Add` types. The implementation of `Const` and `Add` here is identical to
-that in the previous post.
+and `Add` types. The implementations of `Const` and `Add` here are identical to
+those in the previous post.
 
 ```csharp
 public interface IExpr { }
@@ -36,7 +36,7 @@ public class Add : IExpr
 ```
 
 The `Eval` operation is now defined as an extension method over the `IExpr`
-type. The implementation of `Eval` here uses a `switch` expression. Note that 
+type. The implementation of `Eval` here uses a `switch` expression. Note that
 the class containing this extension method may or may not be in the same
 namespace as the `IExpr`, `Const` and `Add` types.
 
@@ -113,7 +113,7 @@ var multExpr2 = new Mult(constExpr2, constExpr3);
 
 var addExpr = new Add(multExpr1, multExpr2);
 
-addExpr.Eval();    // throws NotImplementedException 
+addExpr.Eval();    // throws NotImplementedException
 ```
 
 This doesn't work as the `Eval` call above invokes the first extension method we
@@ -123,7 +123,7 @@ runtime! This violates the type safety requirement of the expression problem and
 unfortunately concludes that extension methods _cannot_ solve the expression
 problem.
 
-The code in this post can be found [here][implementation-tree] along with 
+The code in this post can be found [here][implementation-tree] along with
 [relevant tests][tests-tree].
 
 [extension-methods]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods
