@@ -56,7 +56,7 @@
 </div>
 <div>
     
-    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><pre><code class="csharp">public interface IExpr { }
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, refer to <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods allow operations to be defined over a type without modifying the type's original definition.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementations of <code>Const</code> and <code>Add</code> here are identical to those in the previous post.</p><pre><code class="csharp">public interface IExpr { }
 
 public class Const : IExpr
 {
@@ -74,7 +74,7 @@ public class Add : IExpr
     public Add(IExpr left, IExpr right) =&gt;
         (Left, Right) = (left, right);
 }
-</code></pre><p>The <code>Eval</code> operation is now defined as an extension method over the <code>IExpr</code> type. The implementation of <code>Eval</code> here uses a <code>switch</code> expression. Note that  the class containing this extension method may or may not be in the same namespace as the <code>IExpr</code>, <code>Const</code> and <code>Add</code> types.</p><pre><code class="csharp">public static class IExprExtensions
+</code></pre><p>The <code>Eval</code> operation is now defined as an extension method over the <code>IExpr</code> type. The implementation of <code>Eval</code> here uses a <code>switch</code> expression. Note that the class containing this extension method may or may not be in the same namespace as the <code>IExpr</code>, <code>Const</code> and <code>Add</code> types.</p><pre><code class="csharp">public static class IExprExtensions
 {
     public static double Eval(this IExpr e) =&gt; e switch {
         Const c =&gt; c.Value,
@@ -122,21 +122,21 @@ var multExpr2 = new Mult(constExpr2, constExpr3);
 
 var addExpr = new Add(multExpr1, multExpr2);
 
-addExpr.Eval();    // throws NotImplementedException 
-</code></pre><p>This doesn't work as the <code>Eval</code> call above invokes the first extension method we defined, which is still unaware of the <code>Mult</code> type. We're also overlooking an important detail about <code>switch</code> expressions - they perform type casting at runtime! This violates the type safety requirement of the expression problem and unfortunately concludes that extension methods <i>cannot</i> solve the expression problem.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/tree/master/csharp/Extensions">here</a> along with  <a href="https://github.com/darth10/expression-problem/tree/master/csharp/Extensions.Tests">relevant tests</a>.</p>
+addExpr.Eval();    // throws NotImplementedException
+</code></pre><p>This doesn't work as the <code>Eval</code> call above invokes the first extension method we defined, which is still unaware of the <code>Mult</code> type. We're also overlooking an important detail about <code>switch</code> expressions - they perform type casting at runtime! This violates the type safety requirement of the expression problem and unfortunately concludes that extension methods <i>cannot</i> solve the expression problem.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/tree/master/csharp/Extensions">here</a> along with <a href="https://github.com/darth10/expression-problem/tree/master/csharp/Extensions.Tests">relevant tests</a>.</p>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
     
-    <a href="/tags/Solving the expression problem/">Solving the expression problem</a>
+    <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/posts/a-lesson-from-open-source-software/">&laquo; A lesson from open source software</a>
+        <a href="/posts/can-object-algebras-solve-the-expression-problem/">&laquo; Can object algebras solve the expression problem?</a>
         
         
         <a class="right" href="/posts/can-partial-classes-solve-the-expression-problem/">Can partial classes solve the expression problem? &raquo;</a>
@@ -162,7 +162,7 @@ addExpr.Eval();    // throws NotImplementedException
 </div>
 </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2021 Akhil Wali
+        <footer>Copyright &copy; 2025 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
                 target="_blank" rel="noreferrer">GPLv2 License</a>)
             <p style="text-align: center;">Powered by

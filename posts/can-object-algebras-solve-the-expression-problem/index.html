@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>darth10.github.io: Can object algebras solve the expression problem?</title>
+    <link rel="canonical" href="https://darth10.github.io/posts/can-object-algebras-solve-the-expression-problem/">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous" defer></script>
+    <script src="/js/highlight.pack.min.js" defer></script>
+    <script src="/js/darth10.github.io.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/50b9794b1c.js"
+            crossorigin="anonymous" samesite="Secure" defer></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">darth10.github.io</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/pages/about/">About</a>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/feed.xml">RSS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="container-fluid">
+<div id="post">
+
+    <div class="post-header">
+    <h2>Can object algebras solve the expression problem?</h2>
+    <div class="post-meta">
+        <div class="date">28 March 2020</div>
+    </div>
+</div>
+<div>
+    
+    <p>Another way to <a href="../../tags/Solving%20the%20expression%20problem">solve the expression problem</a> in C# and other object-oriented languages is by using <i>object algebras</i><sup><a href="#ref-1">[1]</a></sup>. Object algebras define a parameterised interface, and a factory that implements that interface.</p><p>First, let's define the interface of the <code>Eval</code> operation.</p><pre><code class="csharp">public interface IEval
+{
+    double Eval();
+}
+</code></pre><p>Next, we define the <code>Const</code> and <code>Add</code> implementations of the <code>Eval</code> interface.</p><pre><code class="csharp">public class ConstEval : IEval
+{
+    readonly double _value;
+
+    public ConstEval(double value) =&gt;
+        _value = value;
+
+    public double Eval() =&gt; _value;
+}
+
+public class AddEval : IEval
+{
+    readonly IEval _left, _right;
+
+    public AddEval(IEval left, IEval right) =&gt;
+        (_left, _right) = (left, right);
+
+    public double Eval() =&gt;
+        _left.Eval() + _right.Eval();
+}
+</code></pre><p>The object algebra interface <code>IExprAlgebra&lt;T&gt;</code> is where the actual <code>Const</code> and <code>Add</code> types are defined. We can define a factory that implements the <code>IExprAlgebra&lt;T&gt;</code> interface by supplying <code>IEval</code> as a type parameter.</p><pre><code class="csharp">public interface IExprAlgebra&lt;T&gt;
+{
+    T Const(double value);
+    T Add(T left, T right);
+}
+
+public class EvalFactory : IExprAlgebra&lt;IEval&gt;
+{
+    public IEval Const(double value) =&gt;
+        new ConstEval(value);
+
+    public IEval Add(IEval left, IEval right) =&gt;
+        new AddEval(left, right);
+}
+</code></pre><p>We can now create the <code>Const</code> and <code>Add</code> types by calling the corresponding methods of this factory. To add the <code>Mult</code> type, we simply implement the <code>IEval</code> interface.</p><pre><code class="csharp">public class MultEval : IEval
+{
+    readonly IEval _left, _right;
+
+    public MultEval(IEval left, IEval right) =&gt;
+        (_left, _right) = (left, right);
+
+    public double Eval() =&gt;
+        _left.Eval() * _right.Eval();
+}
+</code></pre><p>We also need to extend the object algebra interface to include the <code>Mult</code> type and define a new factory that implements this interface. All of this doesn't require any changes to the <code>EvalFactory</code> definition.</p><pre><code class="csharp">public interface IMultExprAlgebra&lt;T&gt; : IExprAlgebra&lt;T&gt;
+{
+    T Mult(T left, T right);
+}
+
+public class MultEvalFactory : IMultExprAlgebra&lt;IEval&gt;
+{
+    readonly EvalFactory _evalFactory = new EvalFactory();
+
+    public IEval Const(double value) =&gt;
+        _evalFactory.Const(value);
+
+    public IEval Add(IEval left, IEval right) =&gt;
+        _evalFactory.Add(left, right);
+
+    public IEval Mult(IEval left, IEval right) =&gt;
+        new MultEval(left, right);
+}
+</code></pre><p>Now we can instantiate this factory to use the <code>Mult</code> type with the <code>Eval</code> operation.</p><pre><code class="csharp">var factory = new MultEvalFactory();
+
+IEval _constExpr1 = factory.Const(7);
+IEval _constExpr2 = factory.Const(2);
+IEval _constExpr3 = factory.Const(3);
+
+IEval _addMultExpr = factory.Add(
+    factory.Mult(_constExpr1, _constExpr2),
+    factory.Mult(_constExpr2, _constExpr3));
+
+_addMultExpr.Eval()    // =&gt; 20
+</code></pre><p>To add a new operation, we create a new <code>IView</code> interface and implement it for the <code>Const</code>, <code>Add</code> and <code>Mult</code> types.</p><pre><code class="csharp">public interface IView
+{
+    string View();
+}
+
+public class ConstView : IView
+{
+    readonly double _value;
+
+    public ConstView(double value) =&gt;
+        _value = value;
+
+    public string View() =&gt;
+        _value.ToString();
+}
+
+public class AddView : IView
+{
+    readonly IView _left, _right;
+
+    public AddView(IView left, IView right) =&gt;
+        (_left, _right) = (left, right);
+
+    public string View() =&gt;
+        $"({_left.View()} + {_right.View()})";
+}
+
+public class MultView : IView
+{
+    readonly IView _left, _right;
+
+    public MultView(IView left, IView right) =&gt;
+        (_left, _right) = (left, right);
+
+    public string View() =&gt;
+        $"({_left.View()} * {_right.View()})";
+}
+</code></pre><p>We can now define a new factory using the existing <code>IMultExprAlgebra&lt;T&gt;</code> interface by supplying <code>IView</code> as a type parameter.</p><pre><code class="csharp">public class ViewFactory : IMultExprAlgebra&lt;IView&gt;
+{
+    public IView Const(double value) =&gt;
+        new ConstView(value);
+
+    public IView Add(IView left, IView right) =&gt;
+        new AddView(left, right);
+
+    public IView Mult(IView left, IView right) =&gt;
+        new MultView(left, right);
+}
+</code></pre><p>This factory is used just like the previous factories we defined.</p><pre><code class="csharp">var factory = new ViewFactory();
+
+IView _constExpr1 = factory.Const(7);
+IView _constExpr2 = factory.Const(2);
+IView _constExpr3 = factory.Const(3);
+
+IView _addMultExpr = factory.Add(
+    factory.Mult(_constExpr1, _constExpr2),
+    factory.Mult(_constExpr2, _constExpr3));
+
+_addMultExpr.View()    // =&gt; ((7 * 2) + (2 * 3))
+</code></pre><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/tree/master/csharp/ObjectAlgebras">here</a> along with <a href="https://github.com/darth10/expression-problem/tree/master/csharp/ObjectAlgebras.Tests">relevant tests</a>.</p><h4 id="references">References</h4><ol><li><a name="ref-1" rel="nofollow" target="_blank" href="https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf">   Extensibility for the Masses</a> -  Bruno C. d. S. Oliveira and William R. Cook (2012).</li></ol>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/a-lesson-from-open-source-software/">&laquo; A lesson from open source software</a>
+        
+        
+        <a class="right" href="/posts/can-extension-methods-solve-the-expression-problem/">Can extension methods solve the expression problem? &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://darth10.github.io/posts/can-object-algebras-solve-the-expression-problem/";
+            this.page.identifier = "Can object algebras solve the expression problem?";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
+            dsq.src = '//darth10.disqus.com/embed.js';
+            dsq.setAttribute('samesite', 'Secure');
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+</div>
+</div>
+        </div><!--/.row -->
+        <footer>Copyright &copy; 2025 Akhil Wali
+            (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
+                target="_blank" rel="noreferrer">GPLv2 License</a>)
+            <p style="text-align: center;">Powered by
+                <a href="http://cryogenweb.org" target="_blank" rel="noreferrer">Cryogen</a> and
+                <a href="https://pages.github.com/" target="_blank" rel="noreferrer">GitHub Pages</a>
+            </p>
+        </footer>
+    </div><!--/.container -->
+</body>
+</html>

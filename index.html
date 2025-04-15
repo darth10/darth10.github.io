@@ -67,13 +67,28 @@
     <hr>
     
     <div class="post-preview-header">
+        <h2>Can object algebras solve the expression problem?</h2>
+        <div class="post-meta">
+            
+            <div class="date">28 March 2020</div>
+        </div>
+    </div>
+    <p>Another way to <a href="../../tags/Solving%20the%20expression%20problem">solve the expression problem</a> in C# and other object-oriented languages is by using <i>object algebras</i><sup><a href="#ref-1">[1]</a></sup>. Object algebras define a parameterised interface, and a factory that implements that interface.</p><p>First, let's define the interface of the <code>Eval</code> operation.</p><pre><code class="csharp">public interface IEval
+{
+    double Eval();
+}
+</code></pre>
+    <a href="/posts/can-object-algebras-solve-the-expression-problem/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>Can extension methods solve the expression problem?</h2>
         <div class="post-meta">
             
             <div class="date">14 March 2020</div>
         </div>
     </div>
-    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, take a look at <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods are essentially used to define operations over a given type without modifying the original definition of the type.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementation of <code>Const</code> and <code>Add</code> here is identical to that in the previous post.</p><pre><code class="csharp">public interface IExpr { }
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, refer to <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods allow operations to be defined over a type without modifying the type's original definition.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementations of <code>Const</code> and <code>Add</code> here are identical to those in the previous post.</p><pre><code class="csharp">public interface IExpr { }
 
 public class Const : IExpr
 {
@@ -106,17 +121,6 @@ public class Add : IExpr
     <a href="/posts/can-partial-classes-solve-the-expression-problem/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-preview-header">
-        <h2>LINQ Is Not Quick</h2>
-        <div class="post-meta">
-            
-            <div class="date">18 October 2019</div>
-        </div>
-    </div>
-    <p>Let me just say that I am not particularly a fan of either  microbenchmarks or premature optimization. I also feel that <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries">LINQ</a> extensions are a fine addition to the .NET standard library. The LINQ query syntax is also an integral part of the C# and F# languages.</p><p>That being said, there's an interesting and revealing tale to be told about the performance of <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects">LINQ to Objects</a>.</p><p></p>
-    <a href="/posts/linq-is-not-quick/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -127,7 +131,7 @@ public class Add : IExpr
 </div>
 </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2021 Akhil Wali
+        <footer>Copyright &copy; 2025 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
                 target="_blank" rel="noreferrer">GPLv2 License</a>)
             <p style="text-align: center;">Powered by
