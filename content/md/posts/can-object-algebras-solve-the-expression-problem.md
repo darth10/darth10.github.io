@@ -3,7 +3,12 @@
  :layout :post
  :tags ["Solving the expression problem"]}
 
-TODO intro and previous post(s)
+Another way to [solve the expression problem](../../tags/Solving%20the%20expression%20problem) in C# and other
+object-oriented languages is by using <i>object
+algebras</i><sup>[\[1\]](#ref-1)</sup>. Object algebras define a parameterised
+interface, and a factory that implements that interface.
+
+First, let's define the interface of the `Eval` operation.
 
 ```csharp
 public interface IEval
@@ -12,7 +17,7 @@ public interface IEval
 }
 ```
 
-TODO
+Next, we define the `Const` and `Add` implementations of the `Eval` interface.
 
 ```csharp
 public class ConstEval : IEval
@@ -37,7 +42,9 @@ public class AddEval : IEval
 }
 ```
 
-TODO
+The object algebra interface `IExprAlgebra<T>` is where the actual `Const` and
+`Add` types are defined. We can define a factory that implements the
+`IExprAlgebra<T>` interface by supplying `IEval` as a type parameter.
 
 ```csharp
 public interface IExprAlgebra<T>
@@ -56,9 +63,9 @@ public class EvalFactory : IExprAlgebra<IEval>
 }
 ```
 
-TODO how to use this? (no code)
-
-TODO how to add a new type
+We can now create the `Const` and `Add` types by calling the corresponding
+methods of this factory. To add the `Mult` type, we simply implement the `IEval`
+interface.
 
 ```csharp
 public class MultEval : IEval
@@ -73,7 +80,9 @@ public class MultEval : IEval
 }
 ```
 
-TODO
+We also need to extend the object algebra interface to include the `Mult` type
+and define a new factory that implements this interface. All of this doesn't
+require any changes to the `EvalFactory` definition.
 
 ```csharp
 public interface IMultExprAlgebra<T> : IExprAlgebra<T>
@@ -96,7 +105,8 @@ public class MultEvalFactory : IMultExprAlgebra<IEval>
 }
 ```
 
-TODO inheritance, or even code duplication can be done
+Now we can instantiate this factory to use the `Mult` type with the `Eval`
+operation.
 
 ```csharp
 var factory = new MultEvalFactory();
@@ -112,18 +122,15 @@ IEval _addMultExpr = factory.Add(
 _addMultExpr.Eval()    // => 20
 ```
 
-TODO adding a new operation
+To add a new operation, we create a new `IView` interface and implement it for
+the `Const`, `Add` and `Mult` types.
 
 ```csharp
 public interface IView
 {
     string View();
 }
-```
 
-TODO
-
-```csharp
 public class ConstView : IView
 {
     readonly double _value;
@@ -158,7 +165,8 @@ public class MultView : IView
 }
 ```
 
-TODO new factory, but new IExpr interface isn't needed
+We can now define a new factory using the existing `IMultExprAlgebra<T>`
+interface by supplying `IView` as a type parameter.
 
 ```csharp
 public class ViewFactory : IMultExprAlgebra<IView>
@@ -174,7 +182,7 @@ public class ViewFactory : IMultExprAlgebra<IView>
 }
 ```
 
-TODO
+This factory is used just like the previous factories we defined.
 
 ```csharp
 var factory = new ViewFactory();
@@ -190,8 +198,14 @@ IView _addMultExpr = factory.Add(
 _addMultExpr.View()    // => ((7 * 2) + (2 * 3))
 ```
 
-TODO
+The code in this post can be found [here][implementation-tree] along with
+[relevant tests][tests-tree].
 
 #### References
 
-1. TODO
+1. <a name="ref-1" rel="nofollow" target="_blank"
+   href="https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf">
+   Extensibility for the Masses</a> -  Bruno C. d. S. Oliveira and William R. Cook (2012).
+
+[implementation-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/ObjectAlgebras 
+[tests-tree]: https://github.com/darth10/expression-problem/tree/master/csharp/ObjectAlgebras.Tests
