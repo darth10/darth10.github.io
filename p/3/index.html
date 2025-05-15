@@ -56,6 +56,23 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>Abstract and parameterized types</h2>
+        <div class="post-meta">
+            
+            <div class="date">16 August 2012</div>
+        </div>
+    </div>
+    <p>Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).</p><p>First off, methods can be parameterized, in order to abstract a generic type which can be used by it. The <code>apply</code> method in companion objects is the best place to start. Here's an example from the implementation of the <code>List</code> class in the Scala library.</p><pre><code class="scala">object List {
+
+  // ...
+
+  def apply[A](xs: A*): List[A] = xs.toList
+}
+</code></pre>
+    <a href="/posts/abstract-and-parameterized-types/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>61 byte selection sort</h2>
         <div class="post-meta">
             

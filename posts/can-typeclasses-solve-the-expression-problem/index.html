@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>darth10.github.io: Can typeclasses solve the expression problem?</title>
+    <link rel="canonical" href="https://darth10.github.io/posts/can-typeclasses-solve-the-expression-problem/">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous" defer></script>
+    <script src="/js/highlight.pack.min.js" defer></script>
+    <script src="/js/darth10.github.io.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/50b9794b1c.js"
+            crossorigin="anonymous" samesite="Secure" defer></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">darth10.github.io</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/pages/about/">About</a>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/feed.xml">RSS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="container-fluid">
+<div id="post">
+
+    <div class="post-header">
+    <h2>Can typeclasses solve the expression problem?</h2>
+    <div class="post-meta">
+        <div class="date">3 April 2020</div>
+    </div>
+</div>
+<div>
+    
+    <p><i>Typeclasses</i> in Haskell roughly correspond to interfaces in object-oriented languages and can be used to <a href="../../tags/Solving%20the%20expression%20problem">solve the Expression Problem</a>. More specifically, since Haskell takes parametric polymorphism quite seriously, typeclasses are more akin to generic interfaces, but also allow ad-hoc polymorphism.</p><p>Let's first define an <code>Expr</code> typeclass with <code>const</code> and <code>add</code> as functions. These functions represent types or variants in the Expression Problem.</p><pre><code class="haskell">class Expr t where
+  const :: Double -&gt; t
+  add :: t -&gt; t -&gt; t
+</code></pre><p>Let's define the <code>Eval</code> operation as a type with <code>eval</code> as a field accessor. This can be easily defined as an instance of <code>Expr</code>.</p><pre><code class="haskell">newtype Eval = Eval { eval :: Double }
+
+instance Expr Eval where
+  const n = Eval n
+  add x y = Eval $ eval x + eval y
+</code></pre><p>We can define a value <code>e1</code> to test that <code>eval e1</code> produces the correct value.</p><pre><code class="haskell">e1 :: Expr t =&gt; t
+e1 = add (const 1)
+         (add (const 2)
+              (const 3))
+</code></pre><p><code>eval e1</code> returns <code>6.0</code> as expected. Next, let's define the <code>View</code> operation as another type.</p><pre><code class="haskell">import Text.Printf (printf)
+
+newtype View = View { view :: String }
+
+instance Expr View where
+  const n = View $ show n
+  add x y = View $ printf "(%s + %s)" (view x) (view y)
+</code></pre><p><code>view e1</code> returns the string <code>"(1.0 + (2.0 + 3.0))"</code>. We can now also add the <code>Mult</code> operation by defining another typeclass <code>MultExpr</code> for it, and defining instances of <code>Eval</code> and <code>View</code>.</p><pre><code class="haskell">class MultExpr t where
+  mult :: t -&gt; t -&gt; t
+
+instance MultExpr Eval where
+  mult x y = Eval $ eval x * eval y
+
+instance MultExpr View where
+  mult x y = View $ printf "(%s * %s)" (view x) (view y)
+</code></pre><p>Now to use <code>MultExpr</code>, simply add another constraint to the polymorphic type <code>t</code>.</p><pre><code class="haskell">e2 :: (Expr t, MultExpr t) =&gt; t
+e2 = mult (const 2)
+          (add (const 2)
+               (const 3))
+</code></pre><p>This produces <code>10.0</code>. That's it! We've solved the Expression Problem using typeclasses to represent data types.</p><p>Next, let's approach the problem by representing the operations in the Expression Problem as typeclasses. We begin by defining <code>Const</code> and <code>Add</code>.</p><pre><code class="haskell">data Const   = Const Double
+data Add x y = Add x y
+</code></pre><p>These types are used to create expressions, so let's define a typeclass for that purpose.</p><pre><code class="haskell">class Expr e
+
+instance Expr Const
+instance (Expr x, Expr y) =&gt; Expr (Add x y)
+</code></pre><p>Next, we can define <code>Eval</code> as a typeclass with a single <code>eval</code> function, making <code>Const</code> and <code>Add</code> instances of <code>Eval</code>.</p><pre><code class="haskell">class (Expr e) =&gt; Eval e where
+  eval :: e -&gt; Double
+
+instance Eval Const where
+  eval (Const x) = x
+
+instance (Eval x, Eval y) =&gt; Eval (Add x y) where
+  eval (Add x y) = eval x + eval y
+</code></pre><p>We can similarly define <code>View</code>.</p><pre><code class="haskell">class (Expr e) =&gt; View e where
+  view :: e -&gt; String
+
+instance View Const where
+  view (Const x) = show x
+
+instance (View x, View y) =&gt; View (Add x y) where
+  view (Add x y) = printf "(%s + %s)" (view x) (view y)
+</code></pre><p>Additionally, we can introduce a new data type <code>Mult</code> and make it an instance of <code>Expr</code>, <code>Eval</code> and <code>View</code>.</p><pre><code class="haskell">data Mult x y = Mult x y
+
+instance (Expr x, Expr y) =&gt; Expr (Mult x y)
+
+instance (Eval x, Eval y) =&gt; Eval (Mult x y) where
+  eval (Mult x y) = eval x * eval y
+
+instance (View x, View y) =&gt; View (Mult x y) where
+  view (Mult x y) = printf "(%s * %s)" (view x) (view y)
+</code></pre><p>But wait, there's an issue - the types aren't related in any meaningful way. That means we can't define a function that composes <code>Const</code> and <code>Add</code> even though they're instances of <code>Expr</code>.</p><pre><code class="haskell">getAlgebra x
+  | x &lt; 10    = Const 2
+  | otherwise = Add (Const 4) (Const 5)
+</code></pre><p>The above function won't compile. </p><pre><code class="xml">* Couldn't match expected type ‘Const’
+              with actual type ‘Add Const Const’
+* In the expression: (Add (Const 4) (Const 5))
+</code></pre><p>In fact, defining the expression <code>Add (Const 4) (Const 5)</code> itself won't work, even if the constraint <code>Expr t =&gt; t</code> is applied.</p><pre><code class="haskell">e1 :: Expr t =&gt; t
+e1 = Add (Const 4) (Const 5)    -- fails compilation
+</code></pre><p>Revisiting the approach of using typeclasses to represent data types in the Expression Problem allows an easy definition of <code>getAlgebra</code>.</p><pre><code class="haskell">getAlgebra x
+  | x &lt; 10    = const 2
+  | otherwise = add (const 4) (const 5)
+</code></pre><p>In conclusion, typeclasses can effectively solve the Expression Problem, but only when they are used to represent data types. This ensures the relationships between types are preserved and used correctly.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/blob/master/haskell/src/Typeclasses.hs">here</a> along with  <a href="https://github.com/darth10/expression-problem/blob/master/haskell/test/TypeclassesTests.hs">relevant tests</a>.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/a-lesson-from-open-source-software/">&laquo; A lesson from open source software</a>
+        
+        
+        <a class="right" href="/posts/can-object-algebras-solve-the-expression-problem/">Can object algebras solve the expression problem? &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://darth10.github.io/posts/can-typeclasses-solve-the-expression-problem/";
+            this.page.identifier = "Can typeclasses solve the expression problem?";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
+            dsq.src = '//darth10.disqus.com/embed.js';
+            dsq.setAttribute('samesite', 'Secure');
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+</div>
+</div>
+        </div><!--/.row -->
+        <footer>Copyright &copy; 2025 Akhil Wali
+            (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
+                target="_blank" rel="noreferrer">GPLv2 License</a>)
+            <p style="text-align: center;">Powered by
+                <a href="http://cryogenweb.org" target="_blank" rel="noreferrer">Cryogen</a> and
+                <a href="https://pages.github.com/" target="_blank" rel="noreferrer">GitHub Pages</a>
+            </p>
+        </footer>
+    </div><!--/.container -->
+</body>
+</html>
