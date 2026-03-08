@@ -56,6 +56,35 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>Can extension methods solve the expression problem?</h2>
+        <div class="post-meta">
+            
+            <div class="date">14 March 2020</div>
+        </div>
+    </div>
+    <p>Let's explore how <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">extension methods</a> in C# can solve the <i>expression problem</i>. For an introduction to the expression problem, refer to <a href="../../posts/can-partial-classes-solve-the-expression-problem/">my first post</a> in <a href="../../tags/Solving%20the%20expression%20problem">this series</a>. Extension methods allow operations to be defined over a type without modifying the type's original definition.</p><p>First, we define <code>IExpr</code> as a marker interface and implement it in the <code>Const</code> and <code>Add</code> types. The implementations of <code>Const</code> and <code>Add</code> here are identical to those in the previous post.</p><pre><code class="csharp">public interface IExpr { }
+
+public class Const : IExpr
+{
+    public double Value { get; }
+
+    public Const(double value) =&gt;
+        Value = value;
+}
+
+public class Add : IExpr
+{
+    public IExpr Left { get; }
+    public IExpr Right { get; }
+
+    public Add(IExpr left, IExpr right) =&gt;
+        (Left, Right) = (left, right);
+}
+</code></pre>
+    <a href="/posts/can-extension-methods-solve-the-expression-problem/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>Can partial classes solve the expression problem?</h2>
         <div class="post-meta">
             
@@ -88,17 +117,6 @@
     <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-preview-header">
-        <h2>The WebBrowser nightmare</h2>
-        <div class="post-meta">
-            
-            <div class="date">23 September 2012</div>
-        </div>
-    </div>
-    <p>I recently had to use the <code>WebBrowser</code> .NET component in a project. The control is essentially Internet Explorer embedded in a <code>UserControl</code> component. Although the facilities for JavaScript interoperability and DOM manipualtion are pretty great, the control fails to meet simpler needs.</p><p>To override keyboard input handing in the control, we need to set the <code>WebBrowserShortcutsEnabled</code> property to <code>false</code> and handle the <code>PreviewKeyDown</code> event.</p><p></p>
-    <a href="/posts/the-webbrowser-nightmare/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -111,7 +129,7 @@
 </div>
 </div>
         </div><!--/.row -->
-        <footer>Copyright &copy; 2025 Akhil Wali
+        <footer>Copyright &copy; 2026 Akhil Wali
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
                 target="_blank" rel="noreferrer">GPLv2 License</a>)
             <p style="text-align: center;">Powered by

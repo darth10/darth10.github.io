@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>darth10.github.io: Can functors solve the expression problem?</title>
+    <link rel="canonical" href="https://darth10.github.io/posts/can-functors-solve-the-expression-problem/">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous" defer></script>
+    <script src="/js/highlight.pack.min.js" defer></script>
+    <script src="/js/darth10.github.io.min.js" defer></script>
+    <script src="https://kit.fontawesome.com/50b9794b1c.js"
+            crossorigin="anonymous" samesite="Secure" defer></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">darth10.github.io</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav justify-content-end">
+                <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
+                
+                <li class="nav-item ">
+                    <a class="nav-link" href="/pages/about/">About</a>
+                </li>
+                
+                <li class="nav-item"><a class="nav-link" href="/feed.xml">RSS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div id="content" class="container-fluid">
+<div id="post">
+
+    <div class="post-header">
+    <h2>Can functors solve the expression problem?</h2>
+    <div class="post-meta">
+        <div class="date">12 April 2020</div>
+    </div>
+</div>
+<div>
+    
+    <p>An elegant approach to <a href="../../tags/Solving%20the%20expression%20problem">solve the Expression Problem</a>  is to use <i>functors</i> and <i>F-algebras</i> to decompose expression types, allowing us to add new variants and new operations easily through modules. The goal is to define a data type by cases while being able to add both new variants and operations without recompiling existing code, and while retaining static type safety.</p><p>In Haskell, adding new operations over a fixed set of types is easily done by writing a new function. But adding a new type variant to an existing data type forces you to touch every function that pattern-matches on it. In object-oriented languages the problem is actually reversed.</p><p></p><p>We'll need two language extensions: <code>DeriveFunctor</code> to automatically derive <code>Functor</code> instances for our expression nodes, and <code>TypeOperators</code> to write the coproduct type <code>f :+: g</code> in infix notation.</p><pre><code class="haskell">{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE TypeOperators #-}
+</code></pre><p>Instead of defining a monolithic expression datatype, we define each <em>kind</em> of node as its own functor with the type variable <code>e</code>:</p><pre><code class="haskell">data Const e = Const Double deriving Functor
+data Add e = Add e e deriving Functor
+</code></pre><p><code>Const</code> holds a literal number and ignores <code>e</code> as it has no subexpressions. <code>Add</code> holds two subexpressions. By deriving <code>Functor</code>, we get <code>fmap</code> for free, which lets us transform the subexpressions inside each node.</p><p>Each functor describes the shape of one layer of an expression tree, but doesn't give us recursive expressions. We recover recursion using a fixed point of functors:</p><pre><code class="haskell">data ExprF f = In (f (ExprF f))
+</code></pre><p>Here, <code>ExprF f</code> is the <i>fixed point</i> of the functor <code>f</code>. An expression is a node whose children are themselves expressions. This is essentially the same idea as <a href="https://hackage.haskell.org/package/data-fix-0.2.0/docs/Data-Fix.html"><code>Data.Fix</code></a> from the <code>data-fix</code> package, generalised to any functor.</p><p>To process such a recursive structure, we use a <i>fold</i>, which is sometimes called a <i>catamorphism</i>. It collapses the tree bottom-up by applying an <em>algebra</em> <code>f a -&gt; a</code> at each node:</p><pre><code class="haskell">foldExpr :: Functor f =&gt; (f a -&gt; a) -&gt; ExprF f -&gt; a
+foldExpr f (In t) = f (fmap (foldExpr f) t)
+</code></pre><p>The <code>fmap (foldExpr f)</code> call recursively folds all the children, turning each <code>ExprF f</code> into an <code>a</code>, before passing the resulting <code>f a</code> to the algebra <code>f</code>. This is the F-algebra pattern - a function <code>f a -&gt; a</code> is an algebra for the functor <code>f</code> with carrier type <code>a</code>.</p><p>Now for the key trick that solves the expression problem. We define a <em>coproduct</em> of two functors:</p><pre><code class="haskell">infixr 7 :+:
+
+data (f :+: g) e = Inl (f e) | Inr (g e) deriving Functor
+</code></pre><p>A value of type <code>(f :+: g) e</code> is either an <code>f e</code> (injected on the left with <code>Inl</code>) or a <code>g e</code> (injected on the right with <code>Inr</code>). This lets us build a composite functor from smaller ones, and add new node types later simply by extending the coproduct, without touching existing code.</p><p>Operations over expressions are defined as typeclasses on functors.  Here's <code>Eval</code>, which evaluates an expression to a <code>Double</code>:</p><pre><code class="haskell">class Functor f =&gt; Eval f where
+  evalF :: f Double -&gt; Double
+
+instance Eval Const where
+  evalF (Const x) = x
+
+instance Eval Add where
+  evalF (Add x y) = x + y
+
+instance (Eval f, Eval g) =&gt; Eval (f :+: g) where
+  evalF (Inl x) = evalF x
+  evalF (Inr y) = evalF y
+</code></pre><p>The coproduct instance is the key - if both <code>f</code> and <code>g</code> support <code>Eval</code>, then so does their coproduct <code>f :+: g</code>.  This propagates automatically through arbitrarily deep coproducts. We then lift the algebra into a fold:</p><pre><code class="haskell">eval :: Eval f =&gt; ExprF f -&gt; Double
+eval = foldExpr evalF
+</code></pre><p>Let's define a concrete expression type using <code>Const</code> and <code>Add</code>, and some smart constructors:</p><pre><code class="haskell">type Expr = ExprF (Const :+: Add)
+
+const :: Double -&gt; Expr
+const x = In (Inl (Const x))
+
+infixl 6 &gt;+&lt;
+
+(&gt;+&lt;) :: Expr -&gt; Expr -&gt; Expr
+x &gt;+&lt; y = In (Inr (Add x y))
+</code></pre><p>These constructors handle the <code>Inl</code>/<code>Inr</code> injections, so call sites can be oblivious to their existence. The type of <code>Expr</code> is essentially a tree where each node is either a <code>Const</code> or an <code>Add</code>:</p><pre><code>ExprF (Const :+: Add)
+       ├── Inl (Const 7.0)
+       └── Inr (Add
+                 ├── Inl (Const 3.0)
+                 └── Inl (Const 2.0))
+</code></pre><p>We can now define a brand new operation <code>View</code> that renders expressions as strings, without touching <code>Const</code>, <code>Add</code>, or <code>Eval</code>:</p><pre><code class="haskell">class Functor f =&gt; View f where
+  viewF :: f String -&gt; String
+
+instance View Const where
+  viewF (Const x) = show x
+
+instance View Add where
+  viewF (Add x y) = printf "(%s + %s)" x y
+
+instance (View f, View g) =&gt; View (f :+: g) where
+  viewF (Inl x) = viewF x
+  viewF (Inr y) = viewF y
+
+view :: View f =&gt; ExprF f -&gt; String
+view = foldExpr viewF
+</code></pre><p>Both <code>eval</code> and <code>view</code> now work on any expression type built from node functors that implement the respective typeclass, while remaining completely open to extension.</p><p>We can also add a new variant <code>Mult</code> for multiplication:</p><pre><code class="haskell">data Mult e = Mult e e deriving Functor
+
+instance Eval Mult where
+  evalF (Mult x y) = x * y
+
+instance View Mult where
+  viewF (Mult x y) = printf "(%s * %s)" x y
+</code></pre><p>We didn't touch <code>Eval</code>, <code>View</code>, <code>Const</code>, or <code>Add</code>. We just defined a new functor and gave it instances. We can now extend <code>Expr</code> by simply widening the coproduct:</p><pre><code class="haskell">type Expr = ExprF (Const :+: Add :+: Mult)
+
+const :: Double -&gt; Expr
+const x = In (Inl (Const x))
+
+infixl 6 &gt;+&lt;
+
+(&gt;+&lt;) :: Expr -&gt; Expr -&gt; Expr
+x &gt;+&lt; y = In (Inr (Inl (Add x y)))
+
+infixl 7 &gt;*&lt;
+
+(&gt;*&lt;) :: Expr -&gt; Expr -&gt; Expr
+x &gt;*&lt; y = In (Inr (Inr (Mult x y)))
+</code></pre><p>The tree structure now has an extra level of nesting in the coproduct, which is abstracted by the <code>&gt;+&lt;</code> and <code>&gt;*&lt;</code> constructors:</p><pre><code>ExprF (Const :+: Add :+: Mult)
+       ├── Inl           (Const)
+       └── Inr ── Inl    (Add)
+               └── Inr   (Mult)
+</code></pre><p>There is one subtlety though: if you construct an expression without using the smart constructors, GHC may not be able to infer the full type. For example:</p><pre><code class="haskell">λ&gt; let x1 = In (Inl (Const 7))
+λ&gt; :t x1
+x1 :: ExprF (Const :+: g)
+λ&gt; eval x1
+&lt;interactive&gt;:...: error:
+    * Ambiguous type variable 'g0' arising from a use of 'eval'
+      prevents the constraint '(Eval g0)' from being solved.
+      ...
+</code></pre><p>Because <code>Inl</code> only constrains the left side of the coproduct, <code>g</code> remains ambiguous. The fix is to either annotate <code>x1 :: Expr</code>, or even better always use constructors like <code>const</code>, which pin the full type. This is also why a function like this works correctly:</p><pre><code class="haskell">getAlgebra x
+  | x &lt; 10    = const 2.0
+  | otherwise = const 4 &gt;+&lt; const 5
+</code></pre><p>The inferred type is <code>(Ord a, Num a) =&gt; a -&gt; Expr</code>, and the smart constructors ensure the return type is unambiguous.</p><p>Now, with some constants defined:</p><pre><code class="haskell">x1 = const 7
+x2 = const 3
+x3 = const 2
+</code></pre><p>We can use both operations on expressions built from all three node types:</p><pre><code class="haskell">λ&gt; eval $ x1 &gt;+&lt; x2
+10.0
+λ&gt; eval $ x1 &gt;*&lt; x3 &gt;+&lt; x2 &gt;*&lt; x3
+20.0
+λ&gt; view $ x1 &gt;+&lt; x2
+"(7.0 + 3.0)"
+λ&gt; view $ x1 &gt;*&lt; x3 &gt;+&lt; x2 &gt;*&lt; x3
+"((7.0 * 2.0) + (3.0 * 2.0))"
+</code></pre><p>By representing each expression variant as a functor and combining them with the coproduct operator <code>:+:</code>, we get a solution to the expression problem that is modular, type-safe, and composable.</p><p>The cost is some syntactic overhead, namely the <code>Inl</code>/<code>Inr</code> injections, fixed-point wrapping with <code>In</code>, and the type inference subtlety around ambiguous coproducts. Smart constructors abstract over most of this at call sites. This approach, popularised by Swierstra's <i>Data Types à la Carte</i><sup><a href="#ref-1">[1]</a></sup>, is one of the most principled solutions to the expression problem available in Haskell.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/blob/master/haskell/src/Functors.hs">here</a> along with  <a href="https://github.com/darth10/expression-problem/blob/master/haskell/test/FunctorsTests.hs">relevant tests</a>.</p><h4 id="references">References</h4><ol><li><a name="ref-1" rel="nofollow" target="_blank" href="https://www.cs.tufts.edu/comp/150FP/archive/wouter-swierstra/DataTypesALaCarte.pdf">   Data Types à la Carte</a> -  Swierstra, Wouter (2008).</li></ol>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/a-lesson-from-open-source-software/">&laquo; A lesson from open source software</a>
+        
+        
+        <a class="right" href="/posts/can-typeclasses-solve-the-expression-problem/">Can typeclasses solve the expression problem? &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://darth10.github.io/posts/can-functors-solve-the-expression-problem/";
+            this.page.identifier = "Can functors solve the expression problem?";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
+            dsq.src = '//darth10.disqus.com/embed.js';
+            dsq.setAttribute('samesite', 'Secure');
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+</div>
+</div>
+        </div><!--/.row -->
+        <footer>Copyright &copy; 2026 Akhil Wali
+            (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
+                target="_blank" rel="noreferrer">GPLv2 License</a>)
+            <p style="text-align: center;">Powered by
+                <a href="http://cryogenweb.org" target="_blank" rel="noreferrer">Cryogen</a> and
+                <a href="https://pages.github.com/" target="_blank" rel="noreferrer">GitHub Pages</a>
+            </p>
+        </footer>
+    </div><!--/.container -->
+</body>
+</html>
