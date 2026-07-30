@@ -11,7 +11,7 @@
   hawk/hawk {:mvn/version "0.2.11"}}
 
  :aliases
- {:compile {:exec-fn darth10.github.io.core/compile}
+ {:compile {:exec-fn darth10.github.io.core/compile-all}
   :serve {:exec-fn darth10.github.io.server/start-server}
   :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
              :main-opts ["-m" "antq.core"]}
