@@ -1,17 +1,19 @@
 {:paths ["src/clj"]
 
  :deps
- {org.clojure/clojure {:mvn/version "1.12.0"}
-  com.github.liquidz/antq {:mvn/version "RELEASE"}
-  info.sunng/ring-jetty9-adapter {:mvn/version "0.34.0"}
-  cheshire/cheshire {:mvn/version "5.13.0"}
-  compojure/compojure {:mvn/version "1.7.1"}
-  cryogen-core/cryogen-core {:mvn/version "0.4.6"}
+ {org.clojure/clojure {:mvn/version "1.12.5"}
+  info.sunng/ring-jetty9-adapter {:mvn/version "0.40.2"}
+  cheshire/cheshire {:mvn/version "6.2.0"}
+  clj-text-decoration/clj-text-decoration {:mvn/version "0.0.3"}
+  compojure/compojure {:mvn/version "1.7.2"}
+  cryogen-core/cryogen-core {:mvn/version "0.5.1"}
   cryogen-markdown/cryogen-markdown {:mvn/version "0.1.13"}
   hawk/hawk {:mvn/version "0.2.11"}}
 
  :aliases
  {:compile {:exec-fn darth10.github.io.core/compile}
   :serve {:exec-fn darth10.github.io.server/start-server}
-  :outdated {:main-opts ["-m" "antq.core"]}
-  :upgrade {:main-opts ["-m" "antq.core" "--upgrade"]}}}
+  :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+             :main-opts ["-m" "antq.core"]}
+  :upgrade {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+            :main-opts ["-m" "antq.core" "--upgrade"]}}}
