@@ -7,10 +7,9 @@
    [cryogen-core.config :refer [resolve-config]]
    [cryogen-core.io :refer [path]]
    [cryogen-core.plugins :refer [load-plugins]]
-   [cryogen-core.watcher :refer [start-watcher!]]
+   [cryogen-core.watcher :as watcher]
    [darth10.github.io.reload :as reload]
    [darth10.github.io.webpack :refer [run-webpack!]]
-   [hawk.core :as hawk]
    [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
    [ring.util.codec :refer [url-decode]]
    [ring.util.response :refer [file-response redirect]]))
@@ -60,7 +59,7 @@
                         "livereload.min.js"))
      :status 200}))
 
-(defn compile-all-assets [& {:keys [reload?] :or {reload? true}}]
+(defn compile-all-assets [{:keys [reload?] :or {reload? true}} & [changeset]]
   (let [config (resolve-config)
         create-dir #(->> % (path "themes" (:theme config))
                          java.io.File. .mkdir)]
@@ -68,7 +67,7 @@
     ;; created or compile-assets will fail.
     (create-dir "css")
     (create-dir "js")
-    (compile-assets)
+    (compile-assets {} changeset)
     (run-webpack!)
     (when reload? (reload/send!))))
 
@@ -80,9 +79,10 @@
     (when (not @plugins-loaded?)
       (load-plugins)
       (swap! plugins-loaded? not))
-    (compile-all-assets :reload? false)
-    (for [dir (:watch-dirs config)]
-      (start-watcher! dir ignored-files compile-all-assets))))
+    (compile-all-assets {:reload? false})
+    (mapv (fn [dir]
+            (watcher/start-watcher-for-changes! dir ignored-files compile-all-assets {:reload? true}))
+      (:watch-dirs config))))
 
 (defonce server (atom []))
 
@@ -100,8 +100,8 @@
 (defn stop-server []
   (when-let [[[& file-watchers]
               http-instance reload-instance] (seq @server)]
-    (doseq [w file-watchers]
-      (hawk/stop! w))
+    (doseq [^java.nio.file.WatchService w file-watchers]
+      (.close w))
     (.stop http-instance)
     (.stop reload-instance)
     (swap! server empty)))
