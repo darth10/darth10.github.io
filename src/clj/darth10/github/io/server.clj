@@ -68,7 +68,7 @@
     ;; created or compile-assets will fail.
     (create-dir "css")
     (create-dir "js")
-    (compile-assets config)
+    (compile-assets)
     (run-webpack!)
     (when reload? (reload/send!))))
 
@@ -94,7 +94,6 @@
                                     :join? false})
         reload-instance (run-jetty reload-handler
                                    {:port 35729
-                                    :allow-null-path-info true
                                     :join? false})]
     (swap! server conj file-watchers http-instance reload-instance)))
 
