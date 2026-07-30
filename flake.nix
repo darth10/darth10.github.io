@@ -17,11 +17,13 @@
       in {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            (clojure.override { jdk = jdk21; })
+            (clojure.override {jdk = jdk21;})
             nodejs_24
             dart-sass
           ];
         };
+
+        formatter = pkgs.alejandra;
       }
     );
 }
