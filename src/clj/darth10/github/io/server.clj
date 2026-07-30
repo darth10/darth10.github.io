@@ -108,5 +108,5 @@
     (swap! server empty)))
 
 (comment
- (start-server)
- (stop-server))
+  (start-server)
+  (stop-server))
