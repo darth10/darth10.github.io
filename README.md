@@ -15,8 +15,7 @@ To get started:
    clj -M:deps
    ```
 1. Start the development server by calling
-   `darth10.github.io.server/start-server`.
-
-   Note that the `serve` command will not recompile assets.
+   `darth10.github.io.server/start-server` through the REPL or the `clj
+   -X:serve` command.
 
 To update Clojure dependencies, run `clj -M:outdated` and `clj -M:upgrade`.
