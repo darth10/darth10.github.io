@@ -20,6 +20,7 @@
  :disqus-shortname   "darth10"
  :ignored-files      [#"\.#.*" #".*\.swp$"]
  :watch-dirs         ["content" "themes" "src/js" "src/scss"]
+ :sass-src           []
  :posts-per-page     4
  :blocks-per-preview 3
  :previews?          true
