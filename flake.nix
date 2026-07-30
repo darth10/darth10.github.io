@@ -18,9 +18,9 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             clojure
-            jdk22
+            jdk25
             nodejs
-            nodePackages.sass
+            sass
           ];
         };
       }
