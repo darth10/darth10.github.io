@@ -18,9 +18,9 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             clojure
-            jdk25
+            jdk21
             nodejs
-            sass
+            dart-sass
           ];
         };
       }
