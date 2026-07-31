@@ -59,30 +59,30 @@
                         "livereload.min.js"))
      :status 200}))
 
-(defn compile-all-assets [{:keys [reload?] :or {reload? true}} & [changeset]]
-  (let [config (resolve-config)
-        create-dir #(->> % (path "themes" (:theme config))
-                         java.io.File. .mkdir)]
-    ;; Directories themes/*/css and themes/*/js need to be
-    ;; created or compile-assets will fail.
-    (create-dir "css")
-    (create-dir "js")
-    (compile-assets {} changeset)
-    (run-webpack!)
-    (when reload? (reload/send!))))
+(defn compile-all-assets
+  ([] (compile-all-assets {}))
+  ([{:keys [reload?] :or {reload? true}}]
+   (let [config (resolve-config)
+         create-dir #(->> % (path "themes" (:theme config))
+                          java.io.File. .mkdir)]
+     ;; Directories themes/*/css and themes/*/js need to be
+     ;; created or compile-assets will fail.
+     (create-dir "css")
+     (create-dir "js")
+     (compile-assets)
+     (run-webpack!)
+     (when reload? (reload/send!)))))
 
 (defonce plugins-loaded? (atom false))
 
 (defn init-server []
-  (let [config (resolve-config)
-        ignored-files (:ignored-files config)]
+  (let [{:keys [ignored-files watch-dirs]} (resolve-config)]
     (when (not @plugins-loaded?)
       (load-plugins)
       (swap! plugins-loaded? not))
     (compile-all-assets {:reload? false})
-    (mapv (fn [dir]
-            (watcher/start-watcher-for-changes! dir ignored-files compile-all-assets {:reload? true}))
-      (:watch-dirs config))))
+    (mapv #(watcher/start-watcher! % ignored-files compile-all-assets)
+          watch-dirs)))
 
 (defonce server (atom []))
 
