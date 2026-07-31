@@ -40,6 +40,10 @@ module.exports = [{
           },
           'sass-loader'
         ],
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       }
     ]
   },
@@ -49,7 +53,6 @@ module.exports = [{
     }),
     new CopyPlugin({
       patterns: [
-        { from: '*.min.js', to: 'js/[name][ext]'},
         {
           from: path.resolve(__dirname, 'node_modules/@fontsource/alegreya-sans/files/alegreya-sans-latin-{400,500,700}-normal.woff2'),
           to: 'fonts/[name][ext]'
