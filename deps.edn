@@ -7,8 +7,7 @@
   clj-text-decoration/clj-text-decoration {:mvn/version "0.0.3"}
   compojure/compojure {:mvn/version "1.7.2"}
   cryogen-core/cryogen-core {:mvn/version "0.5.1"}
-  cryogen-markdown/cryogen-markdown {:mvn/version "0.1.13"}
-  hawk/hawk {:mvn/version "0.2.11"}}
+  cryogen-markdown/cryogen-markdown {:mvn/version "0.1.13"}}
 
  :aliases
  {:compile {:exec-fn darth10.github.io.core/compile-all}
