@@ -14,5 +14,7 @@
     (let [result (shell/sh "npx" "webpack")]
       (if (zero? (:exit result))
         (println (text/cyan (:out result)))
-        (println (text/red (:err result))
-                 (text/red (:out result)))))))
+        (do
+          (println (text/red (:err result))
+                   (text/red (:out result)))
+          (throw (ex-info "Error running webpack" result)))))))
