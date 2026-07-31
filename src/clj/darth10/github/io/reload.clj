@@ -10,6 +10,9 @@
                                         (swap! sockets conj ws))
                              :on-close (fn [ws _ _]
                                          (swap! sockets disj ws))
+                             :on-error (fn [ws ex]
+                                         (println "Error sending to websocket:" (ex-message ex))
+                                         (swap! sockets disj ws))
                              :on-message (fn on-ws-message [ws text-message]
                                            (when (= "hello" (get (json/parse-string text-message) "command"))
                                              (ring-ws/send ws (json/generate-string {"command" "hello"
