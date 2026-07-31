@@ -48,8 +48,8 @@
   (route/files "/")
   (route/not-found "Page not found"))
 
-(def http-handler
-  (wrap-subdirectories routes (resolve-config)))
+(defn http-handler [config]
+  (wrap-subdirectories routes config))
 
 (defn reload-handler [request]
   (if (jetty/ws-upgrade-request? request)
@@ -88,14 +88,15 @@
 
 (defn start-server [& {:keys [port]
                        :or {port 4000}}]
-  (let [file-watchers   (init-server)
-        http-instance   (run-jetty http-handler
-                                   {:port port
-                                    :join? false})
-        reload-instance (run-jetty reload-handler
-                                   {:port 35729
-                                    :join? false})]
-    (swap! server conj file-watchers http-instance reload-instance)))
+  (when (empty? @server)
+    (let [file-watchers   (init-server)
+          http-instance   (run-jetty (http-handler (resolve-config))
+                                     {:port port
+                                      :join? false})
+          reload-instance (run-jetty reload-handler
+                                     {:port 35729
+                                      :join? false})]
+      (swap! server conj file-watchers http-instance reload-instance))))
 
 (defn stop-server []
   (when-let [[[& file-watchers]
