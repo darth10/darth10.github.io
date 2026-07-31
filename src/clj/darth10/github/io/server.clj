@@ -15,9 +15,9 @@
    [ring.util.response :refer [file-response redirect]]))
 
 (defn wrap-subdirectories
-  [handler]
+  [handler config]
   (fn [request]
-    (let [{:keys [clean-urls blog-prefix public-dest]} (resolve-config)
+    (let [{:keys [clean-urls blog-prefix public-dest]} config
           req-uri (.substring (url-decode (:uri request)) 1)
           res-path (if (or (.endsWith req-uri "/")
                            (.endsWith req-uri ".html")
@@ -49,7 +49,7 @@
   (route/not-found "Page not found"))
 
 (def http-handler
-  (wrap-subdirectories routes))
+  (wrap-subdirectories routes (resolve-config)))
 
 (defn reload-handler [request]
   (if (jetty/ws-upgrade-request? request)
