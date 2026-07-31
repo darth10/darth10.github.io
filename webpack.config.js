@@ -11,8 +11,8 @@ module.exports = [{
   },
   context: path.resolve(__dirname, 'src/js'),
   output: {
-    path: path.resolve(__dirname, 'public/js'),
-    filename: '[name].min.js'
+    path: path.resolve(__dirname, 'public'),
+    filename: 'js/[name].min.js'
   },
   module: {
     rules: [
@@ -30,7 +30,14 @@ module.exports = [{
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // Fonts are copied to public/fonts and served from the site
+              // root, so leave root-absolute url() references untouched.
+              url: { filter: (url) => !url.startsWith('/') }
+            }
+          },
           'sass-loader'
         ],
       }
@@ -38,11 +45,19 @@ module.exports = [{
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '../css/[name].css'
+      filename: 'css/[name].css'
     }),
     new CopyPlugin({
       patterns: [
-        { from: '*.min.js'}
+        { from: '*.min.js', to: 'js/[name][ext]'},
+        {
+          from: path.resolve(__dirname, 'node_modules/@fontsource/alegreya-sans/files/alegreya-sans-latin-{400,500,700}-normal.woff2'),
+          to: 'fonts/[name][ext]'
+        },
+        {
+          from: path.resolve(__dirname, 'node_modules/@fontsource/cascadia-code/files/cascadia-code-latin-{400,700}-normal.woff2'),
+          to: 'fonts/[name][ext]'
+        }
       ]})
   ]}, {
     mode: mode,
