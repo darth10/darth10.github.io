@@ -97,8 +97,10 @@ svg {
 }
 
 .contact-info {
-  display: table;
-  margin: auto;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding-top: 20px;
 }
 
 #page-header {
