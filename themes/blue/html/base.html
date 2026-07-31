@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="darth10.github.io">
+    <meta name="description" content="{% if post.title %}{{post.title}}{% else %}{{description}}{% endif %}">
+    <meta property="og:type" content="{% if post %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{site-url}}{{uri}}">
+    <meta property="og:image" content="{{site-url}}/img/logo.png">
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
     <link rel="canonical" href="{{site-url}}{{uri}}">
     <link rel="icon" href="/img/logo.png">
