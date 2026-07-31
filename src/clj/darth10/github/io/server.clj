@@ -14,10 +14,12 @@
    [ring.util.codec :refer [url-decode]]
    [ring.util.response :refer [file-response redirect]]))
 
+(def config (delay (resolve-config)))
+
 (defn wrap-subdirectories
-  [handler config]
+  [handler]
   (fn [request]
-    (let [{:keys [clean-urls blog-prefix public-dest]} config
+    (let [{:keys [clean-urls blog-prefix public-dest]} @config
           req-uri (.substring (url-decode (:uri request)) 1)
           res-path (if (or (.endsWith req-uri "/")
                            (.endsWith req-uri ".html")
@@ -41,15 +43,15 @@
           (handler request)))))
 
 (defroutes routes
-  (GET "/" [] (redirect (let [config (resolve-config)]
-                          (path (:blog-prefix config)
-                                (when (= (:clean-urls config) :dirty)
+  (GET "/" [] (redirect (let [{:keys [blog-prefix clean-urls]} @config]
+                          (path blog-prefix
+                                (when (= clean-urls :dirty)
                                   "index.html")))))
   (route/files "/")
   (route/not-found "Page not found"))
 
-(defn http-handler [config]
-  (wrap-subdirectories routes config))
+(def http-handler
+  (wrap-subdirectories routes))
 
 (defn reload-handler [request]
   (if (jetty/ws-upgrade-request? request)
@@ -62,8 +64,7 @@
 (defn compile-all-assets
   ([] (compile-all-assets {}))
   ([{:keys [reload?] :or {reload? true}}]
-   (let [config (resolve-config)
-         create-dir #(->> % (path "themes" (:theme config))
+   (let [create-dir #(->> % (path "themes" (:theme @config))
                           java.io.File. .mkdir)]
      ;; Directories themes/*/css and themes/*/js need to be
      ;; created or compile-assets will fail.
@@ -76,7 +77,7 @@
 (defonce plugins-loaded? (atom false))
 
 (defn init-server []
-  (let [{:keys [ignored-files watch-dirs]} (resolve-config)]
+  (let [{:keys [ignored-files watch-dirs]} @config]
     (when (not @plugins-loaded?)
       (load-plugins)
       (swap! plugins-loaded? not))
@@ -90,7 +91,7 @@
                        :or {port 4000}}]
   (when (empty? @server)
     (let [file-watchers   (init-server)
-          http-instance   (run-jetty (http-handler (resolve-config))
+          http-instance   (run-jetty http-handler
                                      {:port port
                                       :join? false})
           reload-instance (run-jetty reload-handler
