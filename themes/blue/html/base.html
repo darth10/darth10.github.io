@@ -4,9 +4,13 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{% if post.title %}{{post.title}}{% else %}{{description}}{% endif %}">
+    <meta property="og:site_name" content="{{title}}">
+    <meta property="og:title" content="{% if post.title %}{{post.title}}{% else %}{% if page.title %}{{page.title}}{% else %}{{title}}{% endif %}{% endif %}">
+    <meta property="og:description" content="{% if post.description %}{{post.description}}{% else %}{{description}}{% endif %}">
     <meta property="og:type" content="{% if post %}article{% else %}website{% endif %}">
     <meta property="og:url" content="{{site-url}}{{uri}}">
     <meta property="og:image" content="{{site-url}}/img/logo.png">
+    <meta name="twitter:card" content="summary">
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
     <link rel="canonical" href="{{site-url}}{{uri}}">
     <link rel="icon" href="/img/logo.png">
