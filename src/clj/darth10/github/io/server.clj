@@ -54,7 +54,7 @@
 (defn reload-handler [request]
   (if (jetty/ws-upgrade-request? request)
     (reload/ws-handler request)
-    ;; Serve livereload.js from npm modules.
+    ;; Serve livereload-js from npm modules.
     {:body (slurp (path "node_modules" "livereload-js" "dist"
                         "livereload.min.js"))
      :status 200}))
