@@ -19,6 +19,6 @@
 
 (defn send! []
   (doseq [ws @sockets]
-    (ring-ws/send ws (json/generate-string (merge {:command "reload"
-                                                   :liveCSS true
-                                                   :path "."})))))
+    (ring-ws/send ws (json/generate-string {:command "reload"
+                                            :liveCSS true
+                                            :path "."}))))
