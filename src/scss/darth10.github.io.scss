@@ -2,7 +2,7 @@
 @import '_mixins';
 
 $light-color: #f2f2f2;
-$header-font: 'Alegreya Sans';
+$header-font: 'Alegreya Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $header-font;
