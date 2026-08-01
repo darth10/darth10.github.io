@@ -25,7 +25,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "jquery.flot": "^0.8.3",
-    "turbolinks": "^5.2.0"
+    "@hotwired/turbo": "^8.0.0",
+    "jquery.flot": "^0.8.3"
   }
 }

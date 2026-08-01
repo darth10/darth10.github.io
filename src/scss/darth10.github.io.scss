@@ -7,6 +7,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $header-font;
 }
 
+html {
+  // Offset in-page anchor targets below the fixed-top navbar.
+  scroll-padding-top: 66px;
+}
+
 body {
   color: #333;
   background-color: $light-color;

@@ -1,7 +1,7 @@
 import './../scss/darth10.github.io.scss';
 import 'highlight.js/styles/base16/solarized-dark.css';
 
-import turbolinks from 'turbolinks';
+import '@hotwired/turbo';
 import hljs from 'highlight.js/lib/core';
 import c from 'highlight.js/lib/languages/c';
 import python from 'highlight.js/lib/languages/python';
@@ -27,31 +27,18 @@ hljs.registerLanguage('xml', xml);
 hljs.registerAliases(['elisp', 'emacs-lisp'], { languageName: 'lisp' });
 
 function initHighlighting() {
-  document.querySelectorAll('pre code').forEach((block) => hljs.highlightElement(block));
+  document.querySelectorAll('pre code:not([data-highlighted])').forEach((block) => hljs.highlightElement(block));
 };
 
-// This is a workaround for an issue with Turbolinks.
-// See: https://github.com/turbolinks/turbolinks/issues/75
-function checkAndPreventOnAnchor(event) {
-  if (event.target.getAttribute('href').charAt(0) === '#') {
-    setTimeout(function () {
-      // This is needed to scroll in-page anchor links below the
-      // Bootstrap NavBar.
-      if (window.location.hash) {
-        scrollBy(0, -66);
-      }
-    }, 10);
-    return event.preventDefault();
-  }
+function excludeAnchorsFromTurbo() {
+  document.querySelectorAll('a[href^="#"]').forEach((a) => a.setAttribute('data-turbo', 'false'));
 };
 
 function addListeners(e, func) {
   document.addEventListener(e, func, false);
 };
 
-addListeners('turbolinks:load', initHighlighting);
+addListeners('turbo:load', initHighlighting);
 addListeners('DOMContentLoaded', initHighlighting);
 
-addListeners('turbolinks:click', checkAndPreventOnAnchor);
-
-turbolinks.start();
+addListeners('turbo:load', excludeAnchorsFromTurbo);
