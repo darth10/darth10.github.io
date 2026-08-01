@@ -34,6 +34,28 @@ function excludeAnchorsFromTurbo() {
   document.querySelectorAll('a[href^="#"]').forEach((a) => a.setAttribute('data-turbo', 'false'));
 };
 
+function initDisqus() {
+  const thread = document.getElementById('disqus_thread');
+  if (!thread) return;
+
+  const { disqusShortname, disqusUrl, disqusIdentifier } = thread.dataset;
+
+  const config = function () {
+    this.page.url = disqusUrl;
+    this.page.identifier = disqusIdentifier;
+  };
+
+  if (window.DISQUS) {
+    window.DISQUS.reset({ reload: true, config });
+  } else {
+    window.disqus_config = config;
+    const dsq = document.createElement('script');
+    dsq.src = `https://${disqusShortname}.disqus.com/embed.js`;
+    dsq.defer = true;
+    (document.head || document.body).appendChild(dsq);
+  }
+};
+
 function addListeners(e, func) {
   document.addEventListener(e, func, false);
 };
@@ -42,3 +64,5 @@ addListeners('turbo:load', initHighlighting);
 addListeners('DOMContentLoaded', initHighlighting);
 
 addListeners('turbo:load', excludeAnchorsFromTurbo);
+
+addListeners('turbo:load', initDisqus);

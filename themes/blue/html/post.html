@@ -15,18 +15,10 @@
     </div>
 
     {% if disqus-shortname %}
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_config = function () {
-            this.page.url = "{{site-url}}{{uri}}";
-            this.page.identifier = "{{post.title}}";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.defer = true;
-            dsq.src = 'https://{{disqus-shortname}}.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
+    <div id="disqus_thread"
+         data-disqus-shortname="{{disqus-shortname}}"
+         data-disqus-url="{{site-url}}{{uri}}"
+         data-disqus-identifier="{{post.title}}"></div>
     {% endif %}
 
 </div>
