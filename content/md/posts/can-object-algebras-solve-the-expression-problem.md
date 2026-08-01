@@ -1,6 +1,7 @@
 {:title "Can object algebras solve the expression problem?"
  :date "2020-03-28"
  :layout :post
+ :description "Solving the expression problem in C# with object algebras, using a parameterised interface and a factory that implements it."
  :tags ["Solving the expression problem"]}
 
 Another way to [solve the expression problem](../../tags/Solving%20the%20expression%20problem) in C# and other

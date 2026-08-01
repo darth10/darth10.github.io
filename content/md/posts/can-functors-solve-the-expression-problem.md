@@ -1,6 +1,7 @@
 {:title "Can functors solve the expression problem?"
  :date "2020-04-12"
  :layout :post
+ :description "Using functors and F-algebras to decompose expression types, adding new variants and operations through modules while keeping static type safety."
  :tags ["Solving the expression problem"]}
 
 An elegant approach to [solve the Expression Problem](../../tags/Solving%20the%20expression%20problem) 

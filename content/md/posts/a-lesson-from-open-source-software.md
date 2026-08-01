@@ -1,6 +1,7 @@
 {:title "A lesson from open source software"
  :date "2021-05-05"
- :layout :post}
+ :layout :post
+ :description "What becoming the maintainer of an open source library taught me, and the new perspectives it brought beyond just contributing."}
 
 I've always tried to contribute to open source software whenever I've seen the
 opportunity, but becoming a maintainer of an open source library gave me some

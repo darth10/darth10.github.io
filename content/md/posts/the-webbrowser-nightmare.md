@@ -1,6 +1,7 @@
 {:title "The WebBrowser nightmare"
  :date "2012-09-23"
- :layout :post}
+ :layout :post
+ :description "The frustrations of the .NET WebBrowser control and working around its keyboard input handling."}
 
 I recently had to use the `WebBrowser` .NET component in a project.
 The control is essentially Internet Explorer embedded in a `UserControl` component.

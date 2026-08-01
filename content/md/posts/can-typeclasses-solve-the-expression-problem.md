@@ -1,6 +1,7 @@
 {:title "Can typeclasses solve the expression problem?"
  :date "2020-04-03"
  :layout :post
+ :description "How Haskell typeclasses, closer to generic interfaces with ad-hoc polymorphism, can be used to solve the expression problem."
  :tags ["Solving the expression problem"]}
 
 _Typeclasses_ in Haskell roughly correspond to interfaces in object-oriented

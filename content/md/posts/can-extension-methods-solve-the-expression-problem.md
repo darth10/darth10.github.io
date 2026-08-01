@@ -1,6 +1,7 @@
 {:title "Can extension methods solve the expression problem?"
  :date "2020-03-14"
  :layout :post
+ :description "Exploring how C# extension methods tackle the expression problem by adding operations to a type without touching its original definition."
  :tags ["Solving the expression problem"]}
 
 Let's explore how [extension methods][extension-methods] in C# can solve the

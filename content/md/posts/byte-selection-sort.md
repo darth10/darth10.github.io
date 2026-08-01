@@ -1,6 +1,7 @@
 {:title "61 byte selection sort"
  :date "2010-01-13"
- :layout :post}
+ :layout :post
+ :description "Dissecting the smallest C array-sorting function, a remarkably compact selection sort written by Doug McIlroy."}
 
 
 Here's the absolutely smallest array sorting function in C.

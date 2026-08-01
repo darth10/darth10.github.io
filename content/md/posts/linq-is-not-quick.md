@@ -1,6 +1,7 @@
 {:title "LINQ Is Not Quick"
  :date "2019-10-18"
- :layout :post}
+ :layout :post
+ :description "A revealing look at the performance of LINQ to Objects in .NET, and the cost that its convenience can hide."}
 
 Let me just say that I am not particularly a fan of either
 microbenchmarks or premature optimization. I also feel that

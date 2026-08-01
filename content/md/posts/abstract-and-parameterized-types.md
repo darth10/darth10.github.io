@@ -1,6 +1,7 @@
 {:title "Abstract and parameterized types"
  :date "2012-08-16"
- :layout :post}
+ :layout :post
+ :description "A look at Scala's abstract and parameterized types, a revamped take on generics and templates, illustrated with the List class."}
 
 Scala supports both abstract and parameterized types, which are essentially revamped generics (in Java) or templates (in C++).
 

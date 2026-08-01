@@ -1,6 +1,7 @@
 {:title "Can partial classes solve the expression problem?"
  :date "2020-03-04"
  :layout :post
+ :description "An introduction to the expression problem and a look at whether C# partial classes can be used to solve it."
  :tags ["Solving the expression problem"]}
 
 Programmers are always defining types and operations to use these types.
