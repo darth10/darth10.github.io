@@ -5,9 +5,8 @@
     <img src="https://imgs.xkcd.com/comics/haskell.png" alt="https://xkcd.com/1312/" class="mx-auto" />
 </a>
 <br>
-<hr>
 
-<div id="post">
+<div class="post">
     {% for post in posts %}
     <div class="post-preview-header">
         <h2>{{post.title}}</h2>
@@ -20,10 +19,9 @@
     </div>
     {{post.content|safe}}
     <a href="{{post.uri}}">Continue reading &#8594;</a>
-    <hr>
     {% endfor %}
 
-    <div id="prev-next">
+    <div class="prev-next">
         {% if prev-uri %}
         <a class="left" href="{{prev-uri}}">&laquo; Prev</a>
         {% endif %}

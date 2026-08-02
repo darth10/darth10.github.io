@@ -38,8 +38,12 @@
   src: url('/fonts/cascadia-code-latin-700-normal.woff2') format('woff2');
 }
 
-@mixin border {
-  border-bottom: 1px solid #dbdbdb;
+@mixin border-bottom {
+  border-bottom: var(--border);
+}
+
+@mixin border-top {
+  border-top: var(--border);
 }
 
 @mixin header {

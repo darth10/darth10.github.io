@@ -30,7 +30,7 @@ function timeFormatter(v, axis) {
 };
 
 function loadCharts () {
-  $.plot($('#postchart1'),
+  $.plot($('.postchart1'),
          [
            { data: chartData1['iterative'], label: 'Iterative', color: '#1e90ff',order: 0 },
            { data: chartData1['linq'], label: 'LINQ', color: '#ffa500', order:1 },
@@ -56,7 +56,7 @@ function loadCharts () {
          });
 
 
-  $.plot($('#postchart2'),
+  $.plot($('.postchart2'),
          [
            { data: chartData2['iterative'], label: 'Iterative', color: '#1e90ff' },
            { data: chartData2['linq'], label: 'LINQ', color: '#ffa500' },

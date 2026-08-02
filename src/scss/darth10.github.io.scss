@@ -3,6 +3,10 @@
 $light-color: #f2f2f2;
 $header-font: 'Alegreya Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+:root {
+  --border: 1px solid #dbdbdb;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $header-font;
 }
@@ -81,14 +85,20 @@ svg {
 }
 
 .post-header {
-  @include border;
+  @include border-bottom;
   @include header;
   @include header-padding;
 }
 
 .post-preview-header {
+  @include border-top;
   @include header;
   @include header-padding;
+
+  & {
+    margin-top: 30px;
+    padding-top: 20px;
+  }
 }
 
 .post-meta {
@@ -108,17 +118,12 @@ svg {
   padding-top: 20px;
 }
 
-#page-header {
-  @include border;
+.page-header {
+  @include border-bottom;
   @include header;
 }
 
-#sidebar {
-  margin-left: 15px;
-  margin-top: 50px;
-}
-
-#content {
+.content {
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 0 0 0, 0 6px 12px rgba(34, 34, 34, 0.1);
@@ -136,11 +141,11 @@ svg {
   }
 }
 
-#post-tags {
+.post-tags {
   margin-top: 30px;
 }
 
-#prev-next {
+.prev-next {
   padding: 15px 0;
 }
 
@@ -163,7 +168,7 @@ svg {
     max-width: 80%;
   }
 
-  #content {
+  .content {
     margin-top: 30px;
     padding: 30px 40px;
   }
@@ -179,18 +184,22 @@ svg {
     text-align: left;
   }
 
-  #content {
+  .content {
     padding: 15px;
   }
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    --border: 1px solid #333;
+  }
+
   body {
     color: $light-color;
     background-color: #121212;
   }
 
-  #content {
+  .content {
     background-color: #1e1e1e;
     box-shadow: 0 0 0 0, 0 6px 12px rgba(0, 0, 0, 0.5);
   }

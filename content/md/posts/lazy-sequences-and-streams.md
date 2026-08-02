@@ -73,7 +73,7 @@ Memory usage can be ignored, as the GC is invoked unpredictably.
 
 And here are the results!
 
-<div id="postchart" class="chart"></div>
+<div class="postchart chart"></div>
 
 A weird observation in the Scala implementation is that `fiboList(1)` takes 8-10 milliseconds to evaluate.
 But Scala actually performs better on average, which is mostly due to the use of static types.

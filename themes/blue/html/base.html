@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item {% if home %}active{% endif %}"><a class="nav-link" href="{{index-uri}}">Home</a></li>
                 <li class="nav-item {% if archives %}active{% endif %}"><a class="nav-link" href="{{archives-uri}}">Archives</a></li>
@@ -60,7 +60,7 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">{% block content %}{% endblock %}</div>
+            <div class="content container-fluid">{% block content %}{% endblock %}</div>
         </div><!--/.row -->
         <footer>Copyright &copy; {{today|date:yyyy}} {{author}}
             (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"

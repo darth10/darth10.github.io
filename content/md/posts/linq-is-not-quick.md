@@ -88,7 +88,7 @@ summary of the results.
 | LinqFasterWhereSelectArray |  415.5 us |  3.324 us |  2.947 us | 429.73 KB |
 ```
 
-<div id="postchart1" class="chart"></div>
+<div class="postchart1 chart"></div>
 
 The results show that using LINQ is slightly more performant than
 imperative approaches in only one case. Even in this case, the difference in
@@ -157,7 +157,7 @@ std dev              4.508 μs   (3.249 μs .. 7.936 μs)
 variance introduced by outliers: 19% (moderately inflated)
 ```
 
-<div id="postchart2" class="chart"></div>
+<div class="postchart2 chart"></div>
 
 It looks like the Haskell equivalent is slower than imperative C# code by a tiny
 bit. It still performs significantly better than LINQ. So the next time you

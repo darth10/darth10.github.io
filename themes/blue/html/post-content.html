@@ -9,7 +9,7 @@
     {{post.content|safe}}
 </div>
 {% if post.tags|not-empty %}
-<div id="post-tags">
+<div class="post-tags">
     <b>Tags: </b>
     {% for tag in post.tags %}
     <a href="{{tag.uri}}">{{tag.name}}</a>

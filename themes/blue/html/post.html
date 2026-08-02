@@ -2,10 +2,10 @@
 {% block subtitle %}: {{post.title}}{% endblock %}
 
 {% block content %}
-<div id="post">
+<div class="post">
 
     {% include "/html/post-content.html" %}
-    <div id="prev-next">
+    <div class="prev-next">
         {% if post.prev %}
         <a href="{{post.prev.uri}}">&laquo; {{post.prev.title}}</a>
         {% endif %}

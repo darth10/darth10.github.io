@@ -40,7 +40,7 @@ function nFormatter(v, axis) {
 
 function loadCharts () {
 
-  $.plot($('#postchart'),
+  $.plot($('.postchart'),
          [
            { data: chartData['scalaFiboList'], label: 'fiboList(x)', color: '#aaff00'},
            { data: chartData['scalaFiboLast'], label: 'fiboLast(x)', color: '#00ff00' },
