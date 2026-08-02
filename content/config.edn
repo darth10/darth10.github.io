@@ -7,7 +7,6 @@
  :post-root-uri      nil
  :page-root-uri      nil
  :tag-root-uri       "tags"
- :author-root-uri    "authors"
  :blog-prefix        "/"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
