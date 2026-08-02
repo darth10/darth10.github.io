@@ -12,6 +12,7 @@ import clojure from 'highlight.js/lib/languages/clojure';
 import scala from 'highlight.js/lib/languages/scala';
 import haskell from 'highlight.js/lib/languages/haskell';
 import lisp from 'highlight.js/lib/languages/lisp';
+import nix from 'highlight.js/lib/languages/nix';
 import xml from 'highlight.js/lib/languages/xml';
 
 hljs.registerLanguage('c', c);
@@ -23,6 +24,7 @@ hljs.registerLanguage('clojure', clojure);
 hljs.registerLanguage('scala', scala);
 hljs.registerLanguage('haskell', haskell);
 hljs.registerLanguage('lisp', lisp);
+hljs.registerLanguage('nix', nix);
 hljs.registerLanguage('xml', xml);
 hljs.registerAliases(['elisp', 'emacs-lisp'], { languageName: 'lisp' });
 
