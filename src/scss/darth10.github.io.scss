@@ -187,11 +187,12 @@ svg {
 @media (prefers-color-scheme: dark) {
   body {
     color: $light-color;
-    background-color: black;
+    background-color: #121212;
   }
 
   #content {
-    background-color: #090909;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 0 0, 0 6px 12px rgba(0, 0, 0, 0.5);
   }
 
   .post-meta {
