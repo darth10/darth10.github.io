@@ -71,6 +71,17 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>Nix has changed everything</h2>
+        <div class="post-meta">
+            
+            <div class="date">1 August 2026</div>
+        </div>
+    </div>
+    <p>I've carried the same <a href="https://github.com/darth10/dotfiles">dotfiles</a> around for years, copying them from machine to machine, patching over the differences by hand, and never quite trusting that a fresh setup would end up like the last one. I used my dotfiles to configure my Linux machines at home as well as my MacBook, which I generally use for work. Every time I set up a new machine, I ended up tweaking the scripts to fix a broken package or a moved config path.</p><p>I also preferred using a Linux distribution with a rolling release, so that I could try out the latest versions of the tools I use. I moved from Ubuntu to Manjaro ages ago for this reason, but my dotfiles often broke in the most unexpected ways.</p><p>So I decided to run an experiment: rebuild my entire environment declaratively with <a href="https://wiki.nixos.org/wiki/Nix_package_manager">Nix</a> and try out <a href="https://nixos.org/">NixOS</a>, and see how far the reproducibility actually goes. The result is <a href="https://github.com/darth10/nix-dotfiles">nix-dotfiles</a>.</p>
+    <a href="/posts/nix-has-changed-everything/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>A lesson from open source software</h2>
         <div class="post-meta">
             
@@ -104,21 +115,6 @@
   add :: t -&gt; t -&gt; t
 </code></pre>
     <a href="/posts/can-typeclasses-solve-the-expression-problem/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-preview-header">
-        <h2>Can object algebras solve the expression problem?</h2>
-        <div class="post-meta">
-            
-            <div class="date">28 March 2020</div>
-        </div>
-    </div>
-    <p>Another way to <a href="../../tags/Solving%20the%20expression%20problem">solve the expression problem</a> in C# and other object-oriented languages is by using <i>object algebras</i><sup><a href="#ref-1">[1]</a></sup>. Object algebras define a parameterised interface, and a factory that implements that interface.</p><p>First, let's define the interface of the <code>Eval</code> operation.</p><pre><code class="csharp">public interface IEval
-{
-    double Eval();
-}
-</code></pre>
-    <a href="/posts/can-object-algebras-solve-the-expression-problem/">Continue reading &#8594;</a>
     <hr>
     
 

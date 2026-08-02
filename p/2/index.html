@@ -71,6 +71,21 @@
 <div id="post">
     
     <div class="post-preview-header">
+        <h2>Can object algebras solve the expression problem?</h2>
+        <div class="post-meta">
+            
+            <div class="date">28 March 2020</div>
+        </div>
+    </div>
+    <p>Another way to <a href="../../tags/Solving%20the%20expression%20problem">solve the expression problem</a> in C# and other object-oriented languages is by using <i>object algebras</i><sup><a href="#ref-1">[1]</a></sup>. Object algebras define a parameterised interface, and a factory that implements that interface.</p><p>First, let's define the interface of the <code>Eval</code> operation.</p><pre><code class="csharp">public interface IEval
+{
+    double Eval();
+}
+</code></pre>
+    <a href="/posts/can-object-algebras-solve-the-expression-problem/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-preview-header">
         <h2>Can extension methods solve the expression problem?</h2>
         <div class="post-meta">
             
@@ -119,17 +134,6 @@ public class Add : IExpr
     </div>
     <p>Let me just say that I am not particularly a fan of either microbenchmarks or premature optimization. I also feel that <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries">LINQ</a> extensions are a fine addition to the .NET standard library. The LINQ query syntax is also an integral part of the C# and F# languages.</p><p>That being said, there's an interesting and revealing tale to be told about the performance of <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects">LINQ to Objects</a>.</p><p></p>
     <a href="/posts/linq-is-not-quick/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-preview-header">
-        <h2>Lazy sequences and streams</h2>
-        <div class="post-meta">
-            
-            <div class="date">25 January 2013</div>
-        </div>
-    </div>
-    <p>Functional languages have the notion of <em>lazy sequences</em>, which are an abstraction of infinite sequences that are stored using a small, finite amount of memory. It would be wasteful to realize an entire infinite sequence before even using it. The basic idea is to only call the function that generates the sequence when needed, and cache the results. With lazy sequences, you don't blow the stack and the elements in the sequence are not recalculated everytime.</p><p>Let's look at how the two most popular and functional JVM languages handle lazy sequences.</p><p></p>
-    <a href="/posts/lazy-sequences-and-streams/">Continue reading &#8594;</a>
     <hr>
     
 
