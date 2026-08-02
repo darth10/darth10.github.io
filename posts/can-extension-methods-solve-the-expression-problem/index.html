@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">darth10.github.io</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
@@ -60,8 +60,8 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">
-<div id="post">
+            <div class="content container-fluid">
+<div class="post">
 
     <div class="post-header">
     <h2>Can extension methods solve the expression problem?</h2>
@@ -141,7 +141,7 @@ addExpr.Eval();    // throws NotImplementedException
 </code></pre><p>This doesn't work as the <code>Eval</code> call above invokes the first extension method we defined, which is still unaware of the <code>Mult</code> type. We're also overlooking an important detail about <code>switch</code> expressions - they perform type casting at runtime! This violates the type safety requirement of the expression problem and unfortunately concludes that extension methods <i>cannot</i> solve the expression problem.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/tree/master/csharp/Extensions">here</a> along with <a href="https://github.com/darth10/expression-problem/tree/master/csharp/Extensions.Tests">relevant tests</a>.</p>
 </div>
 
-<div id="post-tags">
+<div class="post-tags">
     <b>Tags: </b>
     
     <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
@@ -149,7 +149,7 @@ addExpr.Eval();    // throws NotImplementedException
 </div>
 
 
-    <div id="prev-next">
+    <div class="prev-next">
         
         <a href="/posts/can-object-algebras-solve-the-expression-problem/">&laquo; Can object algebras solve the expression problem?</a>
         

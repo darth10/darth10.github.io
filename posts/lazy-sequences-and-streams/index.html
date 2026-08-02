@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">darth10.github.io</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
@@ -60,8 +60,8 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">
-<div id="post">
+            <div class="content container-fluid">
+<div class="post">
 
     <div class="post-header">
     <h2>Lazy sequences and streams</h2>
@@ -98,11 +98,11 @@
   println("Elapsed time: " + (t1 - t0) + "ms")
   result
 }
-</code></pre><p>Note that the time taken to print the result of a statement in the REPL shouldn't be measured. We can ensure this by binding the result to a variable. This is done by using <code>val fibo = time(fiboLast(5000)</code> in Scala, and <code>(time (def fibo (fibo-last 5000)))</code> in Clojure, for example. Memory usage can be ignored, as the GC is invoked unpredictably.</p><p>And here are the results!</p><p></p><div id="postchart" class="chart"></div><p>A weird observation in the Scala implementation is that <code>fiboList(1)</code> takes 8-10 milliseconds to evaluate. But Scala actually performs better on average, which is mostly due to the use of static types.</p><p>Interestingly, the Clojure <code>fibo-list</code> function evaluates in constant time, which is less than a millisecond! Clojure also fetches cached elements in the lazy sequence much faster than Scala. However, <code>fibo-last</code> performs linearly since the <code>last</code> function has linear time-complexity.</p><p><script type="text/javascript" src="post.min.js" defer="defer"></script></p>
+</code></pre><p>Note that the time taken to print the result of a statement in the REPL shouldn't be measured. We can ensure this by binding the result to a variable. This is done by using <code>val fibo = time(fiboLast(5000)</code> in Scala, and <code>(time (def fibo (fibo-last 5000)))</code> in Clojure, for example. Memory usage can be ignored, as the GC is invoked unpredictably.</p><p>And here are the results!</p><p></p><div class="postchart chart"></div><p>A weird observation in the Scala implementation is that <code>fiboList(1)</code> takes 8-10 milliseconds to evaluate. But Scala actually performs better on average, which is mostly due to the use of static types.</p><p>Interestingly, the Clojure <code>fibo-list</code> function evaluates in constant time, which is less than a millisecond! Clojure also fetches cached elements in the lazy sequence much faster than Scala. However, <code>fibo-last</code> performs linearly since the <code>last</code> function has linear time-complexity.</p><p><script type="text/javascript" src="post.min.js" defer="defer"></script></p>
 </div>
 
 
-    <div id="prev-next">
+    <div class="prev-next">
         
         <a href="/posts/linq-is-not-quick/">&laquo; LINQ Is Not Quick</a>
         

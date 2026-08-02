@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">darth10.github.io</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
@@ -60,15 +60,14 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">
+            <div class="content container-fluid">
 
 <a href="https://xkcd.com/1312/" target="_blank" rel="noreferrer">
     <img src="https://imgs.xkcd.com/comics/haskell.png" alt="https://xkcd.com/1312/" class="mx-auto" />
 </a>
 <br>
-<hr>
 
-<div id="post">
+<div class="post">
     
     <div class="post-preview-header">
         <h2>Network packets with Python</h2>
@@ -93,7 +92,6 @@ Welcome to Scapy (2.3.3)
 &gt;&gt;&gt; r.pdfdump()
 </code></pre><p>This generates a self-explanatory packet dump. You could also use a different reader; just change the <code>conf.prog.pdfreader</code> object.</p>
     <a href="/posts/network-packets-with-py/">Continue reading &#8594;</a>
-    <hr>
     
     <div class="post-preview-header">
         <h2>__name__ and HTTP servers</h2>
@@ -108,10 +106,9 @@ else:
     print "Got imported! I'm so cool!"
 </code></pre>
     <a href="/posts/name-and-http-servers/">Continue reading &#8594;</a>
-    <hr>
     
 
-    <div id="prev-next">
+    <div class="prev-next">
         
         <a class="left" href="/p/3/">&laquo; Prev</a>
         

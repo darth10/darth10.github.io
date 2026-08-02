@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">darth10.github.io</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
@@ -60,8 +60,8 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">
-<div id="post">
+            <div class="content container-fluid">
+<div class="post">
 
     <div class="post-header">
     <h2>Can partial classes solve the expression problem?</h2>
@@ -139,7 +139,7 @@ public partial class Mult
 </code></pre><p>That was real easy! It was almost as easy as defining the <code>Const</code> and <code>Add</code> types along with their implementations of <code>Eval</code> and <code>View</code>. In fact, it's easy to define types and independent operations as partial classes because they're actually <i>open classes</i><sup><a href="#ref-3">[3]</a></sup>.</p><p>It's worth noting that all definitions of a partial class are compiled into a single class in a given assembly. So, it can be argued that adding new definitions to an existing partial class causes recompilation of the entire class. While this is definitely true, existing methods in the class will produce the same compilation output as long as they haven't been modified. Partial classes thus have the effect of not recompiling existing code.</p><p>To truly avoid recompilation of a partial class after adding a new definition, the new definition would have to be in a different assembly. Unfortunately, this is not really possible as one of the limitations of partial classes is that they cannot span multiple assemblies or namespaces.</p><p>Despite these limitations, partial classes and interfaces can be used this way to implement an adequate solution to the expression problem in C#.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses">here</a> along with  <a href="https://github.com/darth10/expression-problem/tree/master/csharp/PartialClasses.Tests">relevant tests</a>.</p><h4 id="references">References</h4><ol><li><a name="ref-1" rel="nofollow" target="_blank" href="http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt">   The Expression Problem</a> -  Wadler, Philip (1998).</li><li><a name="ref-2" rel="nofollow" target="_blank" href="https://web.archive.org/web/20170119094603/http://www.brpreiss.com/books/opus5/html/page264.html">   Expression Trees</a> -  Preiss, Bruno R. (1998).</li><li><a name="ref-3" rel="nofollow" target="_blank" href="https://people.csail.mit.edu/dnj/teaching/6898/papers/multijava.pdf">   MultiJava: Modular Open Classes and Symmetric Multiple Dispatch for Java   </a> - Clifton, Curtis; Leavens, Gary T.; Chambers, Craig; Millstein, Todd   (2000).</li></ol>
 </div>
 
-<div id="post-tags">
+<div class="post-tags">
     <b>Tags: </b>
     
     <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
@@ -147,7 +147,7 @@ public partial class Mult
 </div>
 
 
-    <div id="prev-next">
+    <div class="prev-next">
         
         <a href="/posts/can-extension-methods-solve-the-expression-problem/">&laquo; Can extension methods solve the expression problem?</a>
         

@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">darth10.github.io</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
@@ -60,15 +60,14 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">
+            <div class="content container-fluid">
 
 <a href="https://xkcd.com/1312/" target="_blank" rel="noreferrer">
     <img src="https://imgs.xkcd.com/comics/haskell.png" alt="https://xkcd.com/1312/" class="mx-auto" />
 </a>
 <br>
-<hr>
 
-<div id="post">
+<div class="post">
     
     <div class="post-preview-header">
         <h2>Can object algebras solve the expression problem?</h2>
@@ -83,7 +82,6 @@
 }
 </code></pre>
     <a href="/posts/can-object-algebras-solve-the-expression-problem/">Continue reading &#8594;</a>
-    <hr>
     
     <div class="post-preview-header">
         <h2>Can extension methods solve the expression problem?</h2>
@@ -112,7 +110,6 @@ public class Add : IExpr
 }
 </code></pre>
     <a href="/posts/can-extension-methods-solve-the-expression-problem/">Continue reading &#8594;</a>
-    <hr>
     
     <div class="post-preview-header">
         <h2>Can partial classes solve the expression problem?</h2>
@@ -123,7 +120,6 @@ public class Add : IExpr
     </div>
     <p>Programmers are always defining types and operations to use these types. It's the essence of developing features in working software. The <i>expression problem</i><sup><a href="#ref-1">[1]</a></sup> asks how easy it is to define types and operations in a given programming language or paradigm, and is stated as follows:</p><blockquote><p> <i>"The goal is to define a datatype by cases, where one can add new cases to</i> <i>the datatype and new functions over the datatype, without recompiling existing</i> <i>code, and while retaining static type safety (e.g., no casts)."</i> </p></blockquote><p></p>
     <a href="/posts/can-partial-classes-solve-the-expression-problem/">Continue reading &#8594;</a>
-    <hr>
     
     <div class="post-preview-header">
         <h2>LINQ Is Not Quick</h2>
@@ -134,10 +130,9 @@ public class Add : IExpr
     </div>
     <p>Let me just say that I am not particularly a fan of either microbenchmarks or premature optimization. I also feel that <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries">LINQ</a> extensions are a fine addition to the .NET standard library. The LINQ query syntax is also an integral part of the C# and F# languages.</p><p>That being said, there's an interesting and revealing tale to be told about the performance of <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects">LINQ to Objects</a>.</p><p></p>
     <a href="/posts/linq-is-not-quick/">Continue reading &#8594;</a>
-    <hr>
     
 
-    <div id="prev-next">
+    <div class="prev-next">
         
         <a class="left" href="/">&laquo; Prev</a>
         

@@ -40,10 +40,10 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">darth10.github.io</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
@@ -60,8 +60,8 @@
 
     <div class="container">
         <div class="row">
-            <div id="content" class="container-fluid">
-<div id="post">
+            <div class="content container-fluid">
+<div class="post">
 
     <div class="post-header">
     <h2>Can typeclasses solve the expression problem?</h2>
@@ -147,7 +147,7 @@ e1 = Add (Const 4) (Const 5)    -- fails compilation
 </code></pre><p>In conclusion, typeclasses can effectively solve the Expression Problem, but only when they are used to represent data types. This ensures the relationships between types are preserved and used correctly.</p><p>The code in this post can be found <a href="https://github.com/darth10/expression-problem/blob/master/haskell/src/Typeclasses.hs">here</a> along with  <a href="https://github.com/darth10/expression-problem/blob/master/haskell/test/TypeclassesTests.hs">relevant tests</a>.</p>
 </div>
 
-<div id="post-tags">
+<div class="post-tags">
     <b>Tags: </b>
     
     <a href="/tags/Solving%20the%20expression%20problem/">Solving the expression problem</a>
@@ -155,7 +155,7 @@ e1 = Add (Const 4) (Const 5)    -- fails compilation
 </div>
 
 
-    <div id="prev-next">
+    <div class="prev-next">
         
         <a href="/posts/can-functors-solve-the-expression-problem/">&laquo; Can functors solve the expression problem?</a>
         
