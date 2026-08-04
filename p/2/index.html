@@ -70,6 +70,19 @@
 <div class="post">
     
     <div class="post-preview-header">
+        <h2>Can typeclasses solve the expression problem?</h2>
+        <div class="post-meta">
+            
+            <div class="date">3 April 2020</div>
+        </div>
+    </div>
+    <p><i>Typeclasses</i> in Haskell roughly correspond to interfaces in object-oriented languages and can be used to <a href="../../tags/Solving%20the%20expression%20problem">solve the Expression Problem</a>. More specifically, since Haskell takes parametric polymorphism quite seriously, typeclasses are more akin to generic interfaces, but also allow ad-hoc polymorphism.</p><p>Let's first define an <code>Expr</code> typeclass with <code>const</code> and <code>add</code> as functions. These functions represent types or variants in the Expression Problem.</p><pre><code class="haskell">class Expr t where
+  const :: Double -&gt; t
+  add :: t -&gt; t -&gt; t
+</code></pre>
+    <a href="/posts/can-typeclasses-solve-the-expression-problem/">Continue reading &#8594;</a>
+    
+    <div class="post-preview-header">
         <h2>Can object algebras solve the expression problem?</h2>
         <div class="post-meta">
             
@@ -120,16 +133,6 @@ public class Add : IExpr
     </div>
     <p>Programmers are always defining types and operations to use these types. It's the essence of developing features in working software. The <i>expression problem</i><sup><a href="#ref-1">[1]</a></sup> asks how easy it is to define types and operations in a given programming language or paradigm, and is stated as follows:</p><blockquote><p> <i>"The goal is to define a datatype by cases, where one can add new cases to</i> <i>the datatype and new functions over the datatype, without recompiling existing</i> <i>code, and while retaining static type safety (e.g., no casts)."</i> </p></blockquote><p></p>
     <a href="/posts/can-partial-classes-solve-the-expression-problem/">Continue reading &#8594;</a>
-    
-    <div class="post-preview-header">
-        <h2>LINQ Is Not Quick</h2>
-        <div class="post-meta">
-            
-            <div class="date">18 October 2019</div>
-        </div>
-    </div>
-    <p>Let me just say that I am not particularly a fan of either microbenchmarks or premature optimization. I also feel that <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries">LINQ</a> extensions are a fine addition to the .NET standard library. The LINQ query syntax is also an integral part of the C# and F# languages.</p><p>That being said, there's an interesting and revealing tale to be told about the performance of <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects">LINQ to Objects</a>.</p><p></p>
-    <a href="/posts/linq-is-not-quick/">Continue reading &#8594;</a>
     
 
     <div class="prev-next">

@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="darth10&#39;s blog">
+    <meta name="description" content="How Scala&#39;s definition of the map function got closer to the Haskell definition, and where it&#39;s headed next.">
     <meta property="og:site_name" content="darth10.github.io">
-    <meta property="og:title" content="darth10.github.io">
-    <meta property="og:description" content="darth10&#39;s blog">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://darth10.github.io/archives/">
+    <meta property="og:title" content="A story about map">
+    <meta property="og:description" content="How Scala&#39;s definition of the map function got closer to the Haskell definition, and where it&#39;s headed next.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://darth10.github.io/posts/map/">
     <meta property="og:image" content="https://darth10.github.io/img/darth10-scene.jpg">
     <meta property="og:image:alt" content="https://darth10.github.io/img/logo.png">
     <meta name="twitter:card" content="summary">
-    <title>darth10.github.io: Archives</title>
-    <link rel="canonical" href="https://darth10.github.io/archives/">
+    <title>darth10.github.io: A story about map</title>
+    <link rel="canonical" href="https://darth10.github.io/posts/map/">
     <link rel="icon" href="/img/logo.png">
     <link rel="alternate" type="application/rss+xml" title="darth10.github.io" href="/feed.xml">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -46,7 +46,7 @@
         <div class="navbar-main navbar-collapse collapse">
             <ul class="nav navbar-nav justify-content-end">
                 <li class="nav-item "><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item active"><a class="nav-link" href="/archives/">Archives</a></li>
+                <li class="nav-item "><a class="nav-link" href="/archives/">Archives</a></li>
                 
                 <li class="nav-item ">
                     <a class="nav-link" href="/pages/about/">About</a>
@@ -61,125 +61,40 @@
     <div class="container">
         <div class="row">
             <div class="content container-fluid">
-<div class="posts">
-    <div class="page-header">
-        <h2>Archives</h2>
+<div class="post">
+
+    <div class="post-header">
+    <h2>A story about map</h2>
+    <div class="post-meta">
+        <div class="date">10 March 2026</div>
     </div>
+</div>
+<div>
     
-        <h4>2026 August</h4>
-        <ul>
+    <p>In Haskell, <code>map</code> is defined as:</p><pre><code class="haskell">map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+</code></pre><p></p><p>In other typed functional languages, such as OCaml, the definition is:</p><pre><code class="ocaml">List.map : ('a -&gt; 'b) -&gt; 'a list -&gt; 'b list
+</code></pre><p>But in <a href="https://github.com/scala/scala/blob/v2.12.21/src/library/scala/collection/TraversableLike.scala#L279">Scala 2</a>, from 2.8 through 2.12, this is the signature of <code>map</code> on <code>List</code>, as defined in the <code>TraversableLike</code> trait:</p><pre><code class="scala">def map[B, That](f: A =&gt; B)(implicit bf: CanBuildFrom[Repr, B, That]): That
+</code></pre><p>It returns <code>That</code>. What's <code>That</code>? Whatever <code>CanBuildFrom</code> decides it is.</p><p>The good news is that the <a href="https://docs.scala-lang.org/overviews/core/collections-migration-213.html">collections rework in Scala 2.13</a> moved away from <code>CanBuildFrom</code>, and <a href="https://scala-lang.org/api/3.6.4/scala/collection/immutable/List.html#map-fffff812">Scala 3</a>, which shares the same collections library, kept the cleaner definition:</p><pre><code class="scala">def map[B](f: A =&gt; B): List[B]
+</code></pre><p>This definition overrides the more general version declared in <code>IterableOps</code>:</p><pre><code class="scala">def map[B](f: A =&gt; B): CC[B]
+</code></pre><p>Here, <code>CC</code> is the collection's type constructor.</p><p>The story doesn't end there, though. In the <a href="https://scala-lang.org/api/3.8.2/scala/collection/IterableOps.html#map-5d3">Scala 3.8 docs</a>, where the library is compiled with experimental <a href="https://docs.scala-lang.org/scala3/reference/experimental/cc.html">capture checking</a>, the signature is already growing new appendages:</p><pre><code class="scala">def map[B](f: A =&gt; B): CC[B]^{this, f}
+</code></pre>
+</div>
+
+
+    <div class="prev-next">
         
-        <li>
-            Aug 01 - <a href="/posts/nix-has-changed-everything/">Nix has changed everything</a>
-        </li>
+        <a href="/posts/nix-has-changed-everything/">&laquo; Nix has changed everything</a>
         
-        </ul>
+        
+        <a class="right" href="/posts/a-lesson-from-open-source-software/">A lesson from open source software &raquo;</a>
+        
+    </div>
+
     
-        <h4>2026 March</h4>
-        <ul>
-        
-        <li>
-            Mar 10 - <a href="/posts/map/">A story about map</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2021 May</h4>
-        <ul>
-        
-        <li>
-            May 05 - <a href="/posts/a-lesson-from-open-source-software/">A lesson from open source software</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2020 April</h4>
-        <ul>
-        
-        <li>
-            Apr 12 - <a href="/posts/can-functors-solve-the-expression-problem/">Can functors solve the expression problem?</a>
-        </li>
-        
-        <li>
-            Apr 03 - <a href="/posts/can-typeclasses-solve-the-expression-problem/">Can typeclasses solve the expression problem?</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2020 March</h4>
-        <ul>
-        
-        <li>
-            Mar 28 - <a href="/posts/can-object-algebras-solve-the-expression-problem/">Can object algebras solve the expression problem?</a>
-        </li>
-        
-        <li>
-            Mar 14 - <a href="/posts/can-extension-methods-solve-the-expression-problem/">Can extension methods solve the expression problem?</a>
-        </li>
-        
-        <li>
-            Mar 04 - <a href="/posts/can-partial-classes-solve-the-expression-problem/">Can partial classes solve the expression problem?</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2019 October</h4>
-        <ul>
-        
-        <li>
-            Oct 18 - <a href="/posts/linq-is-not-quick/">LINQ Is Not Quick</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2013 January</h4>
-        <ul>
-        
-        <li>
-            Jan 25 - <a href="/posts/lazy-sequences-and-streams/">Lazy sequences and streams</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2012 September</h4>
-        <ul>
-        
-        <li>
-            Sept 23 - <a href="/posts/the-webbrowser-nightmare/">The WebBrowser nightmare</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2012 August</h4>
-        <ul>
-        
-        <li>
-            Aug 16 - <a href="/posts/abstract-and-parameterized-types/">Abstract and parameterized types</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2010 January</h4>
-        <ul>
-        
-        <li>
-            Jan 13 - <a href="/posts/byte-selection-sort/">61 byte selection sort</a>
-        </li>
-        
-        </ul>
-    
-        <h4>2009 May</h4>
-        <ul>
-        
-        <li>
-            May 19 - <a href="/posts/network-packets-with-py/">Network packets with Python</a>
-        </li>
-        
-        <li>
-            May 13 - <a href="/posts/name-and-http-servers/">__name__ and HTTP servers</a>
-        </li>
-        
-        </ul>
+    <div id="disqus_thread"
+         data-disqus-shortname="darth10"
+         data-disqus-url="https://darth10.github.io/posts/map/"
+         data-disqus-identifier="A story about map"></div>
     
 
 </div>

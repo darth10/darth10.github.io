@@ -80,6 +80,17 @@
     <a href="/posts/nix-has-changed-everything/">Continue reading &#8594;</a>
     
     <div class="post-preview-header">
+        <h2>A story about map</h2>
+        <div class="post-meta">
+            
+            <div class="date">10 March 2026</div>
+        </div>
+    </div>
+    <p>In Haskell, <code>map</code> is defined as:</p><pre><code class="haskell">map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+</code></pre><p></p>
+    <a href="/posts/map/">Continue reading &#8594;</a>
+    
+    <div class="post-preview-header">
         <h2>A lesson from open source software</h2>
         <div class="post-meta">
             
@@ -98,19 +109,6 @@
     </div>
     <p>An elegant approach to <a href="../../tags/Solving%20the%20expression%20problem">solve the Expression Problem</a>  is to use <i>functors</i> and <i>F-algebras</i> to decompose expression types, allowing us to add new variants and new operations easily through modules. The goal is to define a data type by cases while being able to add both new variants and operations without recompiling existing code, and while retaining static type safety.</p><p>In Haskell, adding new operations over a fixed set of types is easily done by writing a new function. But adding a new type variant to an existing data type forces you to touch every function that pattern-matches on it. In object-oriented languages the problem is actually reversed.</p><p></p>
     <a href="/posts/can-functors-solve-the-expression-problem/">Continue reading &#8594;</a>
-    
-    <div class="post-preview-header">
-        <h2>Can typeclasses solve the expression problem?</h2>
-        <div class="post-meta">
-            
-            <div class="date">3 April 2020</div>
-        </div>
-    </div>
-    <p><i>Typeclasses</i> in Haskell roughly correspond to interfaces in object-oriented languages and can be used to <a href="../../tags/Solving%20the%20expression%20problem">solve the Expression Problem</a>. More specifically, since Haskell takes parametric polymorphism quite seriously, typeclasses are more akin to generic interfaces, but also allow ad-hoc polymorphism.</p><p>Let's first define an <code>Expr</code> typeclass with <code>const</code> and <code>add</code> as functions. These functions represent types or variants in the Expression Problem.</p><pre><code class="haskell">class Expr t where
-  const :: Double -&gt; t
-  add :: t -&gt; t -&gt; t
-</code></pre>
-    <a href="/posts/can-typeclasses-solve-the-expression-problem/">Continue reading &#8594;</a>
     
 
     <div class="prev-next">
