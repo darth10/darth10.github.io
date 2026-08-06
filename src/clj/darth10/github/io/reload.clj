@@ -1,7 +1,8 @@
 (ns darth10.github.io.reload
     (:require
      [cheshire.core :as json]
-     [ring.websocket :as ring-ws]))
+     [ring.websocket :as ring-ws]
+     [taoensso.telemere :as tel]))
 
 (defonce sockets (atom #{}))
 
@@ -11,7 +12,8 @@
                              :on-close (fn [ws _ _]
                                          (swap! sockets disj ws))
                              :on-error (fn [ws ex]
-                                         (println "Error sending to websocket:" (ex-message ex))
+                                         (tel/log! {:level :error}
+                                                   ["Error sending to websocket:" (ex-message ex)])
                                          (swap! sockets disj ws))
                              :on-message (fn on-ws-message [ws text-message]
                                            (when (= "hello" (get (json/parse-string text-message) "command"))

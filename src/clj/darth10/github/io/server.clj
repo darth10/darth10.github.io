@@ -8,6 +8,7 @@
    [cryogen-core.io :refer [path]]
    [cryogen-core.plugins :refer [load-plugins]]
    [cryogen-core.watcher :as watcher]
+   [darth10.github.io.logging :as logging]
    [darth10.github.io.reload :as reload]
    [darth10.github.io.webpack :refer [run-webpack!]]
    [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
@@ -78,6 +79,7 @@
 
 (defn init-server []
   (let [{:keys [ignored-files watch-dirs]} @config]
+    (logging/init!)
     (when (not @plugins-loaded?)
       (load-plugins)
       (swap! plugins-loaded? not))
