@@ -1,7 +1,7 @@
 {:title "Evil by default"
  :date "2026-08-06"
  :layout :post
- :description "How I relapsed into vi key bindings, despite being the maintainer of God mode"}
+ :description "How I relapsed into vi key bindings, despite being the maintainer of God mode."}
 
 <!-- TODO change date -->
 
