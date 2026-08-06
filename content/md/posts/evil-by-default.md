@@ -32,12 +32,14 @@ coffin of my God mode setup. I write a lot of Clojure and Emacs Lisp, and
 structural editing that understands Evil states turned out to fit my hands
 better than the paredit-themed [`lispy`][lispy] bindings I'd been using.
 
+<!-- TODO more about navigating and editing with lispyville -->
+
 The obvious question is whether I should still be maintaining God mode. I
-believe the answer is yes, and it's for the reason I wrote about last time: the
-useful work of a maintainer is mostly not about having strong opinions on the
-feature set. It's about getting out of the way of the people who _do_ use it
-every day. It also feels like God mode is one of those packages that doesn't
-need a lot of code churn since its core implementation is solid.
+believe the answer is yes, and it's for the reason I wrote about last time:
+being a maintainer is mostly not about having strong opinions on the feature
+set. It's about getting out of the way of the people who _do_ use it every day.
+It also feels like God mode is one of those packages that doesn't need a lot of
+code churn since its core implementation is solid.
 
 And it still has one advantage over Evil: its bindings _are_ Emacs bindings, so
 there's less to learn up front, and the muscle memory works on any Emacs you sit
