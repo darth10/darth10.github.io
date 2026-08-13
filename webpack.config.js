@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mode = 'production';
@@ -79,6 +80,11 @@ module.exports = [{
     output: {
       path: path.resolve(__dirname, 'public/posts/'),
       filename: '[name]/post.min.js'
+    },
+    optimization: {
+      minimizer: [new TerserPlugin({
+        extractComments: /license|copyright/i
+      })]
     },
     module: {
       rules: [
