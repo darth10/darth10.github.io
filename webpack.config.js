@@ -1,8 +1,18 @@
+const fs = require('fs');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mode = 'production';
+
+// Each script in src/js/posts is built into public/posts/<entry name>/post.min.js,
+// so a script's filename must match the slug of the post that loads it.
+const postsContext = path.resolve(__dirname, 'src/js/posts');
+const postEntries = Object.fromEntries(
+  fs.readdirSync(postsContext)
+    .filter((file) => file.endsWith('.js'))
+    .map((file) => [path.basename(file, '.js'), './' + file])
+);
 
 module.exports = [{
   mode: mode,
@@ -64,11 +74,8 @@ module.exports = [{
       ]})
   ]}, {
     mode: mode,
-    entry: {
-      'lazy-sequences-and-streams': './lazy-sequences-and-streams.js',
-      'linq-is-not-quick':          './linq-is-not-quick.js'
-    },
-    context: path.resolve(__dirname, 'src/js/posts'),
+    entry: postEntries,
+    context: postsContext,
     output: {
       path: path.resolve(__dirname, 'public/posts/'),
       filename: '[name]/post.min.js'
