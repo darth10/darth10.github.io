@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -14,6 +15,16 @@ const postEntries = Object.fromEntries(
     .filter((file) => file.endsWith('.js'))
     .map((file) => [path.basename(file, '.js'), './' + file])
 );
+
+// highlight.js ships no license header in the sources we import, so its
+// BSD-3-Clause notice has to be added explicitly. BannerPlugin emits it as a
+// /*! comment, which Terser then extracts into the .LICENSE.txt sidecar.
+const hljsDir = path.resolve(__dirname, 'node_modules/highlight.js');
+const hljsBanner = [
+  `highlight.js ${require(path.join(hljsDir, 'package.json')).version}`,
+  '',
+  fs.readFileSync(path.join(hljsDir, 'LICENSE'), 'utf8').trim()
+].join('\n');
 
 module.exports = [{
   mode: mode,
@@ -61,6 +72,11 @@ module.exports = [{
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
+    }),
+    new webpack.BannerPlugin({
+      banner: hljsBanner,
+      raw: false,
+      entryOnly: true
     }),
     new CopyPlugin({
       patterns: [
