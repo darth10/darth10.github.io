@@ -68,7 +68,7 @@ module.exports = [{
       'lazy-sequences-and-streams': './lazy-sequences-and-streams.js',
       'linq-is-not-quick':          './linq-is-not-quick.js'
     },
-    context: path.resolve(__dirname, 'src/js'),
+    context: path.resolve(__dirname, 'src/js/posts'),
     output: {
       path: path.resolve(__dirname, 'public/posts/'),
       filename: '[name]/post.min.js'

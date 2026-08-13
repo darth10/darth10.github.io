@@ -1,0 +1,43 @@
+Licensing
+=========
+
+Copyright © Akhil Wali
+
+This repository holds both a static site generator and the writing it publishes.
+They are licensed separately. Where more than one of the statements below could
+apply to a file, the more specific one governs.
+
+The site harness is under the GNU General Public License, Version 2, the full
+text of which is in LICENSES/GPL-2.0-only.txt. This covers src/,
+content/config.edn, deps.edn, package.json, webpack.config.js, flake.nix, and
+all other files in the repository root.
+
+themes/ is derived from the "blue" theme distributed with Cryogen
+(https://github.com/cryogen-project/cryogen), copyright © the Cryogen
+contributors, and remains under the Eclipse Public License, Version 1.0, the
+full text of which is in LICENSES/EPL-1.0.txt. The templates there have been
+modified (restructured for Bootstrap 4, with markup, metadata and asset
+handling changed throughout) and those modifications are contributed under the
+same license. EPL-1.0 and GPLv2 are not compatible, which is why these files are
+licensed separately from the rest of the site harness rather than being
+relicensed.
+
+Posts, pages and images are under the Creative Commons Attribution-ShareAlike
+4.0 International License, the full text of which is in
+LICENSES/CC-BY-SA-4.0.txt. This covers everything under the content/ directory
+except config.edn.
+
+Code snippets are under the MIT No Attribution License (MIT-0), the full text of
+which is in LICENSES/MIT-0.txt. This covers code appearing within the text of
+posts and pages, and the scripts under src/js/posts/.
+
+src/js/jquery.flot.orderBars.js is third-party code, copyright © 2010 Benjamin
+Buffet, released under the MIT License. None of the above applies to it.
+
+public/ is generated output, produced from content/ and themes/. As copyright
+holder in the content, I offer the post and page text as it appears there under
+the Creative Commons Attribution-ShareAlike 4.0 International License. The
+surrounding template markup remains under EPL-1.0, and assets copied or bundled
+into public/ keep their own licenses - public/css/ contains font files under the
+SIL Open Font License 1.1, and public/posts/*/post.min.js bundles third-party
+code under the MIT License.

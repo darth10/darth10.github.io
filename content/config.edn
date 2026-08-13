@@ -14,7 +14,7 @@
  :post-date-format   "yyyy-MM-dd"
  :theme              "blue"
  :resources          ["img"]
- :keep-files         [".git", "LICENSE.md"]
+ :keep-files         [".git"]
  :disqus?            true
  :disqus-shortname   "darth10"
  :ignored-files      [#"\.#.*" #".*\.swp$"]

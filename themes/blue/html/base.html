@@ -62,9 +62,13 @@
         <div class="row">
             <div class="content container-fluid">{% block content %}{% endblock %}</div>
         </div><!--/.row -->
-        <footer>Copyright &copy; {{today|date:yyyy}} {{author}}
-            (<a href="https://github.com/darth10/darth10.github.io/blob/master/LICENSE.md"
-                target="_blank" rel="noreferrer">GPLv2 License</a>)
+        <footer>Copyright &copy; {{author}}
+            <p style="text-align: center;">
+                Text licensed with <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+                   target="_blank" rel="noreferrer license">CC BY-SA 4.0</a> &middot;
+                See <a href="https://github.com/darth10/darth10.github.io/blob/cryogen/LICENSE"
+                   target="_blank" rel="noreferrer">LICENSE</a>
+            </p>
             <p style="text-align: center;">Powered by
                 <a href="http://cryogenweb.org" target="_blank" rel="noreferrer">Cryogen</a> and
                 <a href="https://pages.github.com/" target="_blank" rel="noreferrer">GitHub Pages</a>

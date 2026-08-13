@@ -4,7 +4,7 @@
   "version": "1.3.0",
   "author": "Akhil Wali <akhil.wali.10@gmail.com>",
   "repository": "https://github.com/darth10/darth10.github.io",
-  "license": "GPL-2.0-only",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "build": "webpack"
   },

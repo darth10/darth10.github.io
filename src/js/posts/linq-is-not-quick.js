@@ -1,5 +1,5 @@
 import 'jquery.flot';
-import './jquery.flot.orderBars';
+import '../jquery.flot.orderBars';
 
 var chartData1 = {
   'iterative': [[1000, 153.39],
