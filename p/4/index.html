@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/css/darth10.github.io.css">
     <link rel="preload" href="/fonts/alegreya-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/alegreya-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="license" href="/pages/license/">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"
             integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs"
             crossorigin="anonymous" defer>
@@ -92,7 +93,7 @@
             <div class="date">13 January 2010</div>
         </div>
     </div>
-    <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/">M. Doughlas McIlroy</a> of Darthmouth College, NH USA. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
+    <p>Here's the absolutely smallest array sorting function in C. It's written by <a href="http://www.cs.dartmouth.edu/~doug/">M. Douglas McIlroy</a> of Dartmouth College, NH USA. Both versions of the function below are his, not mine, and carry his terms rather than this site's snippet license. It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive. In the function <code>s</code> shown below, <code>a</code> is the starting address of the array, and <code>b</code> is the address of the last element plus one.</p><pre><code class="c">s(int*a,int*b)
 {for(int*c=b,t;c&gt;a;)if(t=*c--,*c&gt;t)c[1]=*c,*c=t,c=b;}
 </code></pre><p>This can be made even smaller using recursion and by inferring the type specifiers of global object declarations, which is a GCC hack. In the following function, <code>n</code> is the number of elements in the array <code>a</code>.</p>
     <a href="/posts/byte-selection-sort/">Continue reading &#8594;</a>
@@ -147,10 +148,8 @@ else:
         </div><!--/.row -->
         <footer>Copyright &copy; Akhil Wali
             <div>
-                Text licensed with <a href="https://creativecommons.org/licenses/by-sa/4.0/"
-                   target="_blank" rel="noreferrer license">CC BY-SA 4.0</a> &middot;
-                See <a href="https://github.com/darth10/darth10.github.io/blob/cryogen/LICENSE"
-                   target="_blank" rel="noreferrer">LICENSE</a>
+                Text under CC BY-SA 4.0 &middot; Code snippets under MIT-0 &middot;
+                <a href="/pages/license/" rel="license">Details</a>
             </div>
             <div>Powered by
                 <a href="http://cryogenweb.org" target="_blank" rel="noreferrer">Cryogen</a> and
