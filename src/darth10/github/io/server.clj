@@ -10,6 +10,7 @@
    [cryogen-core.watcher :as watcher]
    [darth10.github.io.logging :as logging]
    [darth10.github.io.reload :as reload]
+   [darth10.github.io.reuse :refer [run-reuse-lint!]]
    [darth10.github.io.webpack :refer [run-webpack!]]
    [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
    [ring.util.codec :refer [url-decode]]
@@ -71,6 +72,7 @@
      ;; created or compile-assets will fail.
      (create-dir "css")
      (create-dir "js")
+     (when-not reload? (run-reuse-lint!))
      (compile-assets)
      (run-webpack!)
      (when reload? (reload/send!)))))

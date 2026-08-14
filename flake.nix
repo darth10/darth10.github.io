@@ -20,6 +20,7 @@
             (clojure.override {jdk = jdk21;})
             nodejs_24
             dart-sass
+            reuse
           ];
         };
 

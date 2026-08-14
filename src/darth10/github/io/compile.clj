@@ -7,5 +7,4 @@
 (defn compile-all [& _]
   (logging/init!)
   (load-plugins)
-  (compile-all-assets {:reload? false})
-  (System/exit 0))
+  (compile-all-assets {:reload? false}))
