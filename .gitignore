@@ -7,7 +7,7 @@
 /classes/
 /lib/
 /log/
-/node_modules/
+/web/node_modules/
 /out/
 /target/
 /themes/*/css/*

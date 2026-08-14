@@ -1,0 +1,29 @@
+{:site-title         "darth10.github.io"
+ :author             "Akhil Wali"
+ :description        "darth10's blog"
+ :site-url           "https://darth10.github.io/"
+ :post-root          "posts"
+ :page-root          "pages"
+ :post-root-uri      nil
+ :page-root-uri      nil
+ :tag-root-uri       "tags"
+ :blog-prefix        "/"
+ :rss-name           "feed.xml"
+ :rss-filters        ["cryogen"]
+ :recent-posts       3
+ :post-date-format   "yyyy-MM-dd"
+ :theme              "blue"
+ :resources          ["img"]
+ :keep-files         [".git"]
+ :disqus?            true
+ :disqus-shortname   "darth10"
+ :ignored-files      [#"\.#.*" #".*\.swp$"]
+ :watch-dirs         ["content" "themes" "web/js" "web/scss" "web/build"]
+ :sass-src           []
+ :posts-per-page     4
+ :blocks-per-preview 3
+ :previews?          true
+ :clean-urls         :trailing-slash
+ :collapse-subdirs?  true
+ :hide-future-posts? true
+ :debug?             false}

@@ -20,7 +20,7 @@
          :heading-anchors true)))))
 
 (defn- asciidoc []
-  (reify Markup
+  (reify m/Markup
     (dir [this] "asc")
     (ext [this] ".asc")
     (render-fn [this]

@@ -1,0 +1,48 @@
+version = 1
+SPDX-PackageName = "darth10.github.io"
+SPDX-PackageSupplier = "Akhil Wali <akhil.wali.10@gmail.com>"
+SPDX-PackageDownloadLocation = "https://github.com/darth10/darth10.github.io"
+
+# The generator. Scopes here mirror the paragraphs in LICENSE; that file remains
+# the authoritative statement and explains why each scope is what it is.
+[[annotations]]
+path = [
+  "src/**",
+  "config/**",
+  "README.md",
+  "REUSE.toml",
+  "deps.edn",
+  "flake.nix",
+  "flake.lock",
+  ".envrc",
+  ".gitignore",
+  ".gitmodules",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Akhil Wali"
+SPDX-License-Identifier = "EPL-1.0"
+
+# Derived from the "blue" theme shipped with Cryogen, so the upstream holders
+# are named alongside me.
+[[annotations]]
+path = ["themes/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = ["Akhil Wali", "The Cryogen contributors"]
+SPDX-License-Identifier = "EPL-1.0"
+
+# Scripts, stylesheets and npm build config. web/vendor/ is excluded: each file
+# there carries its own notice and terms in a .license sidecar.
+[[annotations]]
+path = ["web/*", "web/build/**", "web/js/**", "web/scss/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Akhil Wali"
+SPDX-License-Identifier = "MIT"
+
+# Posts, pages and images. The prose is CC BY-SA 4.0 and the fenced code blocks
+# within it are MIT-0; SPDX cannot express a split inside a file, so both are
+# named and LICENSE draws the line between them.
+[[annotations]]
+path = ["content/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Akhil Wali"
+SPDX-License-Identifier = "CC-BY-SA-4.0 AND MIT-0"

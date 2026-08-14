@@ -5,7 +5,8 @@
 
 
 Here's the absolutely smallest array sorting function in C.
-It's written by <a href="http://www.cs.dartmouth.edu/~doug/">M. Doughlas McIlroy</a> of Darthmouth College, NH USA.
+It's written by <a href="http://www.cs.dartmouth.edu/~doug/">M. Douglas McIlroy</a> of Dartmouth College, NH USA.
+Both versions of the function below are his, not mine, and carry his terms rather than this site's snippet license.
 It only 67 bytes long (ignoring new-line characters), which is ridiculously impressive.
 In the function `s` shown below, `a` is the starting address of the array, and `b` is the address of the last element plus one.
 
