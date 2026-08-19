@@ -30,5 +30,5 @@ are under MIT. The
 [`LICENSE`](https://github.com/darth10/darth10.github.io/blob/cryogen/LICENSE) file
 has the full statement. The third-party fonts and libraries bundled into this
 site carry their own licenses, collected in
-[`THIRD-PARTY-NOTICES.txt`](/THIRD-PARTY-NOTICES.txt) and
-[`fonts/LICENSE.txt`](/fonts/LICENSE.txt).
+[`THIRD-PARTY-NOTICES.txt`](../../THIRD-PARTY-NOTICES.txt) and
+[`fonts/LICENSE.txt`](../../fonts/LICENSE.txt).
