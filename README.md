@@ -2,16 +2,15 @@
 
 To get started:
 
-1. Install Nix flakes and `direnv`.
+1. Install Nix (with flakes enabled) and `direnv`.
 2. Initialize the `public/` submodule.
    ```sh
    git submodule update --init
    ```
-
 3. Install all dependencies. The npm project lives in `web/`.
    ```sh
    npm install --prefix web
-   clj -M:deps
+   clj -P
    ```
 4. Start the development server by calling
    `darth10.github.io.server/start-server` through the REPL or the `clj -X:serve`
@@ -22,7 +21,7 @@ To update Clojure dependencies, run `clj -M:outdated` and `clj -M:upgrade`.
 ## License
 
 There are multiple licenses in play, one per directory, plus third-party code
-that retains its own. [`LICENSE`](LICENSE) states the scope of each; the verbatim
+that retains its own license. [`LICENSE`](LICENSE) states the scope of each; the verbatim
 texts are in [`LICENSES/`](LICENSES), named by SPDX identifier.
 
 Each directory is licensed as a whole. Where more than one row below could
