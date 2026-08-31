@@ -1,29 +1,28 @@
-## darth10.github.io
+# darth10.github.io
 
 To get started:
 
 1. Install Nix flakes and `direnv`.
-1. Initialize the `public/` submodule.
-   ``` sh
-   git submodule init
-   git submodule update
+2. Initialize the `public/` submodule.
+   ```sh
+   git submodule update --init
    ```
 
-1. Install all dependencies. The npm project lives in `web/`.
+3. Install all dependencies. The npm project lives in `web/`.
    ```sh
    npm install --prefix web
    clj -M:deps
    ```
-1. Start the development server by calling
-   `darth10.github.io.server/start-server` through the REPL or the `clj
-   -X:serve` command.
+4. Start the development server by calling
+   `darth10.github.io.server/start-server` through the REPL or the `clj -X:serve`
+   command.
 
 To update Clojure dependencies, run `clj -M:outdated` and `clj -M:upgrade`.
 
 ## License
 
 There are multiple licenses in play, one per directory, plus third-party code
-that keeps its own. [`LICENSE`](LICENSE) states the scope of each; the verbatim
+that retains its own. [`LICENSE`](LICENSE) states the scope of each; the verbatim
 texts are in [`LICENSES/`](LICENSES), named by SPDX identifier.
 
 Each directory is licensed as a whole. Where more than one row below could
@@ -39,7 +38,7 @@ apply, the more specific one governs.
 The same scopes are expressed as SPDX tags in [`REUSE.toml`](REUSE.toml), so
 `reuse lint` passes; `LICENSE` remains the authoritative statement.
 
-`web/vendor/` holds third-party code that keeps its own copyright, and the
+`web/vendor/` holds third-party code that retains its own copyright, and the
 generated `public/` mixes all of the above with bundled dependencies. The build
 collects the notices for those into `public/THIRD-PARTY-NOTICES.txt` and
 `public/fonts/LICENSE.txt`. See [`LICENSE`](LICENSE) for both statements.
