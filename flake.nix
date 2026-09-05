@@ -18,7 +18,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             (clojure.override {jdk = jdk21;})
-            nodejs_24
+            bun
             dart-sass
             reuse
           ];

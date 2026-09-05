@@ -1,0 +1,32 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "darth10.github.io",
+      "dependencies": {
+        "@hotwired/turbo": "^8.0.23",
+        "highlight.js": "^11.12.0",
+        "jquery.flot": "^0.8.3",
+      },
+      "devDependencies": {
+        "@fontsource/alegreya-sans": "^5.3.0",
+        "@fontsource/cascadia-code": "^5.3.0",
+        "livereload-js": "^4.0.2",
+      },
+    },
+  },
+  "packages": {
+    "@fontsource/alegreya-sans": ["@fontsource/alegreya-sans@5.3.0", "", {}, "sha512-Uf0RbuwzhSS3NQrBFcRzEUm7TxDQW3qdAbQ6JIOhsIW6V+YN2dqlR99lhfEE38R3GHgMCMJBzqSp7aJxhNXSOw=="],
+
+    "@fontsource/cascadia-code": ["@fontsource/cascadia-code@5.3.0", "", {}, "sha512-XEGnkay3kCOAJXcrZqokezGlw1sATtpqOMOrBOuvYt6Bj6EaejU2BvO1q8AdWdNfDQ4AoYP/Zs30QRY5m9UEZw=="],
+
+    "@hotwired/turbo": ["@hotwired/turbo@8.0.23", "", {}, "sha512-GZ7cijxEZ6Ig71u7rD6LHaRv/wcE/hNsc+nEfiWOkLNqUgLOwo5MNGWOy5ZV9ZUDSiQx1no7YxjTNnT4O6//cQ=="],
+
+    "highlight.js": ["highlight.js@11.12.0", "", {}, "sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg=="],
+
+    "jquery.flot": ["jquery.flot@0.8.3", "", {}, "sha512-/tEE8J5NjwvStHDaCHkvTJpD7wDS4hE1OEL8xEmhgQfUe0gLUem923PIceNez1mz4yBNx6Hjv7pJcowLNd+nbg=="],
+
+    "livereload-js": ["livereload-js@4.0.2", "", {}, "sha512-Fy7VwgQNiOkynYyNBTo3v9hQUhcW5pFAheJN148+DTgpShjsy/22pLHKKwDK5v0kOsZsJBK+6q1PMgLvRmrwFQ=="],
+  }
+}

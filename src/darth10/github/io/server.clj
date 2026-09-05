@@ -8,10 +8,10 @@
    [cryogen-core.io :refer [path]]
    [cryogen-core.plugins :refer [load-plugins]]
    [cryogen-core.watcher :as watcher]
+   [darth10.github.io.bundle :refer [run-build!]]
    [darth10.github.io.logging :as logging]
    [darth10.github.io.reload :as reload]
    [darth10.github.io.reuse :refer [run-reuse-lint!]]
-   [darth10.github.io.webpack :refer [run-webpack!]]
    [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
    [ring.util.codec :refer [url-decode]]
    [ring.util.response :refer [file-response redirect]]))
@@ -74,7 +74,7 @@
      (create-dir "js")
      (when-not reload? (run-reuse-lint!))
      (compile-assets)
-     (run-webpack!)
+     (run-build!)
      (when reload? (reload/send!)))))
 
 (defonce plugins-loaded? (atom false))

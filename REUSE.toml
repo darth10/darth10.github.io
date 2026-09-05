@@ -30,7 +30,7 @@ precedence = "aggregate"
 SPDX-FileCopyrightText = ["Akhil Wali", "The Cryogen contributors"]
 SPDX-License-Identifier = "EPL-1.0"
 
-# Scripts, stylesheets and npm build config. web/vendor/ is excluded: each file
+# Scripts, stylesheets and Bun build config. web/vendor/ is excluded: each file
 # there carries its own notice and terms in a .license sidecar.
 [[annotations]]
 path = ["web/*", "web/build/**", "web/js/**", "web/scss/**"]

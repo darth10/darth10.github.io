@@ -1,6 +1,3 @@
-import './../scss/darth10.github.io.scss';
-import 'highlight.js/styles/base16/solarized-dark.css';
-
 import '@hotwired/turbo';
 import hljs from 'highlight.js/lib/core';
 import c from 'highlight.js/lib/languages/c';

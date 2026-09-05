@@ -17,7 +17,7 @@ contributors. The templates there have been modified (restructured for Bootstrap
 modifications are contributed under the same license.
 
 web/ is under the MIT License, the full text of which is in LICENSES/MIT.txt.
-This covers the scripts, stylesheets and build configuration of the npm project
+This covers the scripts, stylesheets and build configuration of the Bun project
 there. web/vendor/ is third-party code and is not mine to relicense; each file
 there is accompanied by a .license file of the same name, carrying that file's
 own copyright notice and license terms.

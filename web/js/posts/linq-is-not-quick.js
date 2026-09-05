@@ -55,7 +55,6 @@ function loadCharts () {
            legend: { position: 'ne', backgroundOpacity: 0.5 }
          });
 
-
   $.plot($('.postchart2'),
          [
            { data: chartData2['iterative'], label: 'Iterative', color: '#1e90ff' },

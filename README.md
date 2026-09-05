@@ -7,9 +7,9 @@ To get started:
    ```sh
    git submodule update --init
    ```
-3. Install all dependencies. The npm project lives in `web/`.
+3. Install all dependencies. The Bun project lives in `web/`.
    ```sh
-   npm install --prefix web
+   bun install --cwd web
    clj -P
    ```
 4. Start the development server by calling
@@ -30,7 +30,7 @@ apply, the more specific one governs.
 | What | License | Text |
 |---|---|---|
 | Generator - `src/`, `themes/`, `config/`, and the build files, dotfiles and README in the repository root | EPL-1.0 | [`EPL-1.0.txt`](LICENSES/EPL-1.0.txt) |
-| Scripts, styles and npm build config - `web/` | MIT | [`MIT.txt`](LICENSES/MIT.txt) |
+| Scripts, styles and Bun build config - `web/` | MIT | [`MIT.txt`](LICENSES/MIT.txt) |
 | Posts, pages and images - everything under `content/` | CC BY-SA 4.0 | [`CC-BY-SA-4.0.txt`](LICENSES/CC-BY-SA-4.0.txt) |
 | Fenced code blocks within posts and pages | MIT-0 | [`MIT-0.txt`](LICENSES/MIT-0.txt) |
 

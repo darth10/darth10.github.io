@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 // Paths below are relative to web/, not to this file's directory.
-const webRoot = path.resolve(__dirname, '..');
+const webRoot = path.resolve(import.meta.dir, '..');
 
 const read = (...segments) =>
   fs.readFileSync(path.resolve(webRoot, ...segments), 'utf8').trim();
@@ -22,26 +22,21 @@ if (mitStart < 0) throw new Error(`LICENSES/MIT.txt: no "${mitMarker}"`);
 const mitTerms = mitLicense.slice(mitStart).trim();
 
 // highlight.js ships no license header in the sources we import, so its
-// BSD-3-Clause notice has to be added explicitly. BannerPlugin emits it as a
-// /*! comment, which Terser then extracts into the .LICENSE.txt sidecar.
-const hljsDir = path.resolve(webRoot, 'node_modules/highlight.js');
+// BSD-3-Clause notice has to be added explicitly. Every other notice reaches
+// the sidecars on its own, by way of noticesFor below.
 const hljsLicense = read('node_modules/highlight.js/LICENSE');
-const hljsBanner = [
-  `highlight.js ${require(path.join(hljsDir, 'package.json')).version}`,
+const hljsVersion = JSON.parse(read('node_modules/highlight.js/package.json')).version;
+
+// Reproduces the shape webpack's BannerPlugin emitted, which Terser then
+// extracted verbatim into the sidecar.
+const block = (text) =>
+  ['/*!', ...text.split('\n').map((line) => (line ? ` * ${line}` : ' *')), ' */'].join('\n');
+
+export const hljsNoticeBlock = block([
+  `highlight.js ${hljsVersion}`,
   '',
   hljsLicense
-].join('\n');
-
-// Fontsource derives its attribution from google/fonts and credits both
-// families to Google Inc. That's incorrect, so the notices are taken from the
-// upstream projects instead.
-const fontNotices = [
-  'Copyright 2013 The Alegreya Sans Project Authors',
-  '(https://github.com/huertatipografica/Alegreya-Sans)',
-  '',
-  'Copyright (c) 2019 - Present, Microsoft Corporation,',
-  'with Reserved Font Name Cascadia Code.'
-].join('\n');
+].join('\n'));
 
 const section = (title, body) =>
   [title, '='.repeat(title.length), '', body].join('\n');
@@ -71,13 +66,24 @@ const oflSource = read('node_modules/@fontsource/alegreya-sans/LICENSE');
 const oflStart = oflSource.indexOf(oflMarker);
 if (oflStart < 0) throw new Error(`@fontsource/alegreya-sans/LICENSE: no "${oflMarker}"`);
 
-const fontLicense = [
+// Fontsource derives its attribution from google/fonts and credits both
+// families to Google Inc. That's incorrect, so the notices are taken from the
+// upstream projects instead.
+const fontNotices = [
+  'Copyright 2013 The Alegreya Sans Project Authors',
+  '(https://github.com/huertatipografica/Alegreya-Sans)',
+  '',
+  'Copyright (c) 2019 - Present, Microsoft Corporation,',
+  'with Reserved Font Name Cascadia Code.'
+].join('\n');
+
+export const fontLicense = [
   section('Fonts served from /fonts/', fontNotices),
   'SIL Open Font License',
   oflSource.slice(oflStart).trim()
 ].join('\n\n');
 
-const thirdPartyNotices = [
+export const thirdPartyNotices = [
   section('Third-party notices', [
     'This file covers the third-party code bundled into the built site. The',
     "site's own content and code are covered by LICENSE in the source",
@@ -101,25 +107,45 @@ const thirdPartyNotices = [
   section('Fonts served from /fonts/', `${fontNotices}\n\nSee /fonts/LICENSE.txt for the full license text.`)
 ].join('\n\n');
 
-// Emits assembled text files that have no source counterpart to copy.
-class EmitNoticesPlugin {
-  constructor(assets) {
-    this.assets = assets;
-  }
+// Terser used to assemble the .LICENSE.txt sidecars by scanning the bundle it
+// had just minified. Bun's bundler drops comments that are not marked legal
+// with /*! or @license, and flot's are neither, so the sources are walked here
+// instead and their notices collected the same way: every block comment that
+// mentions a license or a copyright, in import order, deduplicated.
+const NOTICE = /license|copyright/i;
+const BLOCK_COMMENT = /\/\*[\s\S]*?\*\//g;
+const SPECIFIERS = [
+  /\bimport\s+['"]([^'"]+)['"]/g,
+  /\b(?:import|export)\b[^'"();]*?\bfrom\s*['"]([^'"]+)['"]/g,
+  /\brequire\s*\(\s*['"]([^'"]+)['"]\s*\)/g
+];
 
-  apply(compiler) {
-    const { RawSource } = compiler.webpack.sources;
-    compiler.hooks.thisCompilation.tap('EmitNoticesPlugin', (compilation) => {
-      compilation.hooks.processAssets.tap({
-        name: 'EmitNoticesPlugin',
-        stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL
-      }, () => {
-        Object.entries(this.assets).forEach(([name, contents]) => {
-          compilation.emitAsset(name, new RawSource(`${contents.trim()}\n`));
-        });
-      });
-    });
-  }
-}
+const walk = (file, sources) => {
+  if (sources.has(file)) return;
 
-module.exports = { hljsBanner, fontLicense, thirdPartyNotices, EmitNoticesPlugin };
+  const source = fs.readFileSync(file, 'utf8');
+  sources.set(file, source);
+  const dir = path.dirname(file);
+
+  for (const pattern of SPECIFIERS) {
+    for (const [, specifier] of source.matchAll(pattern)) {
+      try {
+        walk(Bun.resolveSync(specifier, dir), sources);
+      } catch {
+        // Builtins and anything else the bundler will not inline either.
+      }
+    }
+  }
+};
+
+export const noticesFor = (entry) => {
+  const sources = new Map();
+  walk(path.resolve(entry), sources);
+
+  const notices = new Set();
+  for (const source of sources.values()) {
+    const matches = source.match(BLOCK_COMMENT) ?? [];
+    matches.filter((comment) => NOTICE.test(comment)).forEach((comment) => notices.add(comment));
+  }
+  return [...notices];
+};

@@ -39,7 +39,6 @@ function nFormatter(v, axis) {
 };
 
 function loadCharts () {
-
   $.plot($('.postchart'),
          [
            { data: chartData['scalaFiboList'], label: 'fiboList(x)', color: '#aaff00'},
