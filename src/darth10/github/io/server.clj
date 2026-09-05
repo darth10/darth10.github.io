@@ -14,7 +14,8 @@
    [darth10.github.io.reuse :refer [run-reuse-lint!]]
    [ring.adapter.jetty9 :as jetty :refer [run-jetty]]
    [ring.util.codec :refer [url-decode]]
-   [ring.util.response :refer [file-response redirect]]))
+   [ring.util.mime-type :refer [ext-mime-type]]
+   [ring.util.response :refer [content-type file-response get-header redirect]]))
 
 (def config (delay (resolve-config)))
 
@@ -52,8 +53,22 @@
   (route/files "/")
   (route/not-found "Page not found"))
 
+(defn wrap-file-content-type
+  "Set content-type based on served file, rather than from the request URI.
+  This is needed for serving JS module resources - `<script type=\"module\">`."
+  [handler]
+  (fn [request]
+    (let [{:keys [body] :as response} (handler request)]
+      (if-let [mime (and (instance? java.io.File body)
+                         (nil? (get-header response "Content-Type"))
+                         (ext-mime-type (.getName ^java.io.File body)))]
+        (content-type response mime)
+        response))))
+
 (def http-handler
-  (wrap-subdirectories routes))
+  (-> routes
+      wrap-subdirectories
+      wrap-file-content-type))
 
 (defn reload-handler [request]
   (if (jetty/ws-upgrade-request? request)
@@ -61,6 +76,7 @@
     ;; Serve livereload-js from npm modules.
     {:body (slurp (path "web" "node_modules" "livereload-js" "dist"
                         "livereload.min.js"))
+     :headers {"Content-Type" "text/javascript"}
      :status 200}))
 
 (defn compile-all-assets
