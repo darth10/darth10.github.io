@@ -100,6 +100,11 @@ export const thirdPartyNotices = [
     [leadingNotice(read('node_modules/@hotwired/turbo/dist/turbo.es2017-esm.js')), '', mitTerms].join('\n')
   ),
   section(
+    'Bootstrap - compiled into /css/darth10.github.io.css and bundled into /js/darth10.github.io.min.js',
+    read('node_modules/bootstrap/LICENSE')
+  ),
+  section('jQuery - bundled into /posts/*/post.min.js', read('node_modules/jquery/LICENSE.txt')),
+  section(
     'Flot and its color helpers - bundled into /posts/*/post.min.js',
     read('node_modules/jquery.flot/LICENSE.txt')
   ),

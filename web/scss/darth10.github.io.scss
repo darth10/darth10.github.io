@@ -1,45 +1,84 @@
-@import '_mixins';
+@use 'sass:map';
+
+@import 'bootstrap/scss/mixins/banner';
+@include bsBanner('');
 
 $light-color: #f2f2f2;
-$header-font: 'Alegreya Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-:root {
-  --border: 1px solid #dbdbdb;
+// Site choices, expressed as Bootstrap variables. These must precede the
+// Bootstrap imports below, where each is declared with !default.
+$body-bg: $light-color;
+$headings-font-family: 'Alegreya Sans', var(--bs-font-sans-serif);
+$font-family-monospace:
+  Consolas,
+  "Cascadia Mono",      /* Windows 11 — ships with Terminal */
+  ui-monospace,         /* Safari */
+  SFMono-Regular,       /* macOS */
+  Menlo,                /* macOS fallback */
+  "Liberation Mono",    /* Linux */
+  "DejaVu Sans Mono",   /* Linux */
+  monospace;
+$navbar-brand-font-size: 1.5rem;
+$container-max-widths: (md: 1000px);
+$border-color: #dbdbdb;
+$code-color: #6f42c1; // Bootstrap's $purple, not yet defined this early
+
+// Dark palette. With media-query colour modes _root.scss emits these under
+// prefers-color-scheme, so data-bs-theme is only ever set on the navbar.
+$color-mode-type: media-query;
+$body-bg-dark: #121212;
+$body-color-dark: $light-color;
+$border-color-dark: #333;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+// After the Bootstrap variables, whose $spacer the header mixin builds on.
+@import '_mixins';
+
+// Bootstrap emits a class per value in a group, and a responsive variant of
+// each at every breakpoint. The templates use three utility classes in all,
+// so each group is cut down to the single value it is here for.
+@function keep-value($group, $key) {
+  @return map.merge($group, (
+    responsive: false,
+    values: ($key: map.get($group, 'values', $key))
+  ));
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: $header-font;
-}
+$utilities: (
+  'margin-x': keep-value(map.get($utilities, 'margin-x'), auto),
+  'justify-content': keep-value(map.get($utilities, 'justify-content'), end),
+  'background-color': keep-value(map.get($utilities, 'background-color'), 'dark'),
+);
+
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/helpers/position';
+@import 'bootstrap/scss/utilities/api';
 
 html {
   // Offset in-page anchor targets below the fixed-top navbar.
   scroll-padding-top: 66px;
 }
 
-body {
-  color: #333;
-  background-color: $light-color;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-}
-
 pre {
   overflow-x: auto;
   overflow-y: hidden;
-  white-space: pre;
   padding: inherit;
-  border: none;
-  border-radius: 4px;
+  border-radius: var(--bs-border-radius);
 
   code {
-    @include code-font;
     word-wrap: unset;
   }
-}
-
-code {
-  @include code-font;
-  color: #428bca;
 }
 
 blockquote {
@@ -48,8 +87,7 @@ blockquote {
 }
 
 footer {
-  @include meta-font;
-
+  font-size: $font-size-sm;
   text-align: center;
   padding-top: 14px;
   padding-bottom: 14px;
@@ -63,12 +101,7 @@ svg {
 }
 
 .container {
-  max-width: 1000px;
   padding-top: 60px;
-}
-
-.row {
-  margin: auto;
 }
 
 .right {
@@ -77,12 +110,7 @@ svg {
 }
 
 .navbar-brand {
-  font-family: $header-font;
-  font-size: 24px;
-}
-
-.navbar-nav {
-  flex-grow: inherit;
+  font-family: $headings-font-family;
 }
 
 .post-header {
@@ -95,20 +123,18 @@ svg {
   @include border-top;
   @include header;
   @include header-padding;
-
-  & {
-    margin-top: 30px;
-    padding-top: 20px;
-  }
+  margin-top: $spacer * 2;
+  padding-top: $spacer * 1.25;
 }
 
 .post-meta {
-  @include meta-font;
-  color: rgba(0, 0, 0, 0.4);
+  font-size: $font-size-sm;
+  color: var(--bs-secondary-color);
 }
 
 .chart {
   width: 90%;
+  height: 200px;
   margin: auto;
 }
 
@@ -116,7 +142,7 @@ svg {
   display: flex;
   gap: 12px;
   justify-content: center;
-  padding-top: 20px;
+  padding-top: $spacer * 1.25;
 }
 
 .page-header {
@@ -125,59 +151,62 @@ svg {
 }
 
 .content {
+  margin-inline: auto;
   background-color: #fff;
-  border-radius: 3px;
-  box-shadow: 0 0 0 0, 0 6px 12px rgba(34, 34, 34, 0.1);
+  border-radius: var(--bs-border-radius-sm);
+  box-shadow: var(--bs-box-shadow);
 
   img {
     max-width: 90%;
     height: auto;
     display: block;
+    border-radius: var(--bs-border-radius);
 
     &.photo {
       max-width: 80%;
       height: auto;
-      border-radius: 4px;
+    }
+  }
+
+  .comic {
+    display: block;
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+    overflow: hidden;
+
+    // The comic's own 2px panel frame is painted into the PNG with square
+    // corners; pull it under the wrapper's clip so the frame below can curve.
+    img {
+      max-width: none;
+      margin: -3px;
     }
   }
 }
 
 .post-tags {
-  margin-top: 30px;
+  margin-top: $spacer * 2;
 }
 
 .prev-next {
   padding: 15px 0;
 }
 
-@media (min-width: 320px) {
-  .chart {
-    height: 200px;
-  }
-
-  .row {
-    max-width: 100%;
-  }
-}
-
-@media (min-width: 768px) {
+@include media-breakpoint-up(md) {
   .chart {
     height: 300px;
   }
 
-  .row {
-    max-width: 80%;
-  }
-
   .content {
-    margin-top: 30px;
-    padding: 30px 40px;
+    max-width: 80%;
+    margin-top: $spacer * 2;
+    padding: ($spacer * 2) ($spacer * 2.5);
   }
 }
 
-@media (max-width: 767px) {
+@include media-breakpoint-down(md) {
   body {
-    @include meta-font;
+    font-size: $font-size-sm;
   }
 
   .post-meta .right {
@@ -190,22 +219,8 @@ svg {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --border: 1px solid #333;
-  }
-
-  body {
-    color: $light-color;
-    background-color: #121212;
-  }
-
+@include color-mode(dark) {
   .content {
     background-color: #1e1e1e;
-    box-shadow: 0 0 0 0, 0 6px 12px rgba(0, 0, 0, 0.5);
-  }
-
-  .post-meta {
-    color: rgba(255, 255, 255, 0.5);
   }
 }

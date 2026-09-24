@@ -1,3 +1,4 @@
+import '../jquery-global.js';
 import 'jquery.flot';
 import '../../vendor/jquery.flot.orderBars';
 

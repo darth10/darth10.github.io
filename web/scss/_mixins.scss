@@ -39,39 +39,17 @@
 }
 
 @mixin border-bottom {
-  border-bottom: var(--border);
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
 }
 
 @mixin border-top {
-  border-top: var(--border);
+  border-top: var(--bs-border-width) solid var(--bs-border-color);
 }
 
 @mixin header {
-  margin-bottom: 20px;
-
-  h2 {
-    font-size: 32px;
-  }
+  margin-bottom: $spacer * 1.25;
 }
 
 @mixin header-padding {
-  & {
-    padding-bottom: 8px;
-  }
-}
-
-@mixin meta-font {
-  font-size: 14px;
-}
-
-@mixin code-font {
-  font-family:
-    Consolas,
-    "Cascadia Mono",      /* Windows 11 — ships with Terminal */
-    ui-monospace,         /* Safari */
-    SFMono-Regular,       /* macOS */
-    Menlo,                /* macOS fallback */
-    "Liberation Mono",    /* Linux */
-    "DejaVu Sans Mono",   /* Linux */
-    monospace;
+  padding-bottom: 8px;
 }

@@ -16,9 +16,6 @@
     <link rel="canonical" href="{{site-url}}{{uri}}">
     <link rel="icon" href="/img/logo.png">
     <link rel="alternate" type="application/rss+xml" title="darth10.github.io" href="/feed.xml">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-          crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"
           integrity="sha384-nRgPTkuX86pH8yjPJUAFuASXQSSl2/bBUiNV47vSYpKFxHJhbcrGnmlYpYJMeD7a"
           crossorigin="anonymous">
@@ -26,43 +23,35 @@
     <link rel="preload" href="/fonts/alegreya-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/alegreya-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="license" href="/pages/license/">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"
-            integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs"
-            crossorigin="anonymous" defer>
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
-            crossorigin="anonymous" defer>
-    </script>
     <script type="module" src="/js/darth10.github.io.min.js"></script>
     {% block files %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target=".navbar-main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-main navbar-collapse collapse">
-            <ul class="nav navbar-nav justify-content-end">
-                <li class="nav-item {% if home %}active{% endif %}"><a class="nav-link" href="{{index-uri}}">Home</a></li>
-                <li class="nav-item {% if archives %}active{% endif %}"><a class="nav-link" href="{{archives-uri}}">Archives</a></li>
-                {% for nav-page in navbar-pages %}
-                <li class="nav-item {%ifequal page.uri nav-page.uri %}active{% endifequal %}">
-                    <a class="nav-link" href="{{nav-page.uri}}">{{nav-page.title}}</a>
-                </li>
-                {% endfor %}
-                <li class="nav-item"><a class="nav-link" href="{{rss-uri}}">RSS</a></li>
-            </ul>
+    <nav class="navbar navbar-expand-md fixed-top bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-main" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-end" id="navbar-main">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link{% if home %} active{% endif %}"{% if home %} aria-current="page"{% endif %} href="{{index-uri}}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link{% if archives %} active{% endif %}"{% if archives %} aria-current="page"{% endif %} href="{{archives-uri}}">Archives</a></li>
+                    {% for nav-page in navbar-pages %}
+                    <li class="nav-item">
+                        <a class="nav-link{% ifequal page.uri nav-page.uri %} active{% endifequal %}"{% ifequal page.uri nav-page.uri %} aria-current="page"{% endifequal %} href="{{nav-page.uri}}">{{nav-page.title}}</a>
+                    </li>
+                    {% endfor %}
+                    <li class="nav-item"><a class="nav-link" href="{{rss-uri}}">RSS</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
 
     <div class="container">
-        <div class="row">
-            <div class="content container-fluid">{% block content %}{% endblock %}</div>
-        </div><!--/.row -->
+        <div class="content">{% block content %}{% endblock %}</div>
         <footer>Copyright &copy; {{author}}
             <div>
                 Text under CC BY-SA 4.0 &middot; Code snippets under MIT-0 &middot;
