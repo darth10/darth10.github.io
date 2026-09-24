@@ -76,7 +76,10 @@ for (const entry of postEntries) {
 // highlight.js theme appended to it, which is what the JS entry point used to
 // pull in through css-loader. Root-absolute url() references are left alone by
 // both halves, so the fonts below resolve against the site root.
-const styles = await $`sass --style=compressed --no-source-map ${path.join(web, 'scss/darth10.github.io.scss')}`.text();
+// Bootstrap's partials resolve through the node_modules load path. Its own
+// deprecation warnings are silenced; ours for @import are too, since Bootstrap
+// 5 does not support @use yet.
+const styles = await $`sass --style=compressed --no-source-map --quiet-deps --silence-deprecation=import --load-path ${path.join(web, 'node_modules')} ${path.join(web, 'scss/darth10.github.io.scss')}`.text();
 const theme = await Bun.file(path.join(web, 'node_modules/highlight.js/styles/base16/solarized-dark.css')).text();
 
 await emit('css/darth10.github.io.css', `${styles.trim()}\n${theme.trimEnd()}\n`);

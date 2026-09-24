@@ -1,4 +1,5 @@
 import '@hotwired/turbo';
+import 'bootstrap/js/dist/collapse';
 import hljs from 'highlight.js/lib/core';
 import c from 'highlight.js/lib/languages/c';
 import python from 'highlight.js/lib/languages/python';
@@ -35,6 +36,19 @@ function excludeAnchorsFromTurbo() {
   document.querySelectorAll('a[href^="#"]').forEach((a) => a.setAttribute('data-turbo', 'false'));
 };
 
+function collapseNavbar() {
+  const panel = document.querySelector('.navbar-collapse');
+  if (panel) {
+    panel.classList.remove('show', 'collapsing');
+    panel.style.height = '';
+  }
+  const toggler = document.querySelector('.navbar-toggler');
+  if (toggler) {
+    toggler.classList.add('collapsed');
+    toggler.setAttribute('aria-expanded', 'false');
+  }
+};
+
 function initDisqus() {
   const thread = document.getElementById('disqus_thread');
   if (!thread) return;
@@ -67,3 +81,5 @@ addListeners('DOMContentLoaded', initHighlighting);
 addListeners('turbo:load', excludeAnchorsFromTurbo);
 
 addListeners('turbo:load', initDisqus);
+
+addListeners('turbo:before-cache', collapseNavbar);

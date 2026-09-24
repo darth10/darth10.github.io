@@ -13,7 +13,7 @@ deps.edn, flake.nix, flake.lock, .envrc, REUSE.toml, .gitignore and .gitmodules.
 themes/ is derived from the "blue" theme distributed with Cryogen
 (https://github.com/cryogen-project/cryogen), copyright © the Cryogen
 contributors. The templates there have been modified (restructured for Bootstrap
-4, with markup, metadata and asset handling changed throughout) and those
+5, with markup, metadata and asset handling changed throughout) and those
 modifications are contributed under the same license.
 
 web/ is under the MIT License, the full text of which is in LICENSES/MIT.txt.
@@ -59,20 +59,26 @@ Assets copied or bundled into public/ keep their own licenses:
     Both notices and the license text are emitted together into
     public/fonts/LICENSE.txt, so that they travel with the fonts.
 
-  - public/css/darth10.github.io.css includes the "base16/solarized-dark" theme
-    distributed with highlight.js, by Ethan Schoonover and modified by
-    aramisgithub, taken from base16-schemes-source and offered there under MIT
-    or more permissive terms. The theme's CSS is included unminified, so its own
-    notice survives as a comment inside the stylesheet.
+  - public/css/darth10.github.io.css is compiled from Bootstrap's Sass
+    partials, copyright © 2011-2025 The Bootstrap Authors, released under the
+    MIT License; Bootstrap's banner survives as a comment at the head of the
+    stylesheet. It also includes the "base16/solarized-dark" theme distributed
+    with highlight.js, by Ethan Schoonover and modified by aramisgithub, taken
+    from base16-schemes-source and offered there under MIT or more permissive
+    terms. The theme's CSS is included unminified, so its own notice survives
+    as a comment inside the stylesheet.
 
   - public/js/darth10.github.io.min.js bundles highlight.js, copyright © 2006
-    Ivan Sagalaev, released under the BSD 3-Clause License; and Turbo
+    Ivan Sagalaev, released under the BSD 3-Clause License; Turbo
     (https://turbo.hotwired.dev), copyright © 37signals LLC, released under the
-    MIT License.
+    MIT License; and Bootstrap's Collapse component, copyright © 2011-2025 The
+    Bootstrap Authors, released under the MIT License.
 
-  - public/posts/*/post.min.js bundle Flot, copyright © 2007-2014 IOLA and Ole
-    Laursen, under the MIT License, together with the color helpers inlined into
-    each bundle, released under the MIT License by Ole Laursen, October 2009.
+  - public/posts/*/post.min.js bundle jQuery, copyright © OpenJS Foundation and
+    other contributors, under the MIT License; and Flot, copyright © 2007-2014
+    IOLA and Ole Laursen, under the MIT License, together with the color helpers
+    inlined into each bundle, released under the MIT License by Ole Laursen,
+    October 2009.
     Some posts additionally include plugins from web/vendor/, which carry their
     own terms alongside them as described above.
 
