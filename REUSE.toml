@@ -15,6 +15,7 @@ path = [
   "flake.nix",
   "flake.lock",
   ".envrc",
+  ".github/**",
   ".gitignore",
   ".gitmodules",
 ]
