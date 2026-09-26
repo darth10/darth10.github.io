@@ -47,7 +47,7 @@
 
 (defroutes routes
   (GET "/" [] (redirect (let [{:keys [blog-prefix clean-urls]} @config]
-                          (path blog-prefix
+                          (path "/" blog-prefix
                                 (when (= clean-urls :dirty)
                                   "index.html")))))
   (route/files "/")

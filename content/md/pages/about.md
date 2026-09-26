@@ -5,7 +5,7 @@
 
 <script src="https://kit.fontawesome.com/17cede8a56.js" crossorigin="anonymous"></script>
 
-<img src="me.jpg" class="mx-auto photo"/>
+<img src="/pages/about/me.jpg" class="mx-auto photo"/>
 <br>
 
 I'm Akhil. I'm a software developer.
