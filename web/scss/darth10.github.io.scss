@@ -1,4 +1,6 @@
+@use 'sass:color';
 @use 'sass:map';
+@use 'sass:math';
 
 @import 'bootstrap/scss/mixins/banner';
 @include bsBanner('');
@@ -29,6 +31,7 @@ $color-mode-type: media-query;
 $body-bg-dark: #121212;
 $body-color-dark: $light-color;
 $border-color-dark: #333;
+$content-bg-dark: #1e1e1e;
 
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
@@ -221,6 +224,10 @@ svg {
 
 @include color-mode(dark) {
   .content {
-    background-color: #1e1e1e;
+    background-color: $content-bg-dark;
+  }
+
+  .comic img {
+    filter: invert(1 - math.div(color.channel($content-bg-dark, 'red', $space: rgb), 255));
   }
 }
