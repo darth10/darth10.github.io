@@ -10,6 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.nix', 'flake.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}-
       - name: install nix flake
         run: nix develop --command true
       - uses: actions/cache@v6
