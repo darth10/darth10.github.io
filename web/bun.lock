@@ -8,7 +8,7 @@
         "@hotwired/turbo": "^8.0.23",
         "bootstrap": "^5.3.8",
         "highlight.js": "^11.12.0",
-        "jquery": "^3.7.1",
+        "jquery": "^4.0.0",
         "jquery.flot": "^0.8.3",
       },
       "devDependencies": {
@@ -31,7 +31,7 @@
 
     "highlight.js": ["highlight.js@11.12.0", "", {}, "sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg=="],
 
-    "jquery": ["jquery@3.7.1", "", {}, "sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg=="],
+    "jquery": ["jquery@4.0.0", "", {}, "sha512-TXCHVR3Lb6TZdtw1l3RTLf8RBWVGexdxL6AC8/e0xZKEpBflBsjh9/8LXw+dkNFuOyW9B7iB3O1sP7hS0Kiacg=="],
 
     "jquery.flot": ["jquery.flot@0.8.3", "", {}, "sha512-/tEE8J5NjwvStHDaCHkvTJpD7wDS4hE1OEL8xEmhgQfUe0gLUem923PIceNez1mz4yBNx6Hjv7pJcowLNd+nbg=="],
 
