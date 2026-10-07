@@ -17,7 +17,6 @@ path = [
   ".envrc",
   ".github/**",
   ".gitignore",
-  ".gitmodules",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Akhil Wali"

@@ -3,18 +3,18 @@
 To get started:
 
 1. Install Nix (with flakes enabled) and `direnv`.
-2. Initialize the `public/` submodule.
-   ```sh
-   git submodule update --init
-   ```
-3. Install all dependencies. The Bun project lives in `web/`.
+2. Install all dependencies. The Bun project lives in `web/`.
    ```sh
    bun install --cwd web
    clj -P
    ```
-4. Start the development server by calling
+3. Start the development server by calling
    `darth10.github.io.server/start-server` through the REPL or the `clj -X:serve`
    command.
+
+Pushes to `cryogen` are compiled and committed to `master` by the Deploy
+workflow. Put `[no deploy]` in the head commit message to skip one, or set the
+repository variable `DEPLOY_ENABLED` to `false` to pause deploys.
 
 To update Clojure dependencies, run `clj -M:outdated` and `clj -M:upgrade`.
 
