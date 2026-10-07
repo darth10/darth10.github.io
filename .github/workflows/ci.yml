@@ -24,6 +24,11 @@ jobs:
           key: deps-${{ hashFiles('deps.edn') }}
       - name: reuse lint
         run: nix develop --command reuse lint
+      - uses: actions/cache@v6
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('web/bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
       - name: bun install
         working-directory: web
         run: nix develop --command bun install --frozen-lockfile
