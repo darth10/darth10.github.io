@@ -52,7 +52,7 @@ jobs:
           git rm -rq --ignore-unmatch .
           git clean -fdxq
       - name: compile
-        run: nix develop --command clj -X:compile
+        run: nix develop --command clj -J-Duser.language=en -J-Duser.country=NZ -J-Duser.timezone=Pacific/Auckland -X:compile
       - name: commit
         working-directory: public
         run: |

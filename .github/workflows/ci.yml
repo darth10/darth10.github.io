@@ -33,4 +33,4 @@ jobs:
         working-directory: web
         run: nix develop --command bun install --frozen-lockfile
       - name: compile
-        run: nix develop --command clj -X:compile
+        run: nix develop --command clj -J-Duser.language=en -J-Duser.country=NZ -J-Duser.timezone=Pacific/Auckland -X:compile
