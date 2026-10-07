@@ -1,14 +1,40 @@
-name: CI
+name: Build and commit to master
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DEPLOY: >-
+        ${{ github.ref == 'refs/heads/cryogen' &&
+            vars.DEPLOY_ENABLED != 'false' &&
+            (github.event_name == 'workflow_dispatch' ||
+             (github.event_name == 'push' &&
+              !contains(github.event.head_commit.message, '[no deploy]'))) }}
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
+        if: env.DEPLOY == 'true'
+        with:
+          ref: master
+          path: public
+      - name: clean
+        if: env.DEPLOY == 'true'
+        working-directory: public
+        run: |
+          git rm -rq --ignore-unmatch .
+          git clean -fdxq
       - uses: cachix/install-nix-action@v31
       - uses: nix-community/cache-nix-action@v7
         with:
@@ -34,3 +60,22 @@ jobs:
         run: nix develop --command bun install --frozen-lockfile
       - name: compile
         run: nix develop --command clj -J-Duser.language=en -J-Duser.country=NZ -J-Duser.timezone=Pacific/Auckland -X:compile
+      - name: deploy
+        if: env.DEPLOY == 'true'
+        working-directory: public
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --name-only --diff-filter=M -- '*.xml' | while read -r f; do
+            strip='s|<lastBuildDate>[^<]*</lastBuildDate>||'
+            if cmp -s <(git show "HEAD:$f" | sed "$strip") <(sed "$strip" "$f"); then
+              git restore --source=HEAD --staged --worktree -- "$f"
+            fi
+          done
+          if git diff --cached --quiet; then
+            echo 'No changes to deploy'
+            exit 0
+          fi
+          git commit -q -m "Site updated on $(date -u +%d/%m/%Y)" -m "Built from ${GITHUB_SHA}"
+          git push origin HEAD:master
