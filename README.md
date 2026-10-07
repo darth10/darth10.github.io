@@ -12,9 +12,9 @@ To get started:
    `darth10.github.io.server/start-server` through the REPL or the `clj -X:serve`
    command.
 
-Pushes to `cryogen` are compiled and committed to `master` by the Deploy
+Pushes to `cryogen` are compiled and committed to `master` by the CI
 workflow. Put `[no deploy]` in the head commit message to skip one, or set the
-repository variable `DEPLOY_ENABLED` to `false` to pause deploys.
+repository variable `DEPLOY_ENABLED` to `false` to pause deploys (Settings > Secrets and variables > Actions > Variables > Repository variables).
 
 To update Clojure dependencies, run `clj -M:outdated` and `clj -M:upgrade`.
 
