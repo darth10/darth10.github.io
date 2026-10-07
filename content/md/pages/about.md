@@ -10,10 +10,10 @@
 
 I'm Akhil. I'm a software developer.
 
-I like programming in Clojure, Haskell, Python, C#, and C.
-I find programming in any Lisp dialect liberating, whether it's Racket, Clojure, SBCL, or even Emacs Lisp.
-I'm _obsessed_ with using GNU/Linux and Emacs for everything.
-I'm _always_ exploring mathematics, open source software, and distributed systems.
+I like programming in C#, Haskell, Python, and C, but I find any Lisp dialect
+liberating, whether it's Clojure, Racket, Common Lisp, or even Emacs Lisp. I'm
+_obsessed_ with using Emacs for everything, and I'm always exploring
+mathematics, open source software, and distributed systems.
 
 <div class="contact-info">
 <a href="https://github.com/darth10" target="_blank"><i class="fab fa-square-github fa-3x"></i></a>
